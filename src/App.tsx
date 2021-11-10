@@ -35,6 +35,17 @@ const mockMerchants: Merchant[] = [
       "Bacon ipsum dolor amet alcatra pork shankle, picanha jerky filet mignon brisket beef ribs strip steak. Turkey shoulder ham, shankle chuck tenderloin bacon frankfurter alcatra tail cupim boudin. Swine bacon chuck prosciutto. Short loin bresaola burgdoggen salami andouille capicola short ribs hamburger frankfurter pork rump kevin biltong landjaeger filet mignon.",
     position: { lat: 40.7074661, lng: -73.9456839 },
   },
+
+  {
+    name: "Yue Wong",
+    addressLine1: "60 Bayard Street",
+    addressLine2: "New York, NY 10013",
+    phoneNumber: "929-285-7263",
+    websiteUrl: "https://www.reddit.com/r/movingtojapan",
+    description:
+      "Bacon ipsum dolor amet alcatra pork shankle, picanha jerky filet mignon brisket beef ribs strip steak. Turkey shoulder ham, shankle chuck tenderloin bacon frankfurter alcatra tail cupim boudin. Swine bacon chuck prosciutto. Short loin bresaola burgdoggen salami andouille capicola short ribs hamburger frankfurter pork rump kevin biltong landjaeger filet mignon.",
+    position: { lat: 40.7155392, lng: -73.9999976 },
+  },
 ];
 
 function App() {
