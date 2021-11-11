@@ -35,27 +35,16 @@ export function Map({
   currentMerchant,
   setCurrentMerchant,
 }: MapProps) {
-  const [mapCenter, setMapCenter] = useState(
-    merchants.length > 0 ? merchants[0].position : defaultMapCenter
-  );
   const [mapObject, setMapObject] = useState<google.maps.Map | null>(null);
-
-  // Force render so that the map pans
-  useEffect(() => {
-    if (mapObject) {
-      mapObject.panTo(mapCenter);
-    }
-  }, [mapCenter]);
 
   // Update map center whenever currentMerchant is updated
   useEffect(() => {
-    if (currentMerchant) {
-      setMapCenter(currentMerchant.position);
+    if (currentMerchant && mapObject) {
+      mapObject.panTo(currentMerchant.position);
     }
   }, [currentMerchant]);
 
   const handleMarkerClick = (e: any, merchant: Merchant) => {
-    setMapCenter({ lat: e.latLng.lat(), lng: e.latLng.lng() });
     setCurrentMerchant(merchant);
   };
 
@@ -63,7 +52,7 @@ export function Map({
     <LoadScript googleMapsApiKey={apiKey}>
       <GoogleMap
         mapContainerStyle={mapContainerStyle}
-        center={mapCenter}
+        center={defaultMapCenter}
         zoom={14}
         onLoad={(map) => {
           setMapObject(map);
