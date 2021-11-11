@@ -14,6 +14,8 @@ function MerchantCard({
   isCurrentMerchant,
   setCurrentMerchant,
 }: MerchantCardProps) {
+  // Conditional styling so that the current merchant's name will be highlighted red.
+  // Only used for debugging purposes and can be removed.
   const style = isCurrentMerchant ? { color: "red" } : {};
 
   const ref: any = useRef<HTMLDivElement>();
