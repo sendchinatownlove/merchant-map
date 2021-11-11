@@ -29,18 +29,17 @@ function MerchantCard({
   }, [onScreen]);
 
   return (
-    <div style={{ width: "300px", height: "800px" }} ref={ref}>
+    <div className="merchant-card" ref={ref}>
       <h2 style={style}>{merchant.name}</h2>
       <p>{merchant.addressLine1}</p>
       <p>{merchant.addressLine2}</p>
       <p>{merchant.phoneNumber}</p>
       <a href={merchant.websiteUrl}>Website</a>
       <p>{merchant.description}</p>
-      <div style={{ height: "400px", width: "300px" }}></div>
-
       <a href="#">
         <button>Visit Merchant Page</button>
       </a>
+      <div className="merchant-images"></div>
     </div>
   );
 }
