@@ -5,8 +5,8 @@ import { Merchant } from "../App";
 // Create an .env file and store your Google Maps API key as VITE_GOOGLE_MAPS_API_KEY
 const apiKey = import.meta.env.VITE_GOOGLE_MAPS_API_KEY;
 const mapContainerStyle = {
-  width: "400px",
-  height: "400px",
+  width: "100%",
+  height: "100%",
 };
 
 export type LatLong = {
@@ -21,9 +21,20 @@ const defaultMapCenter: LatLong = {
 
 interface MapProps {
   merchants: Merchant[];
+  currentMerchant: Merchant | null;
+  setCurrentMerchant: React.Dispatch<React.SetStateAction<Merchant | null>>;
 }
 
-export function Map({ merchants }: MapProps) {
+const selectedMarkerIcon =
+  "https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png";
+
+const unselectedMarkericon = "";
+
+export function Map({
+  merchants,
+  currentMerchant,
+  setCurrentMerchant,
+}: MapProps) {
   const [mapCenter, setMapCenter] = useState(
     merchants.length > 0 ? merchants[0].position : defaultMapCenter
   );
@@ -36,8 +47,16 @@ export function Map({ merchants }: MapProps) {
     }
   }, [mapCenter]);
 
-  const handleMarkerClick = (e: any) => {
+  // Update map center whenever currentMerchant is updated
+  useEffect(() => {
+    if (currentMerchant) {
+      setMapCenter(currentMerchant.position);
+    }
+  }, [currentMerchant]);
+
+  const handleMarkerClick = (e: any, merchant: Merchant) => {
     setMapCenter({ lat: e.latLng.lat(), lng: e.latLng.lng() });
+    setCurrentMerchant(merchant);
   };
 
   return (
@@ -45,16 +64,21 @@ export function Map({ merchants }: MapProps) {
       <GoogleMap
         mapContainerStyle={mapContainerStyle}
         center={mapCenter}
-        zoom={12}
+        zoom={14}
         onLoad={(map) => {
           setMapObject(map);
         }}
       >
         {merchants.map((merchant) => (
           <Marker
-            onClick={handleMarkerClick}
+            onClick={(e) => handleMarkerClick(e, merchant)}
             key={merchant.name}
             position={merchant.position}
+            icon={
+              currentMerchant && merchant.name === currentMerchant.name
+                ? selectedMarkerIcon
+                : unselectedMarkericon
+            }
           />
         ))}
       </GoogleMap>

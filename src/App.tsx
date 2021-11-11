@@ -1,6 +1,7 @@
 import { LatLong, Map } from "./map/Map";
 import SideBar from "./side-bar/SideBar";
 import "./App.css";
+import { useState } from "react";
 
 export type Merchant = {
   name: string;
@@ -49,11 +50,27 @@ const mockMerchants: Merchant[] = [
 ];
 
 function App() {
+  const [currentMerchant, setCurrentMerchant] = useState<Merchant | null>(
+    mockMerchants.length > 0 ? mockMerchants[0] : null
+  );
+
   return (
-    <>
-      <SideBar merchants={mockMerchants} />
-      <Map merchants={mockMerchants} />
-    </>
+    <div id="app-container">
+      <div id="sidebar-container">
+        <SideBar
+          merchants={mockMerchants}
+          currentMerchant={currentMerchant}
+          setCurrentMerchant={setCurrentMerchant}
+        />
+      </div>
+      <div id="map-container">
+        <Map
+          merchants={mockMerchants}
+          currentMerchant={currentMerchant}
+          setCurrentMerchant={setCurrentMerchant}
+        />
+      </div>
+    </div>
   );
 }
 

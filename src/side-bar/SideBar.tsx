@@ -3,16 +3,28 @@ import MerchantCard from "../merchant-card/MerchantCard";
 import { Merchant } from "../App";
 
 interface SideBarProps {
-  merchants: Merchant[]
+  merchants: Merchant[];
+  currentMerchant: Merchant | null;
+  setCurrentMerchant: React.Dispatch<React.SetStateAction<Merchant | null>>;
 }
 
-function SideBar({ merchants }: SideBarProps) {
+function SideBar({
+  merchants,
+  currentMerchant,
+  setCurrentMerchant,
+}: SideBarProps) {
   return (
     <>
       <h1>Explore our merchants</h1>
-      {merchants.map(merchant => 
-        <MerchantCard merchant={merchant}/>
-      )}
+      {merchants.map((merchant) => (
+        <MerchantCard
+          merchant={merchant}
+          isCurrentMerchant={
+            currentMerchant ? currentMerchant.name === merchant.name : false
+          }
+          setCurrentMerchant={setCurrentMerchant}
+        />
+      ))}
     </>
   );
 }
