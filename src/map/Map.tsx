@@ -44,10 +44,6 @@ export function Map({
     }
   }, [currentMerchant]);
 
-  const handleMarkerClick = (e: any, merchant: Merchant) => {
-    setCurrentMerchant(merchant);
-  };
-
   return (
     <LoadScript googleMapsApiKey={apiKey}>
       <GoogleMap
@@ -60,7 +56,7 @@ export function Map({
       >
         {merchants.map((merchant) => (
           <Marker
-            onClick={(e) => handleMarkerClick(e, merchant)}
+            onClick={() => setCurrentMerchant(merchant)}
             key={merchant.name}
             position={merchant.position}
             icon={
