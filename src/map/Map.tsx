@@ -48,7 +48,7 @@ export function Map({
     <LoadScript googleMapsApiKey={apiKey}>
       <GoogleMap
         mapContainerStyle={mapContainerStyle}
-        center={defaultMapCenter}
+        center={currentMerchant ? currentMerchant.position : defaultMapCenter}
         zoom={14}
         onLoad={(map) => {
           setMapObject(map);
