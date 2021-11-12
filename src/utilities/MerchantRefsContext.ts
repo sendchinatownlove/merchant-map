@@ -7,7 +7,7 @@ export type MerchantRefsContextValue = {
   setIsMapClick: React.Dispatch<React.SetStateAction<boolean>>;
   map: google.maps.Map | null;
   setMap: React.Dispatch<React.SetStateAction<google.maps.Map | null>>;
-  handleMerchantCardOnScreen: (
+  handleUserSidebarScroll: (
     isCardOnScreen: boolean,
     merchant: Merchant
   ) => void;
@@ -19,7 +19,7 @@ const contextValues: MerchantRefsContextValue = {
   setIsMapClick: () => {},
   map: null,
   setMap: () => {},
-  handleMerchantCardOnScreen: () => {},
+  handleUserSidebarScroll: () => {},
 };
 
 export const MerchantRefsContext = createContext(contextValues);

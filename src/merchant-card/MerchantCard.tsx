@@ -11,15 +11,15 @@ interface MerchantCardProps {
 function MerchantCard({ merchant }: MerchantCardProps) {
   // TODO: update ref type
   const ref: any = useRef<Element>();
-  const onScreen: boolean = isElementOnScreen(ref, "-300px");
-  const { merchantRefs, handleMerchantCardOnScreen } =
+  const isDivOnScreen: boolean = isElementOnScreen(ref, "-300px");
+  const { merchantRefs, handleUserSidebarScroll } =
     useContext(MerchantRefsContext);
 
   merchantRefs[merchant.name] = ref;
 
   useEffect(() => {
-    handleMerchantCardOnScreen(onScreen, merchant);
-  }, [onScreen]);
+    handleUserSidebarScroll(isDivOnScreen, merchant);
+  }, [isDivOnScreen]);
 
   return (
     <div className="merchant-card" ref={ref}>

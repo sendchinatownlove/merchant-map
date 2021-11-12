@@ -41,13 +41,13 @@ function App() {
     }
   };
 
-  const handleMerchantCardOnScreen = (
+  const handleUserSidebarScroll = (
     isCardOnScreen: boolean,
     merchant: Merchant
   ) => {
-    // The map should pan to the merchant whose card is visible on screen
-    // only if the user is scrolling on the sidebar. If clickedMerchant is null
-    // then the user didn't click on a marker and thus has to be scrolling.
+    // To avoid double panning in the map (remember that the map can pan if a user clicks on a marker),
+    // this function will only pan to the merchant if the user didn't click on a marker (i.e clickedMerchant)
+    // is null.
     if (isCardOnScreen && clickedMerchant === null) {
       setCurrentMerchant(merchant); // this will change the marker icon
       panToMerchant(merchant);
@@ -74,7 +74,7 @@ function App() {
   context.setMap = setMap;
   context.isMapClick = isMapClick;
   context.setIsMapClick = setIsMapClick;
-  context.handleMerchantCardOnScreen = handleMerchantCardOnScreen;
+  context.handleUserSidebarScroll = handleUserSidebarScroll;
 
   const merchantRefs = context.merchantRefs;
 
