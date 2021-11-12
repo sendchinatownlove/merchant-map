@@ -37,24 +37,27 @@ export function Map({
   setCurrentMerchant,
 }: MapProps) {
   const [mapObject, setMapObject] = useState<google.maps.Map | null>(null);
-  const { merchantRefs } = useContext(MerchantRefsContext);
+  const { merchantRefs, setMap, setIsMapClick } =
+    useContext(MerchantRefsContext);
 
-  // Update map center whenever currentMerchant is updated
-  useEffect(() => {
-    if (currentMerchant && mapObject) {
-      mapObject.panTo(currentMerchant.position);
-    }
-  }, [currentMerchant]);
-
+  // TODO: move to app level
   const scrollToMerchant = (merchant: Merchant) => {
     const merchantDiv = merchantRefs[merchant.name];
     if (merchantDiv.current !== undefined) {
-      window.scrollTo({
-        top: merchantDiv.current.offsetTop,
-        behavior: "smooth",
-      });
+      merchantDiv.current.scrollIntoView({ behavior: "smooth" });
     }
   };
+
+  const handleMarkerClick = (merchant: Merchant) => {
+    setCurrentMerchant(merchant);
+    setIsMapClick(true);
+    mapObject && mapObject.panTo(merchant.position);
+    scrollToMerchant(merchant);
+  };
+
+  useEffect(() => {
+    setMap(mapObject);
+  }, [mapObject]);
 
   return (
     <LoadScript googleMapsApiKey={apiKey}>
@@ -66,21 +69,20 @@ export function Map({
           setMapObject(map);
         }}
       >
-        {merchants.map((merchant) => (
-          <Marker
-            onClick={() => {
-              setCurrentMerchant(merchant);
-              scrollToMerchant(merchant);
-            }}
-            key={merchant.name}
-            position={merchant.position}
-            icon={
-              currentMerchant && merchant.name === currentMerchant.name
-                ? selectedMarkerIcon
-                : unselectedMarkericon
-            }
-          />
-        ))}
+        {merchants.map((merchant) => {
+          return (
+            <Marker
+              onClick={() => handleMarkerClick(merchant)}
+              key={merchant.name}
+              position={merchant.position}
+              icon={
+                currentMerchant && merchant.name === currentMerchant.name
+                  ? selectedMarkerIcon
+                  : unselectedMarkericon
+              }
+            />
+          );
+        })}
       </GoogleMap>
     </LoadScript>
   );

@@ -18,15 +18,17 @@ function MerchantCard({
   // TODO: update ref type
   const ref: any = useRef<Element>();
   const onScreen: boolean = useOnScreen(ref, "-300px");
-
-  const { merchantRefs } = useContext(MerchantRefsContext);
+  const { merchantRefs, map, isMapClick, setIsMapClick } =
+    useContext(MerchantRefsContext);
   merchantRefs[merchant.name] = ref;
 
   // Update current merchant whenever the merchant's MerchantCard is in the viewport
   useEffect(() => {
-    if (onScreen) {
+    if (onScreen && map && !isMapClick) {
+      map.panTo(merchant.position);
       setCurrentMerchant(merchant);
     }
+    setIsMapClick(false);
   }, [onScreen]);
 
   return (

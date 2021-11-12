@@ -1,7 +1,8 @@
 import { LatLong, Map } from "./map/Map";
 import SideBar from "./side-bar/SideBar";
 import "./App.css";
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { MerchantRefsContext } from "./utilities/hooks/MerchantRefsContext";
 
 export type Merchant = {
   name: string;
@@ -50,9 +51,17 @@ const mockMerchants: Merchant[] = [
 ];
 
 function App() {
+  const [map, setMap] = useState(null);
+  const [isMapClick, setIsMapClick] = useState(false);
   const [currentMerchant, setCurrentMerchant] = useState<Merchant | null>(
     mockMerchants.length > 0 ? mockMerchants[0] : null
   );
+
+  const context = useContext(MerchantRefsContext);
+  context.map = map;
+  context.setMap = setMap;
+  context.isMapClick = isMapClick;
+  context.setIsMapClick = setIsMapClick;
 
   return (
     <div id="app-container">
