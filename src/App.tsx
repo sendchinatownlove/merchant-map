@@ -25,6 +25,8 @@ function App() {
     mockMerchants.length > 0 ? mockMerchants[0] : null
   );
 
+  const [clickedMerchant, setClickedMerchant] = useState<Merchant | null>(null);
+
   const scrollToMerchant = (merchant: Merchant) => {
     const merchantDiv = merchantRefs[merchant.name];
 
@@ -43,21 +45,24 @@ function App() {
     isCardOnScreen: boolean,
     merchant: Merchant
   ) => {
-    const isUserScroll: boolean = !isMapClick;
-
     // The map should pan to the merchant whose card is visible on screen
-    // only if the user is scrolling on the sidebar.
-    if (isCardOnScreen && isUserScroll) {
+    // only if the user is scrolling on the sidebar. If clickedMerchant is null
+    // then the user didn't click on a marker and thus has to be scrolling.
+    if (isCardOnScreen && clickedMerchant === null) {
       setCurrentMerchant(merchant); // this will change the marker icon
       panToMerchant(merchant);
     }
-    if (isCardOnScreen) {
-      setIsMapClick(false);
+
+    // If the clickedMerchant matches the merchant in this div, then auto-scrolling
+    // is finished and we can set clickedMerchant to null.
+    if (clickedMerchant && clickedMerchant.name === merchant.name) {
+      setClickedMerchant(null);
     }
   };
 
   const handleMarkerClick = (merchant: Merchant) => {
     setCurrentMerchant(merchant);
+    setClickedMerchant(merchant);
     setIsMapClick(true);
     map && map.panTo(merchant.position);
     scrollToMerchant(merchant);
