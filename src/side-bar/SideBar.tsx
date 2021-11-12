@@ -4,11 +4,9 @@ import { Merchant } from "../App";
 
 interface SideBarProps {
   merchants: Merchant[];
-  currentMerchant: Merchant | null;
-  setCurrentMerchant: React.Dispatch<React.SetStateAction<Merchant | null>>;
 }
 
-function SideBar({ merchants, setCurrentMerchant }: SideBarProps) {
+function SideBar({ merchants }: SideBarProps) {
   return (
     <>
       <h1>Explore our merchants</h1>

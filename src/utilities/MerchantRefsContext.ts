@@ -1,5 +1,5 @@
 import React, { createContext, MutableRefObject } from "react";
-import { Merchant } from "../../App";
+import { Merchant } from "../App";
 
 export type MerchantRefsContextValue = {
   merchantRefs: { [key: string]: MutableRefObject<HTMLDivElement> };

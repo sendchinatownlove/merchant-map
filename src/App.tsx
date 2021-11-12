@@ -104,11 +104,7 @@ function App() {
   return (
     <div id="app-container">
       <div id="sidebar-container">
-        <SideBar
-          merchants={mockMerchants}
-          currentMerchant={currentMerchant}
-          setCurrentMerchant={setCurrentMerchant}
-        />
+        <SideBar merchants={mockMerchants} />
       </div>
       <div id="map-container">
         <Map
