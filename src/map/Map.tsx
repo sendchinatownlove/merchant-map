@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { Marker, GoogleMap, LoadScript } from "@react-google-maps/api";
 import { Merchant } from "../App";
-import { MerchantRefsContext } from "../utilities/hooks/MerchantRefsContext";
+import { MerchantRefsContext } from "../utilities/MerchantRefsContext";
 
 // Create an .env file and store your Google Maps API key as VITE_GOOGLE_MAPS_API_KEY
 const apiKey = import.meta.env.VITE_GOOGLE_MAPS_API_KEY;

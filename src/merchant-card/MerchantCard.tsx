@@ -1,8 +1,8 @@
 import { Merchant } from "../App";
 import "./MerchantCard.css";
-import { useOnScreen } from "../utilities/hooks/useOnScreen";
+import { isElementOnScreen } from "../utilities/isElementOnScreen";
 import { useContext, useEffect, useRef } from "react";
-import { MerchantRefsContext } from "../utilities/hooks/MerchantRefsContext";
+import { MerchantRefsContext } from "../utilities/MerchantRefsContext";
 
 interface MerchantCardProps {
   merchant: Merchant;
@@ -11,7 +11,7 @@ interface MerchantCardProps {
 function MerchantCard({ merchant }: MerchantCardProps) {
   // TODO: update ref type
   const ref: any = useRef<Element>();
-  const onScreen: boolean = useOnScreen(ref, "-300px");
+  const onScreen: boolean = isElementOnScreen(ref, "-300px");
   const { merchantRefs, handleMerchantCardOnScreen } =
     useContext(MerchantRefsContext);
 

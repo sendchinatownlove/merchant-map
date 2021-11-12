@@ -1,8 +1,8 @@
 import { LatLong, Map } from "./map/Map";
 import SideBar from "./side-bar/SideBar";
 import "./App.css";
-import { useContext, useEffect, useState } from "react";
-import { MerchantRefsContext } from "./utilities/hooks/MerchantRefsContext";
+import { useContext, useState } from "react";
+import { MerchantRefsContext } from "./utilities/MerchantRefsContext";
 
 export type Merchant = {
   name: string;

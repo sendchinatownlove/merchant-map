@@ -1,13 +1,15 @@
-import { useState, useEffect, MutableRefObject  } from "react";
+import { useState, useEffect, MutableRefObject } from "react";
 
 // Credit to https://usehooks.com/useOnScreen/
 
-export function useOnScreen<T extends Element>(ref: MutableRefObject<T>, rootMargin: string = "0px"): boolean {
+export function isElementOnScreen<T extends Element>(
+  ref: MutableRefObject<T>,
+  rootMargin: string = "0px"
+): boolean {
   // State and setter for storing whether element is visible
 
   const [isIntersecting, setIntersecting] = useState<boolean>(false);
   useEffect(() => {
-
     const observer = new IntersectionObserver(
       ([entry]) => {
         // Update our state when observer callback fires
@@ -17,7 +19,7 @@ export function useOnScreen<T extends Element>(ref: MutableRefObject<T>, rootMar
         rootMargin,
       }
     );
-    observer.unobserve(ref.current)
+    observer.unobserve(ref.current);
 
     if (ref.current) {
       observer.observe(ref.current);
@@ -25,6 +27,6 @@ export function useOnScreen<T extends Element>(ref: MutableRefObject<T>, rootMar
     return () => {
       observer.unobserve(ref.current);
     };
-  },[]); // Empty array ensures that effect is only run on mount and unmount
+  }, []); // Empty array ensures that effect is only run on mount and unmount
   return isIntersecting;
 }
