@@ -1,4 +1,4 @@
-import { useState, useEffect, useContext } from "react";
+import { useContext } from "react";
 import { Marker, GoogleMap, LoadScript } from "@react-google-maps/api";
 import { Merchant } from "../App";
 import { MerchantRefsContext } from "../utilities/hooks/MerchantRefsContext";
@@ -23,7 +23,7 @@ const defaultMapCenter: LatLong = {
 interface MapProps {
   merchants: Merchant[];
   currentMerchant: Merchant | null;
-  setCurrentMerchant: React.Dispatch<React.SetStateAction<Merchant | null>>;
+  handleMarkerClick: (merchant: Merchant) => void;
 }
 
 const selectedMarkerIcon =
@@ -34,39 +34,18 @@ const unselectedMarkericon = "";
 export function Map({
   merchants,
   currentMerchant,
-  setCurrentMerchant,
+  handleMarkerClick,
 }: MapProps) {
-  const [mapObject, setMapObject] = useState<google.maps.Map | null>(null);
-  const { merchantRefs, setMap, setIsMapClick } =
-    useContext(MerchantRefsContext);
-
-  // TODO: move to app level
-  const scrollToMerchant = (merchant: Merchant) => {
-    const merchantDiv = merchantRefs[merchant.name];
-    if (merchantDiv.current !== undefined) {
-      merchantDiv.current.scrollIntoView({ behavior: "smooth" });
-    }
-  };
-
-  const handleMarkerClick = (merchant: Merchant) => {
-    setCurrentMerchant(merchant);
-    setIsMapClick(true);
-    mapObject && mapObject.panTo(merchant.position);
-    scrollToMerchant(merchant);
-  };
-
-  useEffect(() => {
-    setMap(mapObject);
-  }, [mapObject]);
+  const { setMap } = useContext(MerchantRefsContext);
 
   return (
     <LoadScript googleMapsApiKey={apiKey}>
       <GoogleMap
         mapContainerStyle={mapContainerStyle}
-        center={currentMerchant ? currentMerchant.position : defaultMapCenter}
+        center={merchants ? merchants[0].position : defaultMapCenter}
         zoom={14}
         onLoad={(map) => {
-          setMapObject(map);
+          setMap(map);
         }}
       >
         {merchants.map((merchant) => {

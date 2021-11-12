@@ -8,22 +8,12 @@ interface SideBarProps {
   setCurrentMerchant: React.Dispatch<React.SetStateAction<Merchant | null>>;
 }
 
-function SideBar({
-  merchants,
-  currentMerchant,
-  setCurrentMerchant,
-}: SideBarProps) {
+function SideBar({ merchants, setCurrentMerchant }: SideBarProps) {
   return (
     <>
       <h1>Explore our merchants</h1>
       {merchants.map((merchant) => (
-        <MerchantCard
-          merchant={merchant}
-          isCurrentMerchant={
-            currentMerchant ? currentMerchant.name === merchant.name : false
-          }
-          setCurrentMerchant={setCurrentMerchant}
-        />
+        <MerchantCard merchant={merchant} />
       ))}
     </>
   );

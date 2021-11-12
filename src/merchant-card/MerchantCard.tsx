@@ -6,29 +6,19 @@ import { MerchantRefsContext } from "../utilities/hooks/MerchantRefsContext";
 
 interface MerchantCardProps {
   merchant: Merchant;
-  isCurrentMerchant: boolean;
-  setCurrentMerchant: React.Dispatch<React.SetStateAction<Merchant | null>>;
 }
 
-function MerchantCard({
-  merchant,
-  isCurrentMerchant,
-  setCurrentMerchant,
-}: MerchantCardProps) {
+function MerchantCard({ merchant }: MerchantCardProps) {
   // TODO: update ref type
   const ref: any = useRef<Element>();
   const onScreen: boolean = useOnScreen(ref, "-300px");
-  const { merchantRefs, map, isMapClick, setIsMapClick } =
+  const { merchantRefs, handleMerchantCardOnScreen } =
     useContext(MerchantRefsContext);
+
   merchantRefs[merchant.name] = ref;
 
-  // Update current merchant whenever the merchant's MerchantCard is in the viewport
   useEffect(() => {
-    if (onScreen && map && !isMapClick) {
-      map.panTo(merchant.position);
-      setCurrentMerchant(merchant);
-    }
-    setIsMapClick(false);
+    handleMerchantCardOnScreen(onScreen, merchant);
   }, [onScreen]);
 
   return (
