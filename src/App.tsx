@@ -75,8 +75,12 @@ function App() {
     isCardOnScreen: boolean,
     merchant: Merchant
   ) => {
-    if (isCardOnScreen && !isMapClick) {
-      setCurrentMerchant(merchant);
+    const isUserScroll: boolean = !isMapClick;
+
+    // The map should pan to the merchant whose card is visible on screen
+    // only if the user is scrolling on the sidebar.
+    if (isCardOnScreen && isUserScroll) {
+      setCurrentMerchant(merchant); // this will change the marker icon
       panToMerchant(merchant);
     }
     if (isCardOnScreen) {
