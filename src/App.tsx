@@ -64,7 +64,7 @@ function App() {
     setCurrentMerchant(merchant);
     setClickedMerchant(merchant);
     setIsMapClick(true);
-    map && map.panTo(merchant.position);
+    panToMerchant(merchant);
     scrollToMerchant(merchant);
   };
 
