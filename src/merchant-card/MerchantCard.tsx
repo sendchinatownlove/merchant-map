@@ -1,7 +1,8 @@
 import { Merchant } from "../App";
 import "./MerchantCard.css";
 import { useOnScreen } from "../utilities/hooks/useOnScreen";
-import { useEffect, useRef } from "react";
+import { useContext, useEffect, useRef } from "react";
+import { MerchantRefsContext } from "../utilities/hooks/MerchantRefsContext";
 
 interface MerchantCardProps {
   merchant: Merchant;
@@ -14,8 +15,12 @@ function MerchantCard({
   isCurrentMerchant,
   setCurrentMerchant,
 }: MerchantCardProps) {
-  const ref: any = useRef<HTMLDivElement>();
+  // TODO: update ref type
+  const ref: any = useRef<Element>();
   const onScreen: boolean = useOnScreen(ref, "-300px");
+
+  const { merchantRefs } = useContext(MerchantRefsContext);
+  merchantRefs[merchant.name] = ref;
 
   // Update current merchant whenever the merchant's MerchantCard is in the viewport
   useEffect(() => {

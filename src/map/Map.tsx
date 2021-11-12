@@ -1,6 +1,7 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { Marker, GoogleMap, LoadScript } from "@react-google-maps/api";
 import { Merchant } from "../App";
+import { MerchantRefsContext } from "../utilities/hooks/MerchantRefsContext";
 
 // Create an .env file and store your Google Maps API key as VITE_GOOGLE_MAPS_API_KEY
 const apiKey = import.meta.env.VITE_GOOGLE_MAPS_API_KEY;
@@ -36,6 +37,7 @@ export function Map({
   setCurrentMerchant,
 }: MapProps) {
   const [mapObject, setMapObject] = useState<google.maps.Map | null>(null);
+  const { merchantRefs } = useContext(MerchantRefsContext);
 
   // Update map center whenever currentMerchant is updated
   useEffect(() => {
@@ -43,6 +45,16 @@ export function Map({
       mapObject.panTo(currentMerchant.position);
     }
   }, [currentMerchant]);
+
+  const scrollToMerchant = (merchant: Merchant) => {
+    const merchantDiv = merchantRefs[merchant.name];
+    if (merchantDiv.current !== undefined) {
+      window.scrollTo({
+        top: merchantDiv.current.offsetTop,
+        behavior: "smooth",
+      });
+    }
+  };
 
   return (
     <LoadScript googleMapsApiKey={apiKey}>
@@ -56,7 +68,10 @@ export function Map({
       >
         {merchants.map((merchant) => (
           <Marker
-            onClick={() => setCurrentMerchant(merchant)}
+            onClick={() => {
+              setCurrentMerchant(merchant);
+              scrollToMerchant(merchant);
+            }}
             key={merchant.name}
             position={merchant.position}
             icon={
