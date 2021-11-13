@@ -3,8 +3,6 @@ import { Merchant } from "../App";
 
 export type MerchantRefsContextValue = {
   merchantRefs: { [key: string]: MutableRefObject<HTMLDivElement> };
-  isMapClick: boolean;
-  setIsMapClick: React.Dispatch<React.SetStateAction<boolean>>;
   map: google.maps.Map | null;
   setMap: React.Dispatch<React.SetStateAction<google.maps.Map | null>>;
   handleUserSidebarScroll: (
@@ -15,8 +13,6 @@ export type MerchantRefsContextValue = {
 
 const contextValues: MerchantRefsContextValue = {
   merchantRefs: {},
-  isMapClick: false,
-  setIsMapClick: () => {},
   map: null,
   setMap: () => {},
   handleUserSidebarScroll: () => {},

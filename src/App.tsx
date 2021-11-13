@@ -20,11 +20,9 @@ const mockMerchants: Merchant[] = mockData;
 
 function App() {
   const [map, setMap] = useState<google.maps.Map | null>(null);
-  const [isMapClick, setIsMapClick] = useState(false);
   const [currentMerchant, setCurrentMerchant] = useState<Merchant | null>(
     mockMerchants.length > 0 ? mockMerchants[0] : null
   );
-
   const [clickedMerchant, setClickedMerchant] = useState<Merchant | null>(null);
 
   const scrollToMerchant = (merchant: Merchant) => {
@@ -63,7 +61,6 @@ function App() {
   const handleMarkerClick = (merchant: Merchant) => {
     setCurrentMerchant(merchant);
     setClickedMerchant(merchant);
-    setIsMapClick(true);
     panToMerchant(merchant);
     scrollToMerchant(merchant);
   };
@@ -72,8 +69,6 @@ function App() {
   const context = useContext(MerchantRefsContext);
   context.map = map;
   context.setMap = setMap;
-  context.isMapClick = isMapClick;
-  context.setIsMapClick = setIsMapClick;
   context.handleUserSidebarScroll = handleUserSidebarScroll;
 
   const merchantRefs = context.merchantRefs;
