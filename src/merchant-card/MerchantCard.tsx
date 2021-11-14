@@ -12,13 +12,14 @@ function MerchantCard({ merchant }: MerchantCardProps) {
   // TODO: update ref type
   const ref: any = useRef<Element>();
   const isDivOnScreen: boolean = isElementOnScreen(ref, "-300px");
-  const { merchantRefs, handleUserSidebarScroll } =
-    useContext(MerchantRefsContext);
+  const { merchantRefs, handleSidebarScroll } = useContext(MerchantRefsContext);
 
   merchantRefs[merchant.name] = ref;
 
   useEffect(() => {
-    handleUserSidebarScroll(isDivOnScreen, merchant);
+    if (isDivOnScreen) {
+      handleSidebarScroll(merchant);
+    }
   }, [isDivOnScreen]);
 
   return (

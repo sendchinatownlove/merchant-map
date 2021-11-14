@@ -19,6 +19,7 @@ export type Merchant = {
 const mockMerchants: Merchant[] = mockData;
 
 function App() {
+  // TODO: Move states and event handler functions out of App component and into separate files
   const [map, setMap] = useState<google.maps.Map | null>(null);
   const [currentMerchant, setCurrentMerchant] = useState<Merchant | null>(
     mockMerchants.length > 0 ? mockMerchants[0] : null
@@ -39,22 +40,24 @@ function App() {
     }
   };
 
-  const handleUserSidebarScroll = (
-    isCardOnScreen: boolean,
-    merchant: Merchant
-  ) => {
-    // To avoid double panning in the map (remember that the map can pan if a user clicks on a marker),
-    // this function will only pan to the merchant if the user didn't click on a marker (i.e clickedMerchant)
-    // is null.
-    if (isCardOnScreen && clickedMerchant === null) {
-      setCurrentMerchant(merchant); // this will change the marker icon
-      panToMerchant(merchant);
-    }
+  const handleUserSidebarScroll = (merchantOnScreen: Merchant) => {
+    setCurrentMerchant(merchantOnScreen); // this will change the marker icon
+    panToMerchant(merchantOnScreen);
+  };
 
-    // If the clickedMerchant matches the merchant in this div, then auto-scrolling
-    // is finished and we can set clickedMerchant to null.
-    if (clickedMerchant && clickedMerchant.name === merchant.name) {
+  const handleMapSidebarScroll = (merchantOnScreen: Merchant) => {
+    if (clickedMerchant && clickedMerchant.name === merchantOnScreen.name) {
       setClickedMerchant(null);
+    }
+  };
+
+  const handleSidebarScroll = (merchant: Merchant) => {
+    const isUserScroll: boolean = clickedMerchant === null;
+
+    if (isUserScroll) {
+      handleUserSidebarScroll(merchant);
+    } else {
+      handleMapSidebarScroll(merchant);
     }
   };
 
@@ -69,7 +72,7 @@ function App() {
   const context = useContext(MerchantRefsContext);
   context.map = map;
   context.setMap = setMap;
-  context.handleUserSidebarScroll = handleUserSidebarScroll;
+  context.handleSidebarScroll = handleSidebarScroll;
 
   const merchantRefs = context.merchantRefs;
 
