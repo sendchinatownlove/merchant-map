@@ -1,7 +1,6 @@
-import { useContext } from "react";
 import { Marker, GoogleMap, LoadScript } from "@react-google-maps/api";
 import { Merchant } from "../App";
-import { MerchantRefsContext } from "../utilities/MerchantRefsContext";
+import { useEventHandler } from "../utilities/EventHandlerContext";
 
 // Create an .env file and store your Google Maps API key as VITE_GOOGLE_MAPS_API_KEY
 const apiKey = import.meta.env.VITE_GOOGLE_MAPS_API_KEY;
@@ -22,8 +21,6 @@ const defaultMapCenter: LatLong = {
 
 interface MapProps {
   merchants: Merchant[];
-  currentMerchant: Merchant | null;
-  handleMarkerClick: (merchant: Merchant) => void;
 }
 
 const selectedMarkerIcon =
@@ -31,12 +28,8 @@ const selectedMarkerIcon =
 
 const unselectedMarkericon = "";
 
-export function Map({
-  merchants,
-  currentMerchant,
-  handleMarkerClick,
-}: MapProps) {
-  const { setMap } = useContext(MerchantRefsContext);
+export function Map({ merchants }: MapProps) {
+  const { setMap, handleMarkerClick, currentMerchant } = useEventHandler();
 
   return (
     <LoadScript googleMapsApiKey={apiKey}>
