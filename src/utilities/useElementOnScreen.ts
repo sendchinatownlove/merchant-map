@@ -2,7 +2,7 @@ import { useState, useEffect, MutableRefObject } from "react";
 
 // Credit to https://usehooks.com/useOnScreen/
 
-export function isElementOnScreen<T extends Element>(
+export function useElementOnScreen<T extends Element>(
   ref: MutableRefObject<T>,
   rootMargin: string = "0px"
 ): boolean {
