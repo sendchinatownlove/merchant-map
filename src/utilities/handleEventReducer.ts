@@ -14,7 +14,7 @@ export enum EventActionType {
   "HANDLE_DIV_ON_SCREEN",
 }
 
-type EventAction = {
+export type EventAction = {
   type: EventActionType;
   payload: {
     merchant: Merchant;

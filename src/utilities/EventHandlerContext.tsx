@@ -1,9 +1,9 @@
 import { createContext, useContext, useReducer } from "react";
-import { AppState, reducer } from "./handleEventReducer";
+import { AppState, EventAction, reducer } from "./handleEventReducer";
 
 type EventHandlerContextValue = {
   state: AppState;
-  dispatch: React.Dispatch<any>;
+  dispatch: React.Dispatch<EventAction>;
 };
 
 const initialReducerState: AppState = {
