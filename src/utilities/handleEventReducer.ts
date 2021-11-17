@@ -68,7 +68,9 @@ export function reducer(state: AppState, action: EventAction): AppState {
       // the map "auto-scrolling" to the clicked merchant, then do not pan the map
       // because the map is still scrolling to the clicked merchant.
       //
-      // Auto-scrolling is finished when the clickedMerchant matches the
+      // Auto-scrolling is finished when the clickedMerchant matches the merchant on screen,
+      // in which case we can set clickedMerchant to null so that the map can pan to the
+      // merchant that appears on the screen as a user scrolls.
 
       const isUserSidebarScroll: boolean = state.clickedMerchant === null;
       const isMapSidebarScroll: boolean = !isUserSidebarScroll;
