@@ -1,26 +1,41 @@
-import { Merchant } from "../App";
 import "./MerchantCard.css";
 import { useElementOnScreen } from "../utilities/useElementOnScreen";
 import { useEffect, useRef } from "react";
 import { useEventHandler } from "../utilities/EventHandlerContext";
+import { EventActionType } from "../utilities/handleEventReducer";
+import { Merchant } from "../utilities/types";
 
 interface MerchantCardProps {
   merchant: Merchant;
 }
 
-function MerchantCard({ merchant }: MerchantCardProps) {
-  // TODO: update ref type
-  const ref: any = useRef<Element>();
+// useHandleMerchantCard stores the ref to the merchant and handles what happens
+// when the merchant div is on the screen
+function useHandleMerchantCard(merchant: Merchant, ref: any) {
+  const { dispatch } = useEventHandler();
   const isDivOnScreen: boolean = useElementOnScreen(ref, "-300px");
-
-  const { merchantRefs, handleSidebarScroll } = useEventHandler();
-  merchantRefs[merchant.name] = ref;
+  // store reference to merchant div
+  useEffect(() => {
+    dispatch({
+      type: EventActionType.STORE_MERCHANT_REF,
+      payload: { merchant: merchant, ref },
+    });
+  }, []);
 
   useEffect(() => {
     if (isDivOnScreen) {
-      handleSidebarScroll(merchant);
+      dispatch({
+        type: EventActionType.HANDLE_DIV_ON_SCREEN,
+        payload: { merchant },
+      });
     }
   }, [isDivOnScreen]);
+}
+
+function MerchantCard({ merchant }: MerchantCardProps) {
+  // TODO: update ref type
+  const ref: any = useRef<Element>(null);
+  useHandleMerchantCard(merchant, ref);
 
   return (
     <div className="merchant-card" ref={ref}>

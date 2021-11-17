@@ -1,18 +1,9 @@
-import { LatLong, Map } from "./map/Map";
+import { Map } from "./map/Map";
 import SideBar from "./side-bar/SideBar";
 import "./App.css";
 import { mockData } from "./utilities/mockData";
 import { EventHandlerProvider } from "./utilities/EventHandlerContext";
-
-export type Merchant = {
-  name: string;
-  addressLine1: string;
-  addressLine2: string;
-  phoneNumber: string;
-  websiteUrl: string;
-  description: string;
-  position: LatLong;
-};
+import { Merchant } from "./utilities/types";
 
 // Replace when we setup the API call
 const mockMerchants: Merchant[] = mockData;

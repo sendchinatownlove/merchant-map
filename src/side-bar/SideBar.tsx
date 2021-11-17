@@ -1,6 +1,6 @@
 import "./SideBar.css";
 import MerchantCard from "../merchant-card/MerchantCard";
-import { Merchant } from "../App";
+import { Merchant } from "../utilities/types";
 
 interface SideBarProps {
   merchants: Merchant[];

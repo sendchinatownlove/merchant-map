@@ -1,4 +1,4 @@
-import { Merchant } from "../App";
+import { Merchant } from "./types";
 
 export const mockData: Merchant[] = [
   {
