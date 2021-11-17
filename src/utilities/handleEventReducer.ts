@@ -17,25 +17,32 @@ export enum EventActionType {
 export type EventAction = {
   type: EventActionType;
   payload: {
-    merchant: Merchant;
-    ref: React.RefObject<Element>;
-    map: google.maps.Map;
+    merchant?: Merchant;
+    ref?: React.RefObject<Element>;
+    map?: google.maps.Map;
   };
 };
 
 export function reducer(state: AppState, action: EventAction): AppState {
   switch (action.type) {
     case EventActionType.SET_MAP: {
-      return {
-        ...state,
-        map: action.payload.map,
-      };
+      if (action.payload.map) {
+        return {
+          ...state,
+          map: action.payload.map,
+        };
+      }
     }
     case EventActionType.MARKER_CLICK: {
       // when a user clicks a marker, map will pan to the clicked merchant
       // and the sidebar will scroll to the merchant
       const clickedMerchant = action.payload.merchant;
-      const merchantDiv = state.merchantRefs[clickedMerchant.name];
+      if (clickedMerchant === null || clickedMerchant === undefined) {
+        return { ...state };
+      }
+      const merchantDiv = clickedMerchant
+        ? state.merchantRefs[clickedMerchant.name]
+        : null;
 
       // pan to merchant
       state.map?.panTo(clickedMerchant.position);
@@ -50,6 +57,9 @@ export function reducer(state: AppState, action: EventAction): AppState {
       };
     }
     case EventActionType.STORE_MERCHANT_REF: {
+      if (!action.payload.merchant) {
+        return { ...state };
+      }
       if (state.merchantRefs[action.payload.merchant.name] === undefined) {
         return {
           ...state,
@@ -73,6 +83,9 @@ export function reducer(state: AppState, action: EventAction): AppState {
       // in which case we can set clickedMerchant to null so that the map can pan to the
       // merchant that appears on the screen as a user scrolls.
 
+      if (!action.payload.merchant) {
+        return { ...state };
+      }
       const clickedMerchant: Merchant | null = state.clickedMerchant;
       const merchantOnScreen: Merchant = action.payload.merchant;
 
