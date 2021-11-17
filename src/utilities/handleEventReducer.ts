@@ -36,16 +36,17 @@ export function reducer(state: AppState, action: EventAction): AppState {
       // and the sidebar will scroll to the merchant
       const clickedMerchant = action.payload.merchant;
       const merchantDiv = state.merchantRefs[clickedMerchant.name];
-      state.map?.panTo(clickedMerchant.position);
 
+      // pan to merchant
+      state.map?.panTo(clickedMerchant.position);
       // scroll to merchant
       if (merchantDiv && merchantDiv.current !== undefined) {
         merchantDiv.current.scrollIntoView({ behavior: "smooth" });
       }
       return {
         ...state,
-        markedMerchant: action.payload.merchant,
-        clickedMerchant: action.payload.merchant,
+        markedMerchant: clickedMerchant,
+        clickedMerchant,
       };
     }
     case EventActionType.STORE_MERCHANT_REF: {
@@ -72,15 +73,18 @@ export function reducer(state: AppState, action: EventAction): AppState {
       // in which case we can set clickedMerchant to null so that the map can pan to the
       // merchant that appears on the screen as a user scrolls.
 
-      const isUserSidebarScroll: boolean = state.clickedMerchant === null;
+      const clickedMerchant: Merchant | null = state.clickedMerchant;
+      const merchantOnScreen: Merchant = action.payload.merchant;
+
+      const isUserSidebarScroll: boolean = clickedMerchant === null;
       const isMapSidebarScroll: boolean = !isUserSidebarScroll;
-      const isAutoScrollFinished: boolean = state.clickedMerchant
-        ? state.clickedMerchant.name === action.payload.merchant.name
+      const isAutoScrollFinished: boolean = clickedMerchant
+        ? clickedMerchant.name === merchantOnScreen.name
         : false;
 
       if (isUserSidebarScroll) {
-        state.map?.panTo(action.payload.merchant.position);
-        return { ...state, markedMerchant: action.payload.merchant };
+        state.map?.panTo(merchantOnScreen.position);
+        return { ...state, markedMerchant: merchantOnScreen };
       } else if (isMapSidebarScroll && isAutoScrollFinished) {
         return { ...state, clickedMerchant: null };
       }
