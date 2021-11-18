@@ -4,21 +4,19 @@ export type AppState = {
   map: google.maps.Map | null;
   markedMerchant: Merchant | null;
   clickedMerchant: Merchant | null;
-  merchantRefs: { [key: string]: any };
 };
 
 export enum EventActionType {
   "SET_MAP",
   "MARKER_CLICK",
-  "STORE_MERCHANT_REF",
-  "HANDLE_DIV_ON_SCREEN",
+  "HANDLE_USER_SCROLL",
+  "HANDLE_AUTO_SCROLL_COMPLETE",
 }
 
 export type EventAction = {
   type: EventActionType;
   payload: {
     merchant?: Merchant;
-    ref?: React.RefObject<Element>;
     map?: google.maps.Map;
   };
 };
@@ -34,74 +32,21 @@ export function reducer(state: AppState, action: EventAction): AppState {
       }
     }
     case EventActionType.MARKER_CLICK: {
-      // when a user clicks a marker, map will pan to the clicked merchant
-      // and the sidebar will scroll to the merchant
       const clickedMerchant = action.payload.merchant;
-      if (clickedMerchant === null || clickedMerchant === undefined) {
-        return { ...state };
-      }
-      const merchantDiv = clickedMerchant
-        ? state.merchantRefs[clickedMerchant.name]
-        : null;
-
-      // pan to merchant
-      state.map?.panTo(clickedMerchant.position);
-      // scroll to merchant
-      if (merchantDiv && merchantDiv.current !== undefined) {
-        merchantDiv.current.scrollIntoView({ behavior: "smooth" });
+      if (clickedMerchant) {
+        return { ...state, markedMerchant: clickedMerchant, clickedMerchant };
       }
       return {
         ...state,
-        markedMerchant: clickedMerchant,
-        clickedMerchant,
       };
     }
-    case EventActionType.STORE_MERCHANT_REF: {
-      if (!action.payload.merchant) {
-        return { ...state };
+    case EventActionType.HANDLE_USER_SCROLL: {
+      if (action.payload.merchant) {
+        return { ...state, markedMerchant: action.payload.merchant };
       }
-      if (state.merchantRefs[action.payload.merchant.name] === undefined) {
-        return {
-          ...state,
-          merchantRefs: {
-            ...state.merchantRefs,
-            [action.payload.merchant.name]: action.payload.ref,
-          },
-        };
-      }
-
-      return { ...state };
     }
-    case EventActionType.HANDLE_DIV_ON_SCREEN: {
-      // when a div appears on the screen:
-      // 1) if a div appears due to a user scrolling, then pan the map.
-      // 2) if a div appears due to both a user clicking on the map and
-      // the map "auto-scrolling" to the clicked merchant, then do not pan the map
-      // because the map is still scrolling to the clicked merchant.
-      //
-      // Auto-scrolling is finished when the clickedMerchant matches the merchant on screen,
-      // in which case we can set clickedMerchant to null so that the map can pan to the
-      // merchant that appears on the screen as a user scrolls.
-
-      if (!action.payload.merchant) {
-        return { ...state };
-      }
-      const clickedMerchant: Merchant | null = state.clickedMerchant;
-      const merchantOnScreen: Merchant = action.payload.merchant;
-
-      const isUserSidebarScroll: boolean = clickedMerchant === null;
-      const isMapSidebarScroll: boolean = !isUserSidebarScroll;
-      const isAutoScrollFinished: boolean = clickedMerchant
-        ? clickedMerchant.name === merchantOnScreen.name
-        : false;
-
-      if (isUserSidebarScroll) {
-        state.map?.panTo(merchantOnScreen.position);
-        return { ...state, markedMerchant: merchantOnScreen };
-      } else if (isMapSidebarScroll && isAutoScrollFinished) {
-        return { ...state, clickedMerchant: null };
-      }
-      return { ...state };
+    case EventActionType.HANDLE_AUTO_SCROLL_COMPLETE: {
+      return { ...state, clickedMerchant: null };
     }
     default:
       throw new Error();

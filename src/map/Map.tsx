@@ -1,7 +1,7 @@
 import { Marker, GoogleMap, LoadScript } from "@react-google-maps/api";
-
+import { useEffect } from "react";
 import { useEventHandler } from "../utilities/EventHandlerContext";
-import { EventActionType } from "../utilities/handleEventReducer";
+import { EventAction, EventActionType } from "../utilities/handleEventReducer";
 import { LatLong, Merchant } from "../utilities/types";
 
 // Create an .env file and store your Google Maps API key as VITE_GOOGLE_MAPS_API_KEY
@@ -25,8 +25,48 @@ const selectedMarkerIcon =
 
 const unselectedMarkericon = "";
 
+function handleMarkerClick(
+  merchant: Merchant,
+  dispatch: React.Dispatch<EventAction>
+): void {
+  dispatch({
+    type: EventActionType.MARKER_CLICK,
+    payload: { merchant },
+  });
+}
+
+function selectMarkerIcon(merchant: Merchant) {
+  const { state } = useEventHandler();
+
+  if (state.markedMerchant && merchant.name === state.markedMerchant.name) {
+    return selectedMarkerIcon;
+  }
+  return unselectedMarkericon;
+}
+
+//  Hook that handles map panning
+function usehandleMapEvents() {
+  const { state } = useEventHandler();
+
+  // Pan the map to the markedMerchant if markedMerchant is updated
+  useEffect(() => {
+    if (state.markedMerchant) {
+      state.map?.panTo(state.markedMerchant.position);
+    }
+  }, [state.markedMerchant]);
+
+  // Pan the map to the clickedMerchant if clickedMerchant is updated
+  useEffect(() => {
+    if (state.clickedMerchant) {
+      state.map?.panTo(state.clickedMerchant?.position);
+    }
+  }, [state.clickedMerchant]);
+}
+
 export function Map({ merchants }: MapProps) {
-  const { state, dispatch } = useEventHandler();
+  const { dispatch } = useEventHandler();
+
+  usehandleMapEvents();
 
   return (
     <LoadScript googleMapsApiKey={apiKey}>
@@ -34,27 +74,17 @@ export function Map({ merchants }: MapProps) {
         mapContainerStyle={mapContainerStyle}
         center={merchants ? merchants[0].position : defaultMapCenter}
         zoom={14}
-        onLoad={(map) => {
-          dispatch({ type: EventActionType.SET_MAP, payload: { map } });
-        }}
+        onLoad={(map) =>
+          dispatch({ type: EventActionType.SET_MAP, payload: { map } })
+        }
       >
         {merchants.map((merchant) => {
           return (
             <Marker
-              onClick={() => {
-                dispatch({
-                  type: EventActionType.MARKER_CLICK,
-                  payload: { merchant },
-                });
-              }}
+              onClick={() => handleMarkerClick(merchant, dispatch)}
               key={merchant.name}
               position={merchant.position}
-              icon={
-                state.markedMerchant &&
-                merchant.name === state.markedMerchant.name
-                  ? selectedMarkerIcon
-                  : unselectedMarkericon
-              }
+              icon={selectMarkerIcon(merchant)}
             />
           );
         })}
