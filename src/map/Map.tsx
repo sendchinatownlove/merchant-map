@@ -45,7 +45,7 @@ function selectMarkerIcon(merchant: Merchant) {
 }
 
 //  Hook that handles map panning
-function usehandleMapEvents() {
+function useHandleMapEvents() {
   const { state } = useEventHandler();
 
   // Pan the map to the markedMerchant if markedMerchant is updated
@@ -66,7 +66,7 @@ function usehandleMapEvents() {
 export function Map({ merchants }: MapProps) {
   const { dispatch } = useEventHandler();
 
-  usehandleMapEvents();
+  useHandleMapEvents();
 
   return (
     <LoadScript googleMapsApiKey={apiKey}>
