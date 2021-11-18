@@ -1,17 +1,14 @@
-import { useState, useEffect } from "react";
 import { Marker, GoogleMap, LoadScript } from "@react-google-maps/api";
-import { Merchant } from "../App";
+import { useEffect } from "react";
+import { useEventHandler } from "../utilities/EventHandlerContext";
+import { EventAction, EventActionType } from "../utilities/handleEventReducer";
+import { LatLong, Merchant } from "../utilities/types";
 
 // Create an .env file and store your Google Maps API key as VITE_GOOGLE_MAPS_API_KEY
 const apiKey = import.meta.env.VITE_GOOGLE_MAPS_API_KEY;
 const mapContainerStyle = {
-  width: "400px",
-  height: "400px",
-};
-
-export type LatLong = {
-  lat: number;
-  lng: number;
+  width: "100%",
+  height: "100%",
 };
 
 const defaultMapCenter: LatLong = {
@@ -23,40 +20,74 @@ interface MapProps {
   merchants: Merchant[];
 }
 
-export function Map({ merchants }: MapProps) {
-  const [mapCenter, setMapCenter] = useState(
-    merchants.length > 0 ? merchants[0].position : defaultMapCenter
-  );
-  const [mapObject, setMapObject] = useState<google.maps.Map | null>(null);
+const selectedMarkerIcon =
+  "https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png";
 
-  // Force render so that the map pans
+const unselectedMarkericon = "";
+
+function handleMarkerClick(
+  merchant: Merchant,
+  dispatch: React.Dispatch<EventAction>
+): void {
+  dispatch({
+    type: EventActionType.MARKER_CLICK,
+    payload: { merchant },
+  });
+}
+
+function selectMarkerIcon(merchant: Merchant) {
+  const { state } = useEventHandler();
+
+  if (state.markedMerchant && merchant.name === state.markedMerchant.name) {
+    return selectedMarkerIcon;
+  }
+  return unselectedMarkericon;
+}
+
+//  Hook that handles map panning
+function useHandleMapEvents() {
+  const { state } = useEventHandler();
+
+  // Pan the map to the markedMerchant if markedMerchant is updated
   useEffect(() => {
-    if (mapObject) {
-      mapObject.panTo(mapCenter);
+    if (state.markedMerchant) {
+      state.map?.panTo(state.markedMerchant.position);
     }
-  }, [mapCenter]);
+  }, [state.markedMerchant]);
 
-  const handleMarkerClick = (e: any) => {
-    setMapCenter({ lat: e.latLng.lat(), lng: e.latLng.lng() });
-  };
+  // Pan the map to the clickedMerchant if clickedMerchant is updated
+  useEffect(() => {
+    if (state.clickedMerchant) {
+      state.map?.panTo(state.clickedMerchant?.position);
+    }
+  }, [state.clickedMerchant]);
+}
+
+export function Map({ merchants }: MapProps) {
+  const { dispatch } = useEventHandler();
+
+  useHandleMapEvents();
 
   return (
     <LoadScript googleMapsApiKey={apiKey}>
       <GoogleMap
         mapContainerStyle={mapContainerStyle}
-        center={mapCenter}
-        zoom={12}
-        onLoad={(map) => {
-          setMapObject(map);
-        }}
+        center={merchants ? merchants[0].position : defaultMapCenter}
+        zoom={14}
+        onLoad={(map) =>
+          dispatch({ type: EventActionType.SET_MAP, payload: { map } })
+        }
       >
-        {merchants.map((merchant) => (
-          <Marker
-            onClick={handleMarkerClick}
-            key={merchant.name}
-            position={merchant.position}
-          />
-        ))}
+        {merchants.map((merchant) => {
+          return (
+            <Marker
+              onClick={() => handleMarkerClick(merchant, dispatch)}
+              key={merchant.name}
+              position={merchant.position}
+              icon={selectMarkerIcon(merchant)}
+            />
+          );
+        })}
       </GoogleMap>
     </LoadScript>
   );

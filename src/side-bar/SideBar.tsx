@@ -1,18 +1,18 @@
 import "./SideBar.css";
 import MerchantCard from "../merchant-card/MerchantCard";
-import { Merchant } from "../App";
+import { Merchant } from "../utilities/types";
 
 interface SideBarProps {
-  merchants: Merchant[]
+  merchants: Merchant[];
 }
 
 function SideBar({ merchants }: SideBarProps) {
   return (
     <>
       <h1>Explore our merchants</h1>
-      {merchants.map(merchant => 
-        <MerchantCard merchant={merchant}/>
-      )}
+      {merchants.map((merchant) => (
+        <MerchantCard merchant={merchant} />
+      ))}
     </>
   );
 }
