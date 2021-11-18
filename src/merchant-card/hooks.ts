@@ -25,9 +25,8 @@ export function useHandleAutoScroll(merchant: Merchant, ref: any) {
   const { state } = useEventHandler();
 
   useEffect(() => {
-    const isClickedMerchant: boolean = state.clickedMerchant
-      ? state.clickedMerchant.name === merchant.name
-      : false;
+    const isClickedMerchant: boolean =
+      state.clickedMerchant?.name === merchant.name;
 
     if (isClickedMerchant) {
       ref.current.scrollIntoView({ behavior: "smooth" });
