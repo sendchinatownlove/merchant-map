@@ -14,10 +14,12 @@ export function MerchantCarousel({ merchants, index }: MerchantCarouselProps) {
   const { dispatch } = useEventHandler();
   const [merchantIndex, setMerchantIndex] = useState<number>(index);
 
+  // Update state whenever user clicks left or right button
   useEffect(() => {
+    const merchantOnScreen = merchants[merchantIndex];
     dispatch({
       type: EventActionType.HANDLE_USER_SCROLL_AND_CAROUSEL_CLICK,
-      payload: { merchant: merchants[merchantIndex] },
+      payload: { merchant: merchantOnScreen },
     });
   }, [merchantIndex]);
 
