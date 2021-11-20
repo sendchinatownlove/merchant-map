@@ -1,11 +1,8 @@
 import "./SideBar.css";
 import MerchantCard from "../merchant-card/MerchantCard";
 import { Merchant } from "../utilities/types";
-import { useCheckIfMobile } from "../utilities/useCheckIfMobile";
 import { MerchantCarousel } from "./mobile/MerchantCarousel";
 import { useEventHandler } from "../utilities/EventHandlerContext";
-import { useEffect } from "react";
-import { EventActionType } from "../utilities/handleEventReducer";
 
 interface SideBarProps {
   merchants: Merchant[];
@@ -52,22 +49,8 @@ function MobileCards({ merchants, markedMerchant }: MobileCardsProps) {
   );
 }
 
-function useUpdateDeviceTypeState() {
-  const { dispatch } = useEventHandler();
-  const isMobile = useCheckIfMobile();
-
-  useEffect(() => {
-    dispatch({
-      type: EventActionType.UPDATE_IF_MOBILE,
-      payload: { isMobile },
-    });
-  }, [isMobile]);
-}
-
 function SideBar({ merchants }: SideBarProps) {
   const { state } = useEventHandler();
-
-  useUpdateDeviceTypeState();
 
   return (
     <>
