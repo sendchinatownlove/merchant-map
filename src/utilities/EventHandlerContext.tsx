@@ -10,6 +10,7 @@ const initialReducerState: AppState = {
   map: null,
   markedMerchant: null,
   clickedMerchant: null,
+  isMobile: false,
 };
 
 const initialContextValue: EventHandlerContextValue = {
