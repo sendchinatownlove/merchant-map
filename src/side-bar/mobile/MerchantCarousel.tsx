@@ -7,25 +7,13 @@ import { EventActionType } from "../../utilities/handleEventReducer";
 
 type MerchantCarouselProps = {
   merchants: Merchant[];
+  index: number;
 };
 
-export function MerchantCarousel({ merchants }: MerchantCarouselProps) {
-  const { state, dispatch } = useEventHandler();
-  const [merchantIndex, setMerchantIndex] = useState<number>(0);
+export function MerchantCarousel({ merchants, index }: MerchantCarouselProps) {
+  const { dispatch } = useEventHandler();
+  const [merchantIndex, setMerchantIndex] = useState<number>(index);
 
-  // When user clicks on a clicked merchant, update merchantIndex with the index
-  // of the clicked merchant in the merchants array.
-  useEffect(() => {
-    for (let i = 0; i < merchants.length; i++) {
-      const currentMerchant = merchants[i];
-      if (currentMerchant.name === state.clickedMerchant?.name) {
-        setMerchantIndex(i);
-      }
-    }
-  }, [state.clickedMerchant]);
-
-  // When the merchantIndex is updated via map click or carousel change, update the state.
-  // This triggers the map to pan.
   useEffect(() => {
     dispatch({
       type: EventActionType.HANDLE_USER_SCROLL_AND_CAROUSEL_CLICK,
