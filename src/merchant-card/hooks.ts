@@ -61,7 +61,7 @@ function updateScrollState(
 
   if (isUserSidebarScroll) {
     dispatch({
-      type: EventActionType.HANDLE_USER_SCROLL,
+      type: EventActionType.HANDLE_USER_SCROLL_AND_CAROUSEL_CLICK,
       payload: { merchant: merchantOnScreen },
     });
   } else {

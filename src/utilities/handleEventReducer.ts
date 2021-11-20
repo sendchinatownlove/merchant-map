@@ -9,7 +9,7 @@ export type AppState = {
 export enum EventActionType {
   "SET_MAP",
   "MARKER_CLICK",
-  "HANDLE_USER_SCROLL",
+  "HANDLE_USER_SCROLL_AND_CAROUSEL_CLICK",
   "HANDLE_AUTO_SCROLL_COMPLETE",
 }
 
@@ -40,7 +40,7 @@ export function reducer(state: AppState, action: EventAction): AppState {
         ...state,
       };
     }
-    case EventActionType.HANDLE_USER_SCROLL: {
+    case EventActionType.HANDLE_USER_SCROLL_AND_CAROUSEL_CLICK: {
       if (action.payload.merchant) {
         return { ...state, markedMerchant: action.payload.merchant };
       }
