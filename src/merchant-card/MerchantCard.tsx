@@ -28,9 +28,9 @@ function MerchantCount({
     numberOfMerchants !== undefined
   ) {
     return (
-      <p>
+      <>
         {currentCount} out of {numberOfMerchants}
-      </p>
+      </>
     );
   }
 
@@ -50,10 +50,12 @@ function MerchantCard({
 
   return (
     <div className="merchant-card" ref={ref}>
-      <MerchantCount
-        currentCount={index !== undefined ? index + 1 : 0}
-        numberOfMerchants={numberOfMerchants ? numberOfMerchants : 0}
-      />
+      <p>
+        <MerchantCount
+          currentCount={index !== undefined ? index + 1 : 0}
+          numberOfMerchants={numberOfMerchants ? numberOfMerchants : 0}
+        />
+      </p>
       <h2>{merchant.name}</h2>
       <p>{merchant.addressLine1}</p>
       <p>{merchant.addressLine2}</p>
