@@ -52,7 +52,11 @@ export function MerchantCarousel({ merchants, index }: MerchantCarouselProps) {
         onForwardButtonClick={handleForwardButtonClick}
       />
 
-      {<MerchantCard merchant={merchants[merchantIndex]} />}
+      <MerchantCard
+        merchant={merchants[merchantIndex]}
+        index={merchantIndex}
+        numberOfMerchants={merchants.length}
+      />
     </>
   );
 }
