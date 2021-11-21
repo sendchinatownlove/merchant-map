@@ -13,9 +13,9 @@ const unselectedMarkericon = "";
 // the corresponding merchant by using the currentIndex and indexing on the data array.
 function useUpdateClickedMerchantIndex(
   clickedMerchant: Merchant,
-  merchants: Merchant[]
+  merchants: Merchant[],
+  dispatch: React.Dispatch<EventAction>
 ) {
-  const { dispatch } = useEventHandler();
   const currentIndex = getClickedMerchantIndex(clickedMerchant, merchants);
 
   dispatch({
@@ -48,7 +48,7 @@ export function handleMarkerClick(
   });
 
   if (isMobile) {
-    useUpdateClickedMerchantIndex(merchant, merchants);
+    useUpdateClickedMerchantIndex(merchant, merchants, dispatch);
   }
 }
 
