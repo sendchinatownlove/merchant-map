@@ -5,6 +5,7 @@ export type AppState = {
   markedMerchant: Merchant | null;
   clickedMerchant: Merchant | null;
   isMobile: boolean;
+  currentIndex: number;
 };
 
 export enum EventActionType {
@@ -13,6 +14,8 @@ export enum EventActionType {
   "HANDLE_USER_SCROLL_AND_CAROUSEL_CLICK",
   "HANDLE_AUTO_SCROLL_COMPLETE",
   "UPDATE_IF_MOBILE",
+  "UPDATE_MERCHANT_INDEX",
+  "STORE_MERCHANTS_DATA",
 }
 
 export type EventAction = {
@@ -21,6 +24,7 @@ export type EventAction = {
     merchant?: Merchant;
     map?: google.maps.Map;
     isMobile?: boolean;
+    currentIndex?: number;
   };
 };
 
@@ -54,6 +58,12 @@ export function reducer(state: AppState, action: EventAction): AppState {
     case EventActionType.UPDATE_IF_MOBILE: {
       if (action.payload.isMobile !== undefined) {
         return { ...state, isMobile: action.payload.isMobile };
+      }
+      return { ...state };
+    }
+    case EventActionType.UPDATE_MERCHANT_INDEX: {
+      if (action.payload.currentIndex !== undefined) {
+        return { ...state, currentIndex: action.payload.currentIndex };
       }
       return { ...state };
     }

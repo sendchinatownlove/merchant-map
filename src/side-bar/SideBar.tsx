@@ -27,6 +27,7 @@ function DesktopCards({ merchants }: DesktopCardsProps) {
 }
 
 function MobileCards({ merchants, markedMerchant }: MobileCardsProps) {
+  const { state } = useEventHandler();
   if (merchants.length === 0) {
     return <div />;
   }
@@ -34,18 +35,11 @@ function MobileCards({ merchants, markedMerchant }: MobileCardsProps) {
     return <MerchantCarousel index={0} merchants={merchants} />;
   }
   return (
-    <>
-      {merchants.map((merchant, index) => {
-        if (merchant.name === markedMerchant?.name)
-          return (
-            <MerchantCarousel
-              key={"Carousel_" + merchant.name + index}
-              index={index}
-              merchants={merchants}
-            />
-          );
-      })}
-    </>
+    <MerchantCarousel
+      key={"Carousel_" + state.currentIndex}
+      index={state.currentIndex}
+      merchants={merchants}
+    />
   );
 }
 
