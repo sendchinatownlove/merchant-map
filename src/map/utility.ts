@@ -28,12 +28,9 @@ function getClickedMerchantIndex(
   clickedMerchant: Merchant,
   merchants: Merchant[]
 ): number {
-  for (let i = 0; i < merchants.length; i++) {
-    if (merchants[i].name === clickedMerchant.name) {
-      return i;
-    }
-  }
-  return 0;
+  return merchants.findIndex(
+    (merchant) => merchant.name === clickedMerchant.name
+  );
 }
 
 export function handleMarkerClick(
