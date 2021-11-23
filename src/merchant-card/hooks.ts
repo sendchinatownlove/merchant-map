@@ -28,7 +28,7 @@ export function useHandleAutoScroll(merchant: Merchant, ref: any) {
     const isClickedMerchant: boolean =
       state.clickedMerchant?.name === merchant.name;
 
-    if (isClickedMerchant) {
+    if (isClickedMerchant && !state.isMobile) {
       ref.current.scrollIntoView({ behavior: "smooth" });
     }
   }, [state.clickedMerchant]);
@@ -61,7 +61,7 @@ function updateScrollState(
 
   if (isUserSidebarScroll) {
     dispatch({
-      type: EventActionType.HANDLE_USER_SCROLL,
+      type: EventActionType.HANDLE_USER_SCROLL_AND_CAROUSEL_CLICK,
       payload: { merchant: merchantOnScreen },
     });
   } else {

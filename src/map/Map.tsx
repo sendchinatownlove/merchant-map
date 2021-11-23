@@ -1,8 +1,12 @@
 import { Marker, GoogleMap, LoadScript } from "@react-google-maps/api";
-import { useEffect } from "react";
 import { useEventHandler } from "../utilities/EventHandlerContext";
-import { EventAction, EventActionType } from "../utilities/handleEventReducer";
+import { EventActionType } from "../utilities/handleEventReducer";
 import { LatLong, Merchant } from "../utilities/types";
+import {
+  handleMarkerClick,
+  selectMarkerIcon,
+  useHandleMapEvents,
+} from "./utility";
 
 // Create an .env file and store your Google Maps API key as VITE_GOOGLE_MAPS_API_KEY
 const apiKey = import.meta.env.VITE_GOOGLE_MAPS_API_KEY;
@@ -20,51 +24,8 @@ interface MapProps {
   merchants: Merchant[];
 }
 
-const selectedMarkerIcon =
-  "https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png";
-
-const unselectedMarkericon = "";
-
-function handleMarkerClick(
-  merchant: Merchant,
-  dispatch: React.Dispatch<EventAction>
-): void {
-  dispatch({
-    type: EventActionType.MARKER_CLICK,
-    payload: { merchant },
-  });
-}
-
-function selectMarkerIcon(merchant: Merchant) {
-  const { state } = useEventHandler();
-
-  if (state.markedMerchant && merchant.name === state.markedMerchant.name) {
-    return selectedMarkerIcon;
-  }
-  return unselectedMarkericon;
-}
-
-//  Hook that handles map panning
-function useHandleMapEvents() {
-  const { state } = useEventHandler();
-
-  // Pan the map to the markedMerchant if markedMerchant is updated
-  useEffect(() => {
-    if (state.markedMerchant) {
-      state.map?.panTo(state.markedMerchant.position);
-    }
-  }, [state.markedMerchant]);
-
-  // Pan the map to the clickedMerchant if clickedMerchant is updated
-  useEffect(() => {
-    if (state.clickedMerchant) {
-      state.map?.panTo(state.clickedMerchant?.position);
-    }
-  }, [state.clickedMerchant]);
-}
-
 export function Map({ merchants }: MapProps) {
-  const { dispatch } = useEventHandler();
+  const { state, dispatch } = useEventHandler();
 
   useHandleMapEvents();
 
@@ -81,7 +42,9 @@ export function Map({ merchants }: MapProps) {
         {merchants.map((merchant) => {
           return (
             <Marker
-              onClick={() => handleMarkerClick(merchant, dispatch)}
+              onClick={() =>
+                handleMarkerClick(merchant, merchants, dispatch, state.isMobile)
+              }
               key={merchant.name}
               position={merchant.position}
               icon={selectMarkerIcon(merchant)}

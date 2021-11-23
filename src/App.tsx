@@ -2,23 +2,52 @@ import { Map } from "./map/Map";
 import SideBar from "./side-bar/SideBar";
 import "./App.css";
 import { mockData } from "./utilities/mockData";
-import { EventHandlerProvider } from "./utilities/EventHandlerContext";
+import {
+  EventHandlerProvider,
+  useEventHandler,
+} from "./utilities/EventHandlerContext";
 import { Merchant } from "./utilities/types";
+import { useCheckIfMobile } from "./utilities/useCheckIfMobile";
+import { useEffect } from "react";
+import { EventActionType } from "./utilities/handleEventReducer";
 
 // Replace when we setup the API call
 const mockMerchants: Merchant[] = mockData;
 
+// Hook that updates the isMobile state whenever the device changes
+function useUpdateDeviceTypeState() {
+  const { dispatch } = useEventHandler();
+  const isMobile = useCheckIfMobile();
+
+  useEffect(() => {
+    dispatch({
+      type: EventActionType.UPDATE_IF_MOBILE,
+      payload: { isMobile },
+    });
+  }, [isMobile]);
+}
+
+// Things like side effects that we want handled at the app-level can go
+// inside the AppContainer
+function AppContainer({ children }: any) {
+  useUpdateDeviceTypeState();
+
+  return <>{children}</>;
+}
+
 function App() {
   return (
     <EventHandlerProvider>
-      <div id="app-container">
-        <div id="sidebar-container">
-          <SideBar merchants={mockMerchants} />
+      <AppContainer>
+        <div id="app-container">
+          <div id="sidebar-container">
+            <SideBar merchants={mockMerchants} />
+          </div>
+          <div id="map-container">
+            <Map merchants={mockMerchants} />
+          </div>
         </div>
-        <div id="map-container">
-          <Map merchants={mockMerchants} />
-        </div>
-      </div>
+      </AppContainer>
     </EventHandlerProvider>
   );
 }
