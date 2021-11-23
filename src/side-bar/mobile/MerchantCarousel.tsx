@@ -24,20 +24,22 @@ export function MerchantCarousel({ merchants, index }: MerchantCarouselProps) {
   }, [merchantIndex]);
 
   const handleBackButtonClick = () => {
-    if (!merchants) return;
-    if (merchantIndex === 0) {
+    if (merchants.length > 0 && merchantIndex === 0) {
       setMerchantIndex(merchants.length - 1);
-    } else {
+    } else if (merchants.length > 0) {
       setMerchantIndex(merchantIndex - 1);
+    } else {
+      return;
     }
   };
 
   const handleForwardButtonClick = () => {
-    if (!merchants) return;
-    if (merchantIndex === merchants.length - 1) {
+    if (merchants.length > 0 && merchantIndex === merchants.length - 1) {
       setMerchantIndex(0);
-    } else {
+    } else if (merchants.length > 0) {
       setMerchantIndex(merchantIndex + 1);
+    } else {
+      return;
     }
   };
 
