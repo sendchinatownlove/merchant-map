@@ -10,9 +10,7 @@ import { Merchant } from "./utilities/types";
 import { useCheckIfMobile } from "./utilities/useCheckIfMobile";
 import { useEffect } from "react";
 import { EventActionType } from "./utilities/handleEventReducer";
-
-// Replace when we setup the API call
-const mockMerchants: Merchant[] = mockData;
+import { useFetchMerchants } from "./utilities/api/useFetchMerchants";
 
 // Hook that updates the isMobile state whenever the device changes
 function useUpdateDeviceTypeState() {
@@ -36,15 +34,21 @@ function AppContainer({ children }: any) {
 }
 
 function App() {
+  const data = useFetchMerchants();
+
+  if (data.length === 0) {
+    return <div />;
+  }
+  console.log(data);
   return (
     <EventHandlerProvider>
       <AppContainer>
         <div id="app-container">
           <div id="sidebar-container">
-            <SideBar merchants={mockMerchants} />
+            <SideBar merchants={data} />
           </div>
           <div id="map-container">
-            <Map merchants={mockMerchants} />
+            <Map merchants={data} />
           </div>
         </div>
       </AppContainer>

@@ -57,11 +57,10 @@ function MerchantCard({
         />
       </p>
       <h2>{merchant.name}</h2>
-      <p>{merchant.addressLine1}</p>
-      <p>{merchant.addressLine2}</p>
+      <p>{merchant.address}</p>
       <p>{merchant.phoneNumber}</p>
       <a href={merchant.websiteUrl}>Website</a>
-      <p>{merchant.description}</p>
+      <p>{merchant.shortDescription}</p>
       <a href="#">
         <button>Visit Merchant Page</button>
       </a>
