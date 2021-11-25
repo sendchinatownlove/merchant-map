@@ -1,7 +1,9 @@
 export type Merchant = {
   name: string;
-  addressLine1: string;
-  addressLine2: string;
+  address: string;
+  shortDescription: string;
+  typeBusiness: string[];
+  imageURLs: { left: string; right: string };
   phoneNumber: string;
   websiteUrl: string;
   description: string;
