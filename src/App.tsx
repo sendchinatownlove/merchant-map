@@ -34,21 +34,27 @@ function AppContainer({ children }: any) {
 }
 
 function App() {
-  const data = useFetchMerchants();
+  const fetchedData = useFetchMerchants();
 
-  if (data.length === 0) {
+  // TODO: Add views for whether the data is loading, has an error, or if there is no data
+  if (fetchedData.error) {
     return <div />;
   }
-  console.log(data);
+  if (fetchedData.loading) {
+    return <div />;
+  }
+  if (!fetchedData.error && fetchedData.data.length === 0) {
+    return <div />;
+  }
   return (
     <EventHandlerProvider>
       <AppContainer>
         <div id="app-container">
           <div id="sidebar-container">
-            <SideBar merchants={data} />
+            <SideBar merchants={fetchedData.data} />
           </div>
           <div id="map-container">
-            <Map merchants={data} />
+            <Map merchants={fetchedData.data} />
           </div>
         </div>
       </AppContainer>

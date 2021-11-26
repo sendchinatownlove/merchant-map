@@ -2,26 +2,30 @@ import { useEffect, useState } from "react";
 import { Merchant } from "../types";
 import { MERCHANTS_ENDPOINT } from "./endpoints";
 
-function handleError(response: Response) {
-  if (!response.ok) {
-    throw new Error(response.statusText);
-  }
-  return response;
-}
+type FetchResult = {
+  data: Merchant[];
+  loading: boolean;
+  error: boolean;
+};
 
-export function useFetchMerchants() {
-  const [data, setData] = useState<Merchant[]>([]);
+export function useFetchMerchants(): FetchResult {
+  const [fetchedData, setData] = useState<FetchResult>({
+    data: [],
+    loading: true,
+    error: false,
+  });
 
   useEffect(() => {
     fetch(MERCHANTS_ENDPOINT)
-      .then(handleError)
       .then((res) => res.text())
       .then((res) => {
         const jsonResponse: Merchant[] = JSON.parse(res);
-        if (jsonResponse.length > 0) {
-          setData(jsonResponse);
-        }
+        setData({ ...fetchedData, loading: false, data: jsonResponse });
+      })
+      .catch(() => {
+        setData({ ...fetchedData, error: true });
       });
   }, []);
-  return data;
+
+  return fetchedData;
 }
