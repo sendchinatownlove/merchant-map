@@ -1,8 +1,8 @@
-import "./SideBar.css";
-import MerchantCard from "../merchant-card/MerchantCard";
-import { Merchant } from "../utilities/types";
+import "./SideBar.scss";
+import MerchantCard from "../../merchant-card/MerchantCard";
+import { Merchant } from "../../utilities/types";
 import { MerchantCarousel } from "./mobile/MerchantCarousel";
-import { useEventHandler } from "../utilities/EventHandlerContext";
+import { useEventHandler } from "../../utilities/EventHandlerContext";
 
 interface SideBarProps {
   merchants: Merchant[];
@@ -18,11 +18,11 @@ interface MobileCardsProps {
 }
 function DesktopCards({ merchants }: DesktopCardsProps) {
   return (
-    <>
+    <div className="Merchant--List">
       {merchants.map((merchant) => (
         <MerchantCard merchant={merchant} />
       ))}
-    </>
+    </div>
   );
 }
 
@@ -47,8 +47,8 @@ function SideBar({ merchants }: SideBarProps) {
   const { state } = useEventHandler();
 
   return (
-    <>
-      <h1>Explore our merchants</h1>
+    <div className="Merchant--Container">
+      <h1 className="Header">Explore our merchants</h1>
       {state.isMobile ? (
         <MobileCards
           merchants={merchants}
@@ -57,7 +57,7 @@ function SideBar({ merchants }: SideBarProps) {
       ) : (
         <DesktopCards merchants={merchants} />
       )}
-    </>
+    </div>
   );
 }
 

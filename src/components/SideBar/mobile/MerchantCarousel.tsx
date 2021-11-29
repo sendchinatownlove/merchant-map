@@ -1,9 +1,9 @@
-import { Merchant } from "../../utilities/types";
+import { Merchant } from "../../../utilities/types";
 import { NavButtons } from "./NavButtons";
-import MerchantCard from "../../merchant-card/MerchantCard";
-import { useEventHandler } from "../../utilities/EventHandlerContext";
+import MerchantCard from "../../../merchant-card/MerchantCard";
+import { useEventHandler } from "../../../utilities/EventHandlerContext";
 import { useEffect, useState } from "react";
-import { EventActionType } from "../../utilities/handleEventReducer";
+import { EventActionType } from "../../../utilities/handleEventReducer";
 
 type MerchantCarouselProps = {
   merchants: Merchant[];

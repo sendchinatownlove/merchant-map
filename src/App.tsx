@@ -1,6 +1,6 @@
 import { Map } from "./map/Map";
-import SideBar from "./side-bar/SideBar";
-import "./App.css";
+import SideBar from "./components/SideBar/SideBar";
+import "./App.scss";
 import { mockData } from "./utilities/mockData";
 import {
   EventHandlerProvider,
@@ -50,9 +50,7 @@ function App() {
     <EventHandlerProvider>
       <AppContainer>
         <div id="app-container">
-          <div id="sidebar-container">
-            <SideBar merchants={fetchedData.data} />
-          </div>
+          <SideBar merchants={fetchedData.data} />
           <div id="map-container">
             <Map merchants={fetchedData.data} />
           </div>
