@@ -1,0 +1,60 @@
+@import '../Theme.scss';
+
+.Merchant {
+    width: 100%;
+    margin: 12px;
+    display: flex;
+    flex-direction: column;
+    
+    &--Name {
+        font-weight: bold;
+        font-size: 24px;
+        line-height: 33px;
+    }
+
+    &--Details {
+
+        &--Row {
+            
+            display: flex;
+            justify-content: space-between;
+        }
+
+        &--Item {
+            font-weight: normal;
+            font-size: 16px;
+            line-height: 22px;
+            margin: 0;
+        }
+
+        &--Link {
+            font-weight: normal;
+            font-size: 16px;
+            line-height: 22px;
+            color: $primary-red;
+        }
+
+    }
+
+    &--Description {
+        font-size: 18px;
+        line-height: 25px;
+    }
+
+    &--Insider-Tips-Label {
+        font-size: 18px;
+        line-height: 25px;
+        color: $primary-red;
+    }
+
+    &--Page-Container {
+        display: flex;
+        justify-content: center;
+    }
+
+    &--Images {
+        height: 400px;
+        width: 300px;
+    }
+}
+
