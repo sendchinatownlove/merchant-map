@@ -1,0 +1,33 @@
+@import '../../Theme.scss';
+
+.Header {
+    background: $primary-red;
+    margin: 0;
+    color: $font-white;
+    font-size: 32px;
+    line-height: 44px;
+    padding: 29px 36px;
+
+    @media only screen and (max-width: 760px) {
+        position: absolute;
+        width: 100%;
+        top: 0;
+    }
+}
+.Merchant {
+    &--Container {
+        width: 50%;
+        display: flex;
+        position: relative;
+        flex-direction: column;
+        justify-content: space-between;
+        @media only screen and (max-width: 760px) {
+            position: absolute;
+            width: 100%;
+        }
+    }
+
+    &--List {
+        padding: 0 36px;
+    }
+}
