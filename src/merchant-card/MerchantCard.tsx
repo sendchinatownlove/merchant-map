@@ -1,4 +1,4 @@
-import "./MerchantCard.css";
+import "./MerchantCard.scss";
 import { useRef } from "react";
 
 import { Merchant } from "../utilities/types";
@@ -49,22 +49,27 @@ function MerchantCard({
   useHandleAutoScroll(merchant, ref);
 
   return (
-    <div className="merchant-card" ref={ref}>
-      <p>
-        <MerchantCount
-          currentCount={index !== undefined ? index + 1 : 0}
-          numberOfMerchants={numberOfMerchants ? numberOfMerchants : 0}
-        />
-      </p>
-      <h2>{merchant.name}</h2>
-      <p>{merchant.address}</p>
-      <p>{merchant.phoneNumber}</p>
-      <a href={merchant.websiteUrl}>Website</a>
-      <p>{merchant.shortDescription}</p>
-      <a href="#">
-        <button>Visit Merchant Page</button>
-      </a>
-      <div className="merchant-images"></div>
+    <div className="Merchant" ref={ref}>
+      <h2 className="Merchant--Name">{merchant.name}</h2>
+      <div className="Merchant--Details">
+        <div className="Merchant--Details--Row">
+          <p className="Merchant--Details--Item">{merchant.address}</p>
+          <p className="Merchant--Details--Item">{merchant.phoneNumber}</p>
+        </div>
+        <div className="Merchant--Details--Row">
+          <a className="Merchant--Details--Link" href={merchant.websiteUrl}>
+            Website
+          </a>
+        </div>
+      </div>
+      <p className="Merchant--Description">{merchant.description}</p>
+      <p className="Merchant--Insider-Tips-Label">Insider Tips</p>
+      <div className="Merchant--Page-Container">
+        <a href="#">
+          <button className="Primary-Button--black">Visit Merchant Page</button>
+        </a>
+      </div>
+      <div className="Merchant--Images"></div>
     </div>
   );
 }
