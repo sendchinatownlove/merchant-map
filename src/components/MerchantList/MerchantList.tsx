@@ -1,10 +1,10 @@
-import "./SideBar.scss";
-import MerchantCard from "../../merchant-card/MerchantCard";
+import "./MerchantList.scss";
+import MerchantCard from "../MerchantCard/MerchantCard";
 import { Merchant } from "../../utilities/types";
-import { MerchantCarousel } from "./mobile/MerchantCarousel";
+import { MobileMerchantList } from "./MobileMerchantList/MobileMerchantList";
 import { useEventHandler } from "../../utilities/EventHandlerContext";
 
-interface SideBarProps {
+interface MerchantListProps {
   merchants: Merchant[];
 }
 
@@ -32,10 +32,10 @@ function MobileCards({ merchants, markedMerchant }: MobileCardsProps) {
     return <div />;
   }
   if (!markedMerchant) {
-    return <MerchantCarousel index={0} merchants={merchants} />;
+    return <MobileMerchantList index={0} merchants={merchants} />;
   }
   return (
-    <MerchantCarousel
+    <MobileMerchantList
       key={"Carousel_" + state.currentIndex}
       index={state.currentIndex}
       merchants={merchants}
@@ -43,7 +43,7 @@ function MobileCards({ merchants, markedMerchant }: MobileCardsProps) {
   );
 }
 
-function SideBar({ merchants }: SideBarProps) {
+function MerchantList({ merchants }: MerchantListProps) {
   const { state } = useEventHandler();
 
   return (
@@ -61,4 +61,4 @@ function SideBar({ merchants }: SideBarProps) {
   );
 }
 
-export default SideBar;
+export default MerchantList;
