@@ -1,5 +1,6 @@
-import { Map } from "./map/Map";
-import SideBar from "./components/SideBar/SideBar";
+import Map from "./components/Map";
+// import {MerchantList, MobileMerchantList} from "./components/MerchantList";
+import {MerchantList} from "./components/MerchantList";
 import "./App.scss";
 import { mockData } from "./utilities/mockData";
 import {
@@ -40,7 +41,7 @@ function App() {
     <EventHandlerProvider>
       <AppContainer>
         <div id="app-container">
-          <SideBar merchants={mockMerchants} />
+          <MerchantList merchants={mockMerchants} />
           <div id="map-container">
             <Map merchants={mockMerchants} />
           </div>

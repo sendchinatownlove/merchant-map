@@ -1,16 +1,16 @@
 import { Merchant } from "../../../utilities/types";
-import { NavButtons } from "./NavButtons";
-import MerchantCard from "../../../merchant-card/MerchantCard";
+import MerchantCard from "../../MerchantCard/MerchantCard";
+import NavButtons from "./NavButtons";
 import { useEventHandler } from "../../../utilities/EventHandlerContext";
 import { useEffect, useState } from "react";
 import { EventActionType } from "../../../utilities/handleEventReducer";
 
-type MerchantCarouselProps = {
+type MobileMerchantListProps = {
   merchants: Merchant[];
   index: number;
 };
 
-export function MerchantCarousel({ merchants, index }: MerchantCarouselProps) {
+export function MobileMerchantList({ merchants, index }: MobileMerchantListProps) {
   const { dispatch } = useEventHandler();
   const [merchantIndex, setMerchantIndex] = useState<number>(index);
 

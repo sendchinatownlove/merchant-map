@@ -1,14 +1,14 @@
 import { useEffect } from "react";
-import { useEventHandler } from "../utilities/EventHandlerContext";
-import { EventAction, EventActionType } from "../utilities/handleEventReducer";
-import { Merchant } from "../utilities/types";
+import { useEventHandler } from "../../utilities/EventHandlerContext";
+import { EventAction, EventActionType } from "../../utilities/handleEventReducer";
+import { Merchant } from "../../utilities/types";
 
 const selectedMarkerIcon =
   "https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png";
 
 const unselectedMarkericon = "";
 
-// Store the index of the clicked merchant. Used in the MerchantCarousel component.
+// Store the index of the clicked merchant. Used in the MobileMerchantList component.
 // When a user clicks on a merchant on the map in the mobile version, we can display
 // the corresponding merchant by using the currentIndex and indexing on the data array.
 function useUpdateClickedMerchantIndex(
