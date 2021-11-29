@@ -1,5 +1,3 @@
-import { Map } from "./map/Map";
-import SideBar from "./components/SideBar/SideBar";
 import "./App.scss";
 import { mockData } from "./utilities/mockData";
 import {
@@ -10,6 +8,8 @@ import { useCheckIfMobile } from "./utilities/useCheckIfMobile";
 import { useEffect } from "react";
 import { EventActionType } from "./utilities/handleEventReducer";
 import { useFetchMerchants } from "./utilities/api/useFetchMerchants";
+import Map from "./components/Map";
+import MerchantList from "./components/MerchantList/MerchantList";
 
 // Hook that updates the isMobile state whenever the device changes
 function useUpdateDeviceTypeState() {
@@ -49,7 +49,7 @@ function App() {
     <EventHandlerProvider>
       <AppContainer>
         <div id="app-container">
-          <SideBar merchants={fetchedData.data} />
+          <MerchantList merchants={fetchedData.data} />
           <div id="map-container">
             <Map merchants={fetchedData.data} />
           </div>

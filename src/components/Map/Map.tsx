@@ -1,7 +1,7 @@
 import { Marker, GoogleMap, LoadScript } from "@react-google-maps/api";
-import { useEventHandler } from "../utilities/EventHandlerContext";
-import { EventActionType } from "../utilities/handleEventReducer";
-import { LatLong, Merchant } from "../utilities/types";
+import { useEventHandler } from "../../utilities/EventHandlerContext";
+import { EventActionType } from "../../utilities/handleEventReducer";
+import { LatLong, Merchant } from "../../utilities/types";
 import {
   handleMarkerClick,
   selectMarkerIcon,

@@ -1,9 +1,9 @@
 import "./MerchantCard.scss";
 import { useRef } from "react";
 
-import { Merchant } from "../utilities/types";
+import { Merchant } from "../../utilities/types";
 import { useHandleAutoScroll, useUpdateStateIfDivOnScreen } from "./hooks";
-import { useEventHandler } from "../utilities/EventHandlerContext";
+import { useEventHandler } from "../../utilities/EventHandlerContext";
 
 interface MerchantCardProps {
   merchant: Merchant;

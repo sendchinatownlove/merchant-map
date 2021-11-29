@@ -5,10 +5,10 @@ type NavButtonsProps = {
   onForwardButtonClick: () => void;
 };
 
-export function NavButtons({
+export default ({
   onBackButtonClick,
   onForwardButtonClick,
-}: NavButtonsProps) {
+}: NavButtonsProps) => {
   return (
     <div className="NavBar--Container">
       <button onClick={onBackButtonClick}>{"<"}</button>
