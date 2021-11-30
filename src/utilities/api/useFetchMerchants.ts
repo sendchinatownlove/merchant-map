@@ -5,26 +5,29 @@ import { MERCHANTS_ENDPOINT } from "./endpoints";
 type FetchResult = {
   data: Merchant[];
   loading: boolean;
-  error: boolean;
+  error: string | null;
 };
 
 export function useFetchMerchants(): FetchResult {
   const [fetchedData, setData] = useState<FetchResult>({
     data: [],
     loading: true,
-    error: false,
+    error: null,
   });
 
+  const fetchData = async () => {
+    const response = await fetch(MERCHANTS_ENDPOINT);
+    try {
+      const responseText = await response.text();
+      const jsonResponse = JSON.parse(responseText);
+      setData({ ...fetchedData, loading: false, data: jsonResponse });
+    } catch (e: any) {
+      setData({ ...fetchedData, loading: false, error: e.message });
+    }
+  };
+
   useEffect(() => {
-    fetch(MERCHANTS_ENDPOINT)
-      .then((res) => res.text())
-      .then((res) => {
-        const jsonResponse: Merchant[] = JSON.parse(res);
-        setData({ ...fetchedData, loading: false, data: jsonResponse });
-      })
-      .catch(() => {
-        setData({ ...fetchedData, error: true });
-      });
+    fetchData();
   }, []);
 
   return fetchedData;
