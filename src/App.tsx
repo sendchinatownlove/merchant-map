@@ -1,13 +1,11 @@
 import Map from "./components/Map";
-// import {MerchantList, MobileMerchantList} from "./components/MerchantList";
+import Header from "./components/Header";
 import { MerchantList } from "./components/MerchantList";
 import "./App.scss";
-import { mockData } from "./utilities/mockData";
 import {
   EventHandlerProvider,
   useEventHandler,
 } from "./utilities/EventHandlerContext";
-import { Merchant } from "./utilities/types";
 import { useCheckIfMobile } from "./utilities/useCheckIfMobile";
 import { useEffect } from "react";
 import { EventActionType } from "./utilities/handleEventReducer";
@@ -24,6 +22,34 @@ function useUpdateDeviceTypeState() {
       payload: { isMobile },
     });
   }, [isMobile]);
+}
+
+function MainContent() {
+  const { state } = useEventHandler();
+  const fetchedData = useFetchMerchants();
+
+  if (fetchedData.loading || fetchedData.error) {
+    return <div />;
+  }
+  return (
+    <div id="app-container">
+      {state.isMobile ? (
+        <div id="merchants-container">
+          <Header merchants={fetchedData.data} />
+          <Map merchants={fetchedData.data} />
+          <MerchantList merchants={fetchedData.data} />
+        </div>
+      ) : (
+        <>
+          <div id="merchants-container">
+            <Header merchants={fetchedData.data} />
+            <MerchantList merchants={fetchedData.data} />
+          </div>
+          <Map merchants={fetchedData.data} />
+        </>
+      )}
+    </div>
+  );
 }
 
 // Things like side effects that we want handled at the app-level can go
@@ -51,10 +77,7 @@ function App() {
     <EventHandlerProvider>
       <AppContainer>
         <div id="app-container">
-          <MerchantList merchants={fetchedData.data} />
-          <div id="map-container">
-            <Map merchants={fetchedData.data} />
-          </div>
+          <MainContent />
         </div>
       </AppContainer>
     </EventHandlerProvider>

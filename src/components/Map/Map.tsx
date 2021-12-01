@@ -7,6 +7,7 @@ import {
   selectMarkerIcon,
   useHandleMapEvents,
 } from "./utility";
+import "./Map.scss";
 
 // Create an .env file and store your Google Maps API key as VITE_GOOGLE_MAPS_API_KEY
 const apiKey = import.meta.env.VITE_GOOGLE_MAPS_API_KEY;
@@ -30,28 +31,30 @@ export function Map({ merchants }: MapProps) {
   useHandleMapEvents();
 
   return (
-    <LoadScript googleMapsApiKey={apiKey}>
-      <GoogleMap
-        mapContainerStyle={mapContainerStyle}
-        center={merchants ? merchants[0].position : defaultMapCenter}
-        zoom={14}
-        onLoad={(map) =>
-          dispatch({ type: EventActionType.SET_MAP, payload: { map } })
-        }
-      >
-        {merchants.map((merchant) => {
-          return (
-            <Marker
-              onClick={() =>
-                handleMarkerClick(merchant, merchants, dispatch, state.isMobile)
-              }
-              key={merchant.name}
-              position={merchant.position}
-              icon={selectMarkerIcon(merchant)}
-            />
-          );
-        })}
-      </GoogleMap>
-    </LoadScript>
+    <div className="Map-Container">
+      <LoadScript googleMapsApiKey={apiKey}>
+        <GoogleMap
+          mapContainerStyle={mapContainerStyle}
+          center={merchants ? merchants[0].position : defaultMapCenter}
+          zoom={14}
+          onLoad={(map) =>
+            dispatch({ type: EventActionType.SET_MAP, payload: { map } })
+          }
+        >
+          {merchants.map((merchant) => {
+            return (
+              <Marker
+                onClick={() =>
+                  handleMarkerClick(merchant, merchants, dispatch, state.isMobile)
+                }
+                key={merchant.name}
+                position={merchant.position}
+                icon={selectMarkerIcon(merchant)}
+              />
+            );
+          })}
+        </GoogleMap>
+      </LoadScript>
+    </div>
   );
 }

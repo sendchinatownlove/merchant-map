@@ -1,3 +1,3 @@
-import MobileMerchantList from './MobileMerchantList';
+import { MobileMerchantList } from './MobileMerchantList';
 
 export default MobileMerchantList;

@@ -2,5 +2,13 @@
     &--Container {
         display: flex;
         justify-content: space-between;
+        align-items: center;
+    }
+
+    &--Button {
+        display: flex;
+        flex-direction: column;
+        background: transparent;
+        border: none;
     }
 }

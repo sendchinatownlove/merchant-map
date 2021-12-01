@@ -1,12 +1,12 @@
 import { useEffect } from "react";
-import { useEventHandler } from "../utilities/EventHandlerContext";
+import { useEventHandler } from "../../utilities/EventHandlerContext";
 import {
   AppState,
   EventAction,
   EventActionType,
-} from "../utilities/handleEventReducer";
-import { Merchant } from "../utilities/types";
-import { useElementOnScreen } from "../utilities/useElementOnScreen";
+} from "../../utilities/handleEventReducer";
+import { Merchant } from "../../utilities/types";
+import { useElementOnScreen } from "../../utilities/useElementOnScreen";
 
 // Hook that updates the state whenever the MerchantCard appears on screen
 export function useUpdateStateIfDivOnScreen(merchant: Merchant, ref: any) {

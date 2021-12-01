@@ -48,17 +48,16 @@ export function MobileMerchantList({ merchants, index }: MobileMerchantListProps
   }
 
   return (
-    <>
-      <NavButtons
-        onBackButtonClick={handleBackButtonClick}
-        onForwardButtonClick={handleForwardButtonClick}
-      />
-
+    <div className="Merchant--Carousel">
       <MerchantCard
         merchant={merchants[merchantIndex]}
         index={merchantIndex}
         numberOfMerchants={merchants.length}
       />
-    </>
+      <NavButtons
+        onBackButtonClick={handleBackButtonClick}
+        onForwardButtonClick={handleForwardButtonClick}
+      />
+    </div>
   );
 }
