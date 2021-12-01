@@ -1,8 +1,8 @@
 import "./MerchantList.scss";
 import MerchantCard from "../MerchantCard/MerchantCard";
 import { Merchant } from "../../utilities/types";
-import { useEventHandler } from "../../utilities/EventHandlerContext";
 import MobileMerchantList from "./MobileMerchantList";
+import { useEventHandler } from "../../utilities/EventHandlerContext";
 
 interface MerchantListProps {
   merchants: Merchant[];
@@ -48,7 +48,6 @@ function MerchantList({ merchants }: MerchantListProps) {
 
   return (
     <div className="Merchant--Container">
-      <h1 className="Header">Explore our merchants</h1>
       {state.isMobile ? (
         <MobileCards
           merchants={merchants}

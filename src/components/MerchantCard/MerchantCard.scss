@@ -2,14 +2,21 @@
 
 .Merchant {
   width: 100%;
-  margin: 12px;
   display: flex;
   flex-direction: column;
+  background: transparent;
+
+  @media only screen and (max-width: 760px) {
+    padding: 8px 0;
+  }
 
   &--Name {
     font-weight: bold;
     font-size: 24px;
     line-height: 33px;
+    @media only screen and (max-width: 760px) {
+      margin: 0px;
+    }
   }
 
   &--Details {
@@ -23,6 +30,10 @@
       font-size: 16px;
       line-height: 22px;
       margin: 0;
+      @media only screen and (max-width: 760px) {
+        font-size: 14px;
+        line-height: 20px;
+      }
     }
 
     &--Link {
@@ -36,12 +47,24 @@
   &--Description {
     font-size: 18px;
     line-height: 25px;
+
+    @media only screen and (max-width: 760px) {
+      font-size: 14px;
+      line-height: 20px;
+      width: 100%;
+      margin: 8px auto;
+    }
   }
 
   &--Insider-Tips-Label {
     font-size: 18px;
     line-height: 25px;
     color: $primary-red;
+    @media only screen and (max-width: 760px) {
+      margin: 4px 0;
+      font-size: 14px;
+      line-height: 20px;
+    }
   }
 
   &--Page-Container {
