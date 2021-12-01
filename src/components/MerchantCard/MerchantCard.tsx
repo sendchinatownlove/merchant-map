@@ -1,47 +1,18 @@
 import "./MerchantCard.scss";
 import { useRef } from "react";
 
-import { Merchant } from "../utilities/types";
+import { Merchant } from "../../utilities/types";
+import { useEventHandler } from "../../utilities/EventHandlerContext";
 import { useHandleAutoScroll, useUpdateStateIfDivOnScreen } from "./hooks";
-import { useEventHandler } from "../utilities/EventHandlerContext";
 
 interface MerchantCardProps {
   merchant: Merchant;
-  index?: number;
-  numberOfMerchants?: number;
-}
-
-interface MerchantCountProps {
-  currentCount: number | undefined;
-  numberOfMerchants: number | undefined;
-}
-
-function MerchantCount({
-  currentCount,
-  numberOfMerchants,
-}: MerchantCountProps) {
-  const { state } = useEventHandler();
-
-  if (
-    state.isMobile &&
-    currentCount !== undefined &&
-    numberOfMerchants !== undefined
-  ) {
-    return (
-      <>
-        {currentCount} out of {numberOfMerchants}
-      </>
-    );
-  }
-
-  return <div />;
 }
 
 function MerchantCard({
   merchant,
-  index,
-  numberOfMerchants,
 }: MerchantCardProps) {
+  const { state } = useEventHandler();
   // TODO: update ref type
   const ref: any = useRef<Element>(null);
 
@@ -63,12 +34,14 @@ function MerchantCard({
       </div>
       <p className="Merchant--Description">{merchant.description}</p>
       <p className="Merchant--Insider-Tips-Label">Insider Tips</p>
-      <div className="Merchant--Page-Container">
-          <a href="#">
-            <button className="Primary-Button--black">Visit Merchant Page</button>
-          </a>
-      </div>
-      <div className="Merchant--Images"></div>
+      { !state.isMobile &&  (
+        <div className="Merchant--Page-Container">
+            <a href="#">
+              <button className="Primary-Button--black">Visit Merchant Page</button>
+            </a>
+        </div>
+      )}
+      {/* <div className="Merchant--Images"></div> */}
     </div>
   );
 }

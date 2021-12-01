@@ -1,6 +1,6 @@
 import Map from "./components/Map";
-// import {MerchantList, MobileMerchantList} from "./components/MerchantList";
-import {MerchantList} from "./components/MerchantList";
+import Header from "./components/Header";
+import { MerchantList } from "./components/MerchantList";
 import "./App.scss";
 import { mockData } from "./utilities/mockData";
 import {
@@ -28,6 +28,31 @@ function useUpdateDeviceTypeState() {
   }, [isMobile]);
 }
 
+function MainContent() {
+  const { state } = useEventHandler();
+  return (
+    <div id="app-container">
+    {
+      state.isMobile ? (
+          <div id="merchants-container">
+            <Header merchants={mockMerchants} />
+            <Map merchants={mockMerchants} />
+            <MerchantList merchants={mockMerchants} />
+          </div>
+      ) : (
+        <>
+          <div id="merchants-container">
+            <Header merchants={mockMerchants} />
+            <MerchantList merchants={mockMerchants} />
+          </div>
+          <Map merchants={mockMerchants} />
+        </>
+      )
+    }
+    </div>
+  );
+}
+
 // Things like side effects that we want handled at the app-level can go
 // inside the AppContainer
 function AppContainer({ children }: any) {
@@ -40,12 +65,9 @@ function App() {
   return (
     <EventHandlerProvider>
       <AppContainer>
-        <div id="app-container">
-          <MerchantList merchants={mockMerchants} />
-          <div id="map-container">
-            <Map merchants={mockMerchants} />
+          <div id="app-container">
+            <MainContent />
           </div>
-        </div>
       </AppContainer>
     </EventHandlerProvider>
   );
