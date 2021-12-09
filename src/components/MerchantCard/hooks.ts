@@ -11,7 +11,7 @@ import { useElementOnScreen } from "../../utilities/useElementOnScreen";
 // Hook that updates the state whenever the MerchantCard appears on screen
 export function useUpdateStateIfDivOnScreen(merchant: Merchant, ref: any) {
   const { state, dispatch } = useEventHandler();
-  const isDivOnScreen: boolean = useElementOnScreen(ref, "-300px");
+  const isDivOnScreen: boolean = useElementOnScreen(ref);
 
   useEffect(() => {
     if (isDivOnScreen) {
