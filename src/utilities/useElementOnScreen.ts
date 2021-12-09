@@ -24,13 +24,12 @@ export function useElementOnScreen(ref: RefObject<HTMLDivElement>) {
 }
 
 /**
- * Checks if a div is on the screen. A div is considered on the screen if it is
- * passing a boundary on the screen. `boundary = percOfScreenHeight * screenHeightInPixels`.
+ * Checks if a div is on the screen. If any part of a div is within the `boundary`,
+ * it is considered part of the screen. `boundary = percOfScreenHeight * screenHeightInPixels`.
  * Think of this like a horizontal line that passes the y-axis at `y = boundary`.
  *
  * For example, if `screenHeightInPixels` is `1000` and the `percOfScreenHeight` is `0.5`,
- * then the `boundary` is at 500 pixels. If any part of a div is within the `boundary`,
- * it is considered part of the screen.
+ * then the `boundary` is at 500 pixels.
  *
  * @param ref Ref object from the React hook `useRef.`
  * @param percOfScreenHeight Sets where on the screen the boundary for determining whether a div is on the screen
