@@ -30,7 +30,7 @@ export function Map({ merchants }: MapProps) {
   useHandleMapEvents();
 
   return (
-    <LoadScript googleMapsApiKey={apiKey}>
+    <LoadScript googleMapsApiKey={apiKey as string}>
       <GoogleMap
         mapContainerStyle={mapContainerStyle}
         center={merchants ? merchants[0].position : defaultMapCenter}

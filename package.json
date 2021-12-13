@@ -1,6 +1,9 @@
 {
   "name": "scl-merchant-map",
   "version": "0.0.0",
+  "engines": {
+    "node": "14.x"
+  },
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
