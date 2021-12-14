@@ -16,6 +16,7 @@ export enum EventActionType {
   "UPDATE_IF_MOBILE",
   "UPDATE_MERCHANT_INDEX",
   "STORE_MERCHANTS_DATA",
+  "INITIALIZE_MARKED_MERCHANT",
 }
 
 export type EventAction = {
@@ -64,6 +65,12 @@ export function reducer(state: AppState, action: EventAction): AppState {
     case EventActionType.UPDATE_MERCHANT_INDEX: {
       if (action.payload.currentIndex !== undefined) {
         return { ...state, currentIndex: action.payload.currentIndex };
+      }
+      return { ...state };
+    }
+    case EventActionType.INITIALIZE_MARKED_MERCHANT: {
+      if (action.payload.merchant !== undefined) {
+        return { ...state, markedMerchant: action.payload.merchant };
       }
       return { ...state };
     }

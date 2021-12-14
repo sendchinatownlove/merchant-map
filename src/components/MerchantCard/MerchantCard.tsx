@@ -19,7 +19,16 @@ function MerchantCard({ merchant }: MerchantCardProps) {
 
   return (
     <div className="Merchant" ref={ref}>
-      <h2 className="Merchant--Name">{merchant.name}</h2>
+      <h2
+        className="Merchant--Name"
+        style={
+          state.markedMerchant && merchant.name === state.markedMerchant.name
+            ? { color: "red" }
+            : {}
+        }
+      >
+        {merchant.name}
+      </h2>
       <div className="Merchant--Details">
         <div className="Merchant--Details--Row">
           <p className="Merchant--Details--Item">{merchant.address}</p>

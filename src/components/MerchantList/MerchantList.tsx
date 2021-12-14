@@ -3,6 +3,7 @@ import MerchantCard from "../MerchantCard/MerchantCard";
 import { Merchant } from "../../utilities/types";
 import MobileMerchantList from "./MobileMerchantList";
 import { useEventHandler } from "../../utilities/EventHandlerContext";
+import { useInitializeMarkedMerchant } from "./hooks";
 
 interface MerchantListProps {
   merchants: Merchant[];
@@ -17,6 +18,9 @@ interface MobileCardsProps {
   markedMerchant: Merchant | null;
 }
 function DesktopCards({ merchants }: DesktopCardsProps) {
+  // On page load, set the markedMarchant to be the first merchant
+  useInitializeMarkedMerchant(merchants[0]);
+
   return (
     <div className="Merchant--List">
       {merchants.map((merchant) => (
