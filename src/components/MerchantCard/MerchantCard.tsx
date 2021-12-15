@@ -34,18 +34,14 @@ function MerchantCard({ merchant }: MerchantCardProps) {
         </div>
       </div>
       <p className="Merchant--Description">{merchant.shortDescription}</p>
-      <div className="Merchant--Insider-Tips">
-        {merchant.insiderTips && (
-          <>
-            <h3 className="Merchant--Insider-Tips--Label">
-              Insider Tips:&nbsp;
-            </h3>
-            <p className="Merchant--Insider-Tips--Text">
-              {merchant.insiderTips}
-            </p>
-          </>
-        )}
-      </div>
+
+      {merchant.insiderTips && (
+        <div className="Merchant--Insider-Tips">
+          <h3 className="Merchant--Insider-Tips--Label">Insider Tips:&nbsp;</h3>
+          <p className="Merchant--Insider-Tips--Text">{merchant.insiderTips}</p>
+        </div>
+      )}
+
       {!state.isMobile && (
         <div className="Merchant--Page-Container">
           <a href="#">
