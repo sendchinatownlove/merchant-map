@@ -26,9 +26,11 @@ function MerchantCard({ merchant }: MerchantCardProps) {
           <p className="Merchant--Details--Item">{merchant.phoneNumber}</p>
         </div>
         <div className="Merchant--Details--Row">
-          <a className="Merchant--Details--Link" href={merchant.websiteUrl}>
-            Website
-          </a>
+          {merchant.websiteUrl && (
+            <a className="Merchant--Details--Link" href={merchant.websiteUrl}>
+              Website
+            </a>
+          )}
         </div>
       </div>
       <p className="Merchant--Description">{merchant.shortDescription}</p>
