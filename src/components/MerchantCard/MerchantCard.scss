@@ -56,10 +56,28 @@
     }
   }
 
-  &--Insider-Tips-Label {
-    font-size: 18px;
-    line-height: 25px;
-    color: $primary-red;
+  &--Insider-Tips {
+    min-height: 60px;
+    display: flex;
+
+    &--Label {
+      color: $primary-red;
+      text-transform: uppercase;
+      font-size: 18px;
+      line-height: 25px;
+
+      // If the insider tips text is more than 1 line, then the
+      // min-width on the label will ensure there is sufficient spacing
+      // between the label and the text.
+      // TODO: Confirm what the design of this label should be if there are 2+ lines
+      min-width: 80px;
+    }
+
+    &--Text {
+      font-size: 18px;
+      line-height: 25px;
+    }
+
     @media only screen and (max-width: 760px) {
       margin: 4px 0;
       font-size: 14px;
@@ -70,6 +88,7 @@
   &--Page-Container {
     display: flex;
     justify-content: center;
+    margin-top: 24px;
   }
 
   &--Images {
