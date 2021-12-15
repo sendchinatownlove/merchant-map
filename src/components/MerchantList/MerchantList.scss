@@ -3,6 +3,8 @@
 .Merchant {
   &--Container {
     width: 50%;
+    min-width: $sidebar-min-width;
+    z-index: 2;
     display: flex;
     position: relative;
     margin-top: 204px;
