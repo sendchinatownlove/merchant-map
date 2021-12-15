@@ -1,51 +1,56 @@
-@import '../../Theme.scss';
+@import "../../Theme.scss";
 
 .Header {
+  display: flex;
+  position: fixed;
+  top: 0;
+  z-index: 2;
+  flex-direction: column;
+  width: 50%;
+  height: 204px;
+  @media only screen and (max-width: 760px) {
+    width: 100%;
+  }
+
+  &--Filters {
+    background-color: $background-white;
     display: flex;
-    flex-direction: column;
-    width: 50%;
+    justify-content: space-between;
+    align-items: center;
+    padding: 40px 36px;
     @media only screen and (max-width: 760px) {
-        width: 100%;
+      padding: 16px 21px;
     }
+  }
 
-    &--Filters {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 40px 36px;
-        @media only screen and (max-width: 760px) {
-            padding: 16px 21px;
-        }
-    }
+  &--Category-Container {
+    display: flex;
+    justify-content: space-between;
+    width: 400px;
+  }
 
-    &--Category-Container {
-        display: flex;
-        justify-content: space-between;
-        width: 400px;
-    }
+  &--Category-Dropdown {
+    border: 1px solid #000000;
+    box-sizing: border-box;
+    border-radius: 10px;
+    text-align: center;
+    padding: 12px 24px;
+  }
 
-    &--Category-Dropdown {
-        border: 1px solid #000000;
-        box-sizing: border-box;
-        border-radius: 10px;
-        text-align: center;
-        padding: 12px 24px;
+  &--Title {
+    background: $primary-red;
+    margin: 0;
+    color: $font-white;
+    font-size: 32px;
+    line-height: 44px;
+    padding: 29px 36px;
+    @media only screen and (max-width: 760px) {
+      padding: 8px 21px;
     }
-    
-    &--Title {
-        background: $primary-red;
-        margin: 0;
-        color: $font-white;
-        font-size: 32px;
-        line-height: 44px;
-        padding: 29px 36px;
-        @media only screen and (max-width: 760px) {
-            padding: 8px 21px;
-        }
-    }    
+  }
 
-    &--Filter-Count {
-        display: flex;
-        justify-content: space-between;
-    }
+  &--Filter-Count {
+    display: flex;
+    justify-content: space-between;
+  }
 }

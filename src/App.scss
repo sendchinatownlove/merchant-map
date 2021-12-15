@@ -1,13 +1,13 @@
 #app-container {
-    display: flex;
-    position: relative;
-    flex-direction: row; 
-    @media only screen and (max-width: 760px) {
-       flex-direction: column; 
-    }
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  @media only screen and (max-width: 760px) {
+    flex-direction: column;
+  }
 }
 
 #merchants-container {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }
