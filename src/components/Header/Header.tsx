@@ -1,4 +1,3 @@
-import { useEventHandler } from "../../utilities/EventHandlerContext";
 import { Merchant } from "../../utilities/types";
 import "./Header.scss";
 
@@ -12,8 +11,6 @@ interface MerchantCountProps {
 }
 
 export function Header({ merchants }: HeaderProps) {
-  const { state } = useEventHandler();
-
   return (
     <div className="Header">
       <h1 className="Header--Title">Explore our merchants</h1>

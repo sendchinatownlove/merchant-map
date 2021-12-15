@@ -1,7 +1,6 @@
 import Map from "./components/Map";
 import Header from "./components/Header";
 import "./App.scss";
-import { mockData } from "./utilities/mockData";
 import {
   EventHandlerProvider,
   useEventHandler,
@@ -10,7 +9,7 @@ import { useCheckIfMobile } from "./utilities/useCheckIfMobile";
 import { useEffect } from "react";
 import { EventActionType } from "./utilities/handleEventReducer";
 import { useFetchMerchants } from "./utilities/api/useFetchMerchants";
-import MerchantList from "./components/MerchantList/MerchantList";
+import { MerchantList } from "./components/MerchantList";
 
 // Hook that updates the isMobile state whenever the device changes
 function useUpdateDeviceTypeState() {
