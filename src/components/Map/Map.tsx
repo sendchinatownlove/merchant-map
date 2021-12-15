@@ -45,7 +45,12 @@ export function Map({ merchants }: MapProps) {
             return (
               <Marker
                 onClick={() =>
-                  handleMarkerClick(merchant, merchants, dispatch, state.isMobile)
+                  handleMarkerClick(
+                    merchant,
+                    merchants,
+                    dispatch,
+                    state.isMobile
+                  )
                 }
                 key={merchant.name}
                 position={merchant.position}

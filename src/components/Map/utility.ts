@@ -1,7 +1,11 @@
 import { useEffect } from "react";
 import { useEventHandler } from "../../utilities/EventHandlerContext";
-import { EventAction, EventActionType } from "../../utilities/handleEventReducer";
+import {
+  EventAction,
+  EventActionType,
+} from "../../utilities/handleEventReducer";
 import { Merchant } from "../../utilities/types";
+import { activeMarker, defaultMarker } from "./markers";
 
 const selectedMarkerIcon =
   "https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png";
@@ -49,13 +53,16 @@ export function handleMarkerClick(
   }
 }
 
-export function selectMarkerIcon(merchant: Merchant) {
+export function selectMarkerIcon(merchant: Merchant): google.maps.Icon {
   const { state } = useEventHandler();
+  const marker: google.maps.Icon = { url: "" };
 
   if (state.markedMerchant && merchant.name === state.markedMerchant.name) {
-    return selectedMarkerIcon;
+    marker.url = svgToDataUrl(activeMarker);
+  } else {
+    marker.url = svgToDataUrl(defaultMarker);
   }
-  return unselectedMarkericon;
+  return marker;
 }
 
 //  Hook that handles map panning
@@ -75,4 +82,16 @@ export function useHandleMapEvents() {
       state.map?.panTo(state.clickedMerchant?.position);
     }
   }, [state.clickedMerchant]);
+}
+
+/**
+ * Creates the data URL for a SVG image.
+ * See more information on data URLs
+ * https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/Data_URIs
+ *
+ * https://stackoverflow.com/questions/66268996/how-to-use-svg-with-multiple-paths-in-google-maps-marker-javascript
+ * @param svg XML of a SVG file as a string.
+ */
+function svgToDataUrl(svg: string): string {
+  return "data:image/svg+xml;charset=utf-8," + encodeURIComponent(svg);
 }
