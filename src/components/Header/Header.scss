@@ -4,7 +4,7 @@
   display: flex;
   position: fixed;
   top: 0;
-  z-index: 2;
+  z-index: 3;
   flex-direction: column;
   width: 50%;
   height: 204px;
@@ -28,15 +28,7 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    width: 30vw;
-    min-width: 350px;
-    max-width: 400px;
-  }
-
-  &--Category-Container {
-    display: flex;
-    justify-content: space-between;
-    width: 500px;
+    width: 350px;
   }
 
   &--Category-Dropdown {
