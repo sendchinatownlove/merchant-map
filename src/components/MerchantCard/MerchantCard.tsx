@@ -31,7 +31,7 @@ function MerchantCard({ merchant }: MerchantCardProps) {
           </a>
         </div>
       </div>
-      <p className="Merchant--Description">{merchant.description}</p>
+      <p className="Merchant--Description">{merchant.shortDescription}</p>
       <p className="Merchant--Insider-Tips-Label">Insider Tips</p>
       {!state.isMobile && (
         <div className="Merchant--Page-Container">
