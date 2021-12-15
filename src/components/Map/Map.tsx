@@ -3,17 +3,23 @@ import { useEventHandler } from "../../utilities/EventHandlerContext";
 import { EventActionType } from "../../utilities/handleEventReducer";
 import { LatLong, Merchant } from "../../utilities/types";
 import {
+  handleMapZoom,
   handleMarkerClick,
   selectMarkerIcon,
   useHandleMapEvents,
 } from "./utility";
 import "./Map.scss";
+import ZoomButtons from "./ZoomButtons";
 
 // Create an .env file and store your Google Maps API key as VITE_GOOGLE_MAPS_API_KEY
 const apiKey = import.meta.env.VITE_GOOGLE_MAPS_API_KEY;
 const mapContainerStyle = {
   width: "100%",
   height: "100%",
+};
+
+const googleMapsOptions: google.maps.MapOptions = {
+  disableDefaultUI: true,
 };
 
 const defaultMapCenter: LatLong = {
@@ -34,6 +40,7 @@ export function Map({ merchants }: MapProps) {
     <div className="Map-Container">
       <LoadScript googleMapsApiKey={apiKey}>
         <GoogleMap
+          options={googleMapsOptions}
           mapContainerStyle={mapContainerStyle}
           center={merchants ? merchants[0].position : defaultMapCenter}
           zoom={14}
@@ -41,6 +48,10 @@ export function Map({ merchants }: MapProps) {
             dispatch({ type: EventActionType.SET_MAP, payload: { map } })
           }
         >
+          <ZoomButtons
+            zoomInCallback={() => handleMapZoom(state.map, "zoom-in")}
+            zoomOutCallback={() => handleMapZoom(state.map, "zoom-out")}
+          />
           {merchants.map((merchant) => {
             return (
               <Marker

@@ -7,6 +7,20 @@ import {
 import { Merchant } from "../../utilities/types";
 import { activeMarker, defaultMarker } from "./markers";
 
+export function handleMapZoom(
+  map: google.maps.Map | null,
+  zoomType: "zoom-in" | "zoom-out"
+) {
+  if (!map) {
+    return;
+  }
+  const currentZoom = map.getZoom();
+  if (currentZoom && zoomType === "zoom-in") {
+    map.setZoom(currentZoom + 1);
+  } else if (currentZoom && zoomType === "zoom-out") {
+    map.setZoom(currentZoom - 1);
+  }
+}
 // Store the index of the clicked merchant. Used in the MobileMerchantList component.
 // When a user clicks on a merchant on the map in the mobile version, we can display
 // the corresponding merchant by using the currentIndex and indexing on the data array.
@@ -87,6 +101,6 @@ export function useHandleMapEvents() {
  * https://stackoverflow.com/questions/66268996/how-to-use-svg-with-multiple-paths-in-google-maps-marker-javascript
  * @param svg XML of a SVG file as a string.
  */
-function svgToDataUrl(svg: string): string {
+export function svgToDataUrl(svg: string): string {
   return "data:image/svg+xml;charset=utf-8," + encodeURIComponent(svg);
 }
