@@ -72,9 +72,7 @@ function App() {
   return (
     <EventHandlerProvider>
       <AppContainer>
-        <div id="app-container">
-          <MainContent />
-        </div>
+        <MainContent />
       </AppContainer>
     </EventHandlerProvider>
   );
