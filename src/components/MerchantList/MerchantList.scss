@@ -35,5 +35,11 @@
     min-height: calc(
       $merchant-container-height - $nav-footer-height - $nav-footer-border-width
     );
+
+    &--Count {
+      text-align: right;
+      font-size: 12px;
+      padding-top: 21px;
+    }
   }
 }

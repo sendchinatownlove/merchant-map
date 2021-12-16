@@ -53,6 +53,9 @@ export function MobileMerchantList({
   return (
     <>
       <div className="Merchant--Carousel">
+        <div className="Merchant--Carousel--Count">{`${
+          merchantIndex + 1
+        } OUT OF ${merchants.length}`}</div>
         <MerchantCard merchant={merchants[merchantIndex]} />
       </div>
       <NavButtons
