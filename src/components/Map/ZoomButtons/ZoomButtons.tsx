@@ -32,8 +32,8 @@ function ZoomInIcon() {
       <path
         d="M9 8H1M9 16V8V16ZM9 8V0V8ZM9 8H17H9Z"
         stroke="black"
-        stroke-width="2"
-        stroke-linecap="round"
+        strokeWidth="2"
+        strokeLinecap="round"
       />
     </svg>
   );
@@ -48,12 +48,7 @@ function ZoomOutIcon() {
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
     >
-      <path
-        d="M17 1H1"
-        stroke="black"
-        stroke-width="2"
-        stroke-linecap="round"
-      />
+      <path d="M17 1H1" stroke="black" strokeWidth="2" strokeLinecap="round" />
     </svg>
   );
 }

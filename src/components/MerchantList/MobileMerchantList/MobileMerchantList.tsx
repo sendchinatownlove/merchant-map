@@ -53,11 +53,7 @@ export function MobileMerchantList({
   return (
     <>
       <div className="Merchant--Carousel">
-        <MerchantCard
-          merchant={merchants[merchantIndex]}
-          index={merchantIndex}
-          numberOfMerchants={merchants.length}
-        />
+        <MerchantCard merchant={merchants[merchantIndex]} />
       </div>
       <NavButtons
         onBackButtonClick={handleBackButtonClick}
