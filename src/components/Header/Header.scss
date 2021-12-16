@@ -10,8 +10,7 @@
   }
 
   @media only screen and (min-width: $max-width-mobile-screen) {
-    min-width: $sidebar-min-width;
-    z-index: 3;
+    z-index: 4;
   }
   // TODO: add filters
   // &--Filters {
