@@ -3,8 +3,14 @@ $background-white: #ffffff;
 $font-white: #fffcfa;
 $font-black: #000000;
 $font-black-2: #333333;
+$grey: #e0e0e0;
 
 $sidebar-min-width: 550px;
+
+// Mobile
+$merchant-container-height: 50vh; // the container includes both the merchant card + footer
+$nav-footer-height: 64px;
+$nav-footer-border-width: 2px;
 
 .Primary-Button--black {
   display: flex;
@@ -23,4 +29,15 @@ $sidebar-min-width: 550px;
   /* Black */
   background: $font-black;
   color: $font-white;
+
+  a {
+    color: $font-white;
+  }
+
+  @media (max-width: 760px) {
+    width: 204px;
+    height: 42px;
+    font-size: 10px;
+    padding: 0;
+  }
 }
