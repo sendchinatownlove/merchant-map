@@ -9,6 +9,11 @@
     width: 44px;
     height: 88px;
     background-color: $background-white;
+
+    @media screen and (max-width: $max-width-mobile-screen) {
+      top: 16px;
+      right: 16px;
+    }
   }
 
   &--Button {
