@@ -10,7 +10,10 @@ type MobileMerchantListProps = {
   index: number;
 };
 
-export function MobileMerchantList({ merchants, index }: MobileMerchantListProps) {
+export function MobileMerchantList({
+  merchants,
+  index,
+}: MobileMerchantListProps) {
   const { dispatch } = useEventHandler();
   const [merchantIndex, setMerchantIndex] = useState<number>(index);
 
@@ -48,16 +51,18 @@ export function MobileMerchantList({ merchants, index }: MobileMerchantListProps
   }
 
   return (
-    <div className="Merchant--Carousel">
-      <MerchantCard
-        merchant={merchants[merchantIndex]}
-        index={merchantIndex}
-        numberOfMerchants={merchants.length}
-      />
+    <>
+      <div className="Merchant--Carousel">
+        <MerchantCard
+          merchant={merchants[merchantIndex]}
+          index={merchantIndex}
+          numberOfMerchants={merchants.length}
+        />
+      </div>
       <NavButtons
         onBackButtonClick={handleBackButtonClick}
         onForwardButtonClick={handleForwardButtonClick}
       />
-    </div>
+    </>
   );
 }

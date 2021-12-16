@@ -2,15 +2,15 @@
 
 .NavBar {
   &--Container {
-    position: fixed;
-    bottom: 0;
     width: 100%;
-    height: 64px;
+    height: $nav-footer-height;
+    min-height: $nav-footer-height;
+    max-height: $nav-footer-height;
     display: flex;
     justify-content: space-between;
     align-items: center;
     background-color: $background-white;
-    border-top: 2px solid $grey;
+    border-top: $nav-footer-border-width solid $grey;
   }
 
   &--Button {

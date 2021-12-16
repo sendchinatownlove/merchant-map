@@ -6,9 +6,6 @@
   flex-direction: column;
   background: transparent;
   padding: 20px 0;
-  @media only screen and (max-width: 760px) {
-    padding: 8px 0;
-  }
 
   &--Name {
     font-weight: bold;
@@ -16,6 +13,7 @@
     line-height: 33px;
     @media only screen and (max-width: 760px) {
       margin: 0px;
+      font-size: 16px;
     }
   }
 

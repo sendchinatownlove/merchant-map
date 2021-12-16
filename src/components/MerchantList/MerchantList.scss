@@ -2,19 +2,21 @@
 
 .Merchant {
   &--Container {
-    width: 50%;
-    min-width: $sidebar-min-width;
     z-index: 2;
     display: flex;
     position: relative;
-    margin-top: 204px;
     flex-direction: column;
-    justify-content: space-between;
-    background: $font-white;
+
+    @media (min-width: 760px) {
+      margin-top: 204px; // height of the header + filter
+      width: 50%;
+      min-width: $sidebar-min-width;
+    }
     @media only screen and (max-width: 760px) {
+      height: $merchant-container-height;
       width: 100%;
-      border-radius: 20px 20px 0px 0px;
-      margin-top: -16px;
+      position: fixed;
+      bottom: 0;
     }
   }
 
@@ -27,5 +29,11 @@
 
   &--Carousel {
     padding: 0 20px;
+    border-radius: 20px 20px 0 0;
+    background: $background-white;
+    overflow-y: scroll;
+    min-height: calc(
+      $merchant-container-height - $nav-footer-height - $nav-footer-border-width
+    );
   }
 }
