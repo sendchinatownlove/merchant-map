@@ -8,7 +8,7 @@
     flex-direction: column;
 
     @media (min-width: $max-width-mobile-screen) {
-      margin-top: 204px; // height of the header + filter
+      margin-top: 102px; // height of the header
       width: 50%;
       min-width: $sidebar-min-width;
     }
