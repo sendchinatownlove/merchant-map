@@ -43,7 +43,7 @@ export function Map({ merchants }: MapProps) {
           options={googleMapsOptions}
           mapContainerStyle={mapContainerStyle}
           center={merchants ? merchants[0].position : defaultMapCenter}
-          zoom={14}
+          zoom={17}
           onLoad={(map) =>
             dispatch({ type: EventActionType.SET_MAP, payload: { map } })
           }
