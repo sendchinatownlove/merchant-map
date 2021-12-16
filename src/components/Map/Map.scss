@@ -10,9 +10,8 @@
     width: 100%;
 
     // the bottom of the map should be at the screen's halfway point
-    // TODO: Change 60px and 75px to variables.
-    // They are height of the header + filters (including padding), respectively
-    height: calc(50vh - 60px - 75px);
-    margin-top: calc(60px + 75px);
+    // TODO: Change 60px variable, which is the height of the header
+    height: calc(50vh - 60px);
+    margin-top: 60px;
   }
 }

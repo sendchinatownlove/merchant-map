@@ -16,7 +16,8 @@ export function Header({ merchants }: HeaderProps) {
   return (
     <div className="Header">
       <h1 className="Header--Title">Explore our merchants</h1>
-      <div className="Header--Filters">
+      {/* TODO: Add filters */}
+      {/* <div className="Header--Filters">
         <div className="Header--Buttons-Container">
           <div className="Header--Category-Dropdown">Location</div>
           <div className="Header--Category-Dropdown">Category</div>
@@ -27,7 +28,7 @@ export function Header({ merchants }: HeaderProps) {
             {`${merchants.length} results`}
           </div>
         )}
-      </div>
+      </div> */}
     </div>
   );
 }

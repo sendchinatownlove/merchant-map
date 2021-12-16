@@ -13,18 +13,18 @@
     min-width: $sidebar-min-width;
     z-index: 3;
   }
-
-  &--Filters {
-    background-color: $background-white;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 40px 36px;
-    @media only screen and (max-width: $max-width-mobile-screen) {
-      justify-content: center;
-      padding: 16px 21px;
-    }
-  }
+  // TODO: add filters
+  // &--Filters {
+  //   background-color: $background-white;
+  //   display: flex;
+  //   justify-content: space-between;
+  //   align-items: center;
+  //   padding: 40px 36px;
+  //   @media only screen and (max-width: $max-width-mobile-screen) {
+  //     justify-content: center;
+  //     padding: 16px 21px;
+  //   }
+  // }
 
   &--Buttons-Container {
     display: flex;
