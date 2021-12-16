@@ -69,17 +69,20 @@
       // between the label and the text.
       // TODO: Confirm what the design of this label should be if there are 2+ lines
       min-width: 80px;
+
+      @media only screen and (max-width: $max-width-mobile-screen) {
+        font-size: 14px;
+        line-height: 20px;
+      }
     }
 
     &--Text {
       font-size: 18px;
       line-height: 25px;
-    }
-
-    @media only screen and (max-width: $max-width-mobile-screen) {
-      margin: 4px 0;
-      font-size: 14px;
-      line-height: 20px;
+      @media only screen and (max-width: $max-width-mobile-screen) {
+        font-size: 14px;
+        line-height: 20px;
+      }
     }
   }
 
