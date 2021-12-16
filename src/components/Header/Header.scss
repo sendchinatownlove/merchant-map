@@ -2,15 +2,15 @@
 
 .Header {
   display: flex;
-  position: fixed;
-  top: 0;
-  z-index: 3;
   flex-direction: column;
   width: 50%;
-  height: 204px;
-  min-width: $sidebar-min-width;
   @media only screen and (max-width: 760px) {
+    position: fixed;
     width: 100%;
+  }
+
+  @media only screen and (min-width: 760px) {
+    min-width: $sidebar-min-width;
   }
 
   &--Filters {
@@ -20,6 +20,7 @@
     align-items: center;
     padding: 40px 36px;
     @media only screen and (max-width: 760px) {
+      justify-content: center;
       padding: 16px 21px;
     }
   }
@@ -37,6 +38,9 @@
     border-radius: 10px;
     text-align: center;
     padding: 12px 24px;
+    @media only screen and (max-width: 760px) {
+      font-size: 14px;
+    }
   }
 
   &--Title {
@@ -48,11 +52,7 @@
     padding: 29px 36px;
     @media only screen and (max-width: 760px) {
       padding: 8px 21px;
+      font-size: 20px;
     }
-  }
-
-  &--Filter-Count {
-    // display: flex;
-    justify-content: space-between;
   }
 }
