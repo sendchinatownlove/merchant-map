@@ -11,7 +11,7 @@
     font-weight: bold;
     font-size: 24px;
     line-height: 33px;
-    @media only screen and (max-width: 760px) {
+    @media only screen and (max-width: $max-width-mobile-screen) {
       margin: 0px;
       font-size: 16px;
     }
@@ -28,7 +28,7 @@
       font-size: 16px;
       line-height: 22px;
       margin: 0;
-      @media only screen and (max-width: 760px) {
+      @media only screen and (max-width: $max-width-mobile-screen) {
         font-size: 14px;
         line-height: 20px;
       }
@@ -46,7 +46,7 @@
     font-size: 18px;
     line-height: 25px;
 
-    @media only screen and (max-width: 760px) {
+    @media only screen and (max-width: $max-width-mobile-screen) {
       font-size: 14px;
       line-height: 20px;
       width: 100%;
@@ -76,7 +76,7 @@
       line-height: 25px;
     }
 
-    @media only screen and (max-width: 760px) {
+    @media only screen and (max-width: $max-width-mobile-screen) {
       margin: 4px 0;
       font-size: 14px;
       line-height: 20px;

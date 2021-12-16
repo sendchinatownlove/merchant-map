@@ -7,12 +7,12 @@
     position: relative;
     flex-direction: column;
 
-    @media (min-width: 760px) {
+    @media (min-width: $max-width-mobile-screen) {
       margin-top: 204px; // height of the header + filter
       width: 50%;
       min-width: $sidebar-min-width;
     }
-    @media only screen and (max-width: 760px) {
+    @media only screen and (max-width: $max-width-mobile-screen) {
       height: $merchant-container-height;
       width: 100%;
       position: fixed;
@@ -22,7 +22,7 @@
 
   &--List {
     padding: 0 36px;
-    @media only screen and (max-width: 760px) {
+    @media only screen and (max-width: $max-width-mobile-screen) {
       padding: 0;
     }
   }

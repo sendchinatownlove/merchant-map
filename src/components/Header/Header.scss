@@ -5,11 +5,11 @@
   flex-direction: column;
   width: 50%;
   position: fixed;
-  @media only screen and (max-width: 760px) {
+  @media only screen and (max-width: $max-width-mobile-screen) {
     width: 100%;
   }
 
-  @media only screen and (min-width: 760px) {
+  @media only screen and (min-width: $max-width-mobile-screen) {
     min-width: $sidebar-min-width;
     z-index: 3;
   }
@@ -20,7 +20,7 @@
     justify-content: space-between;
     align-items: center;
     padding: 40px 36px;
-    @media only screen and (max-width: 760px) {
+    @media only screen and (max-width: $max-width-mobile-screen) {
       justify-content: center;
       padding: 16px 21px;
     }
@@ -39,7 +39,7 @@
     border-radius: 10px;
     text-align: center;
     padding: 12px 24px;
-    @media only screen and (max-width: 760px) {
+    @media only screen and (max-width: $max-width-mobile-screen) {
       font-size: 14px;
     }
   }
@@ -51,7 +51,7 @@
     font-size: 32px;
     line-height: 44px;
     padding: 29px 36px;
-    @media only screen and (max-width: 760px) {
+    @media only screen and (max-width: $max-width-mobile-screen) {
       padding: 8px 21px;
       font-size: 20px;
     }
