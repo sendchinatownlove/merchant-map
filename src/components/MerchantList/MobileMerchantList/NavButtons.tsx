@@ -1,3 +1,4 @@
+import { NextButton, PrevButton } from "./icons";
 import "./NavButtons.scss";
 
 type NavButtonsProps = {
@@ -11,15 +12,17 @@ export default ({
 }: NavButtonsProps) => {
   return (
     <div className="NavBar--Container">
-      <button className="NavBar--Button" onClick={onBackButtonClick}>
-        {"<"}
-      </button>
+      <div className="NavBar--Button" onClick={onBackButtonClick}>
+        <PrevButton />
+        <span className="NavBar--Button-Text">Prev</span>
+      </div>
       <button className="Primary-Button--black">
         <a href="/">Visit Merchant Page</a>
       </button>
-      <button className="NavBar--Button" onClick={onForwardButtonClick}>
-        {">"}
-      </button>
+      <div className="NavBar--Button" onClick={onForwardButtonClick}>
+        <NextButton />
+        <span className="NavBar--Button-Text">Next</span>
+      </div>
     </div>
   );
 };

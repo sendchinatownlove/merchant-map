@@ -18,5 +18,13 @@
     flex-direction: column;
     background: transparent;
     border: none;
+    padding: 12px;
+  }
+
+  &--Button-Text {
+    color: $light-grey;
+    font-size: 10px;
+    text-transform: uppercase;
+    padding-top: 6px;
   }
 }
