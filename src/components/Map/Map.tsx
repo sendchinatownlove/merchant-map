@@ -38,7 +38,7 @@ export function Map({ merchants }: MapProps) {
 
   return (
     <div className="Map-Container">
-      <LoadScript googleMapsApiKey={apiKey}>
+      <LoadScript googleMapsApiKey={apiKey as string}>
         <GoogleMap
           options={googleMapsOptions}
           mapContainerStyle={mapContainerStyle}
