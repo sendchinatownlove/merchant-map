@@ -1,0 +1,30 @@
+@import "../../../Theme.scss";
+
+.NavBar {
+  &--Container {
+    width: 100%;
+    height: $nav-footer-height;
+    min-height: $nav-footer-height;
+    max-height: $nav-footer-height;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: $background-white;
+    border-top: $nav-footer-border-width solid $grey;
+  }
+
+  &--Button {
+    display: flex;
+    flex-direction: column;
+    background: transparent;
+    border: none;
+    padding: 12px;
+  }
+
+  &--Button-Text {
+    color: $light-grey;
+    font-size: 10px;
+    text-transform: uppercase;
+    padding-top: 6px;
+  }
+}

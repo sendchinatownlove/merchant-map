@@ -1,10 +1,10 @@
-import "./SideBar.css";
-import MerchantCard from "../merchant-card/MerchantCard";
-import { Merchant } from "../utilities/types";
-import { MerchantCarousel } from "./mobile/MerchantCarousel";
-import { useEventHandler } from "../utilities/EventHandlerContext";
+import "./MerchantList.scss";
+import MerchantCard from "../MerchantCard/MerchantCard";
+import { Merchant } from "../../utilities/types";
+import MobileMerchantList from "./MobileMerchantList";
+import { useEventHandler } from "../../utilities/EventHandlerContext";
 
-interface SideBarProps {
+interface MerchantListProps {
   merchants: Merchant[];
 }
 
@@ -18,11 +18,11 @@ interface MobileCardsProps {
 }
 function DesktopCards({ merchants }: DesktopCardsProps) {
   return (
-    <>
+    <div className="Merchant--List">
       {merchants.map((merchant) => (
         <MerchantCard merchant={merchant} />
       ))}
-    </>
+    </div>
   );
 }
 
@@ -32,10 +32,10 @@ function MobileCards({ merchants, markedMerchant }: MobileCardsProps) {
     return <div />;
   }
   if (!markedMerchant) {
-    return <MerchantCarousel index={0} merchants={merchants} />;
+    return <MobileMerchantList index={0} merchants={merchants} />;
   }
   return (
-    <MerchantCarousel
+    <MobileMerchantList
       key={"Carousel_" + state.currentIndex}
       index={state.currentIndex}
       merchants={merchants}
@@ -43,12 +43,11 @@ function MobileCards({ merchants, markedMerchant }: MobileCardsProps) {
   );
 }
 
-function SideBar({ merchants }: SideBarProps) {
+function MerchantList({ merchants }: MerchantListProps) {
   const { state } = useEventHandler();
 
   return (
-    <>
-      <h1>Explore our merchants</h1>
+    <div className="Merchant--Container">
       {state.isMobile ? (
         <MobileCards
           merchants={merchants}
@@ -57,8 +56,8 @@ function SideBar({ merchants }: SideBarProps) {
       ) : (
         <DesktopCards merchants={merchants} />
       )}
-    </>
+    </div>
   );
 }
 
-export default SideBar;
+export default MerchantList;

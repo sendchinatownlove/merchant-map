@@ -1,14 +1,27 @@
 import { useEffect } from "react";
-import { useEventHandler } from "../utilities/EventHandlerContext";
-import { EventAction, EventActionType } from "../utilities/handleEventReducer";
-import { Merchant } from "../utilities/types";
+import { useEventHandler } from "../../utilities/EventHandlerContext";
+import {
+  EventAction,
+  EventActionType,
+} from "../../utilities/handleEventReducer";
+import { Merchant } from "../../utilities/types";
+import { activeMarker, defaultMarker } from "./markers";
 
-const selectedMarkerIcon =
-  "https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png";
-
-const unselectedMarkericon = "";
-
-// Store the index of the clicked merchant. Used in the MerchantCarousel component.
+export function handleMapZoom(
+  map: google.maps.Map | null,
+  zoomType: "zoom-in" | "zoom-out"
+) {
+  if (!map) {
+    return;
+  }
+  const currentZoom = map.getZoom();
+  if (currentZoom && zoomType === "zoom-in") {
+    map.setZoom(currentZoom + 1);
+  } else if (currentZoom && zoomType === "zoom-out") {
+    map.setZoom(currentZoom - 1);
+  }
+}
+// Store the index of the clicked merchant. Used in the MobileMerchantList component.
 // When a user clicks on a merchant on the map in the mobile version, we can display
 // the corresponding merchant by using the currentIndex and indexing on the data array.
 function useUpdateClickedMerchantIndex(
@@ -49,13 +62,16 @@ export function handleMarkerClick(
   }
 }
 
-export function selectMarkerIcon(merchant: Merchant) {
+export function selectMarkerIcon(merchant: Merchant): google.maps.Icon {
   const { state } = useEventHandler();
+  const marker: google.maps.Icon = { url: "" };
 
   if (state.markedMerchant && merchant.name === state.markedMerchant.name) {
-    return selectedMarkerIcon;
+    marker.url = svgToDataUrl(activeMarker);
+  } else {
+    marker.url = svgToDataUrl(defaultMarker);
   }
-  return unselectedMarkericon;
+  return marker;
 }
 
 //  Hook that handles map panning
@@ -75,4 +91,16 @@ export function useHandleMapEvents() {
       state.map?.panTo(state.clickedMerchant?.position);
     }
   }, [state.clickedMerchant]);
+}
+
+/**
+ * Creates the data URL for a SVG image.
+ * See more information on data URLs
+ * https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/Data_URIs
+ *
+ * https://stackoverflow.com/questions/66268996/how-to-use-svg-with-multiple-paths-in-google-maps-marker-javascript
+ * @param svg XML of a SVG file as a string.
+ */
+export function svgToDataUrl(svg: string): string {
+  return "data:image/svg+xml;charset=utf-8," + encodeURIComponent(svg);
 }

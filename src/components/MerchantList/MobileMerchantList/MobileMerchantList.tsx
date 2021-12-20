@@ -1,16 +1,19 @@
-import { Merchant } from "../../utilities/types";
-import { NavButtons } from "./NavButtons";
-import MerchantCard from "../../merchant-card/MerchantCard";
-import { useEventHandler } from "../../utilities/EventHandlerContext";
+import { Merchant } from "../../../utilities/types";
+import MerchantCard from "../../MerchantCard/MerchantCard";
+import NavButtons from "./NavButtons";
+import { useEventHandler } from "../../../utilities/EventHandlerContext";
 import { useEffect, useState } from "react";
-import { EventActionType } from "../../utilities/handleEventReducer";
+import { EventActionType } from "../../../utilities/handleEventReducer";
 
-type MerchantCarouselProps = {
+type MobileMerchantListProps = {
   merchants: Merchant[];
   index: number;
 };
 
-export function MerchantCarousel({ merchants, index }: MerchantCarouselProps) {
+export function MobileMerchantList({
+  merchants,
+  index,
+}: MobileMerchantListProps) {
   const { dispatch } = useEventHandler();
   const [merchantIndex, setMerchantIndex] = useState<number>(index);
 
@@ -49,15 +52,15 @@ export function MerchantCarousel({ merchants, index }: MerchantCarouselProps) {
 
   return (
     <>
+      <div className="Merchant--Carousel">
+        <div className="Merchant--Carousel--Count">{`${
+          merchantIndex + 1
+        } OUT OF ${merchants.length}`}</div>
+        <MerchantCard merchant={merchants[merchantIndex]} />
+      </div>
       <NavButtons
         onBackButtonClick={handleBackButtonClick}
         onForwardButtonClick={handleForwardButtonClick}
-      />
-
-      <MerchantCard
-        merchant={merchants[merchantIndex]}
-        index={merchantIndex}
-        numberOfMerchants={merchants.length}
       />
     </>
   );

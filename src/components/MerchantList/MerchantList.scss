@@ -1,0 +1,44 @@
+@import "../../Theme.scss";
+
+.Merchant {
+  &--Container {
+    z-index: 3;
+    display: flex;
+    position: relative;
+    flex-direction: column;
+
+    @media (min-width: $max-width-mobile-screen) {
+      margin-top: 102px; // height of the header
+      width: 50%;
+    }
+    @media only screen and (max-width: $max-width-mobile-screen) {
+      height: $merchant-container-height;
+      width: 100%;
+      position: fixed;
+      bottom: 0;
+    }
+  }
+
+  &--List {
+    padding: 0 36px;
+    @media only screen and (max-width: $max-width-mobile-screen) {
+      padding: 0;
+    }
+  }
+
+  &--Carousel {
+    padding: 0 20px;
+    border-radius: 20px 20px 0 0;
+    background: $background-white;
+    overflow-y: scroll;
+    min-height: calc(
+      $merchant-container-height - $nav-footer-height - $nav-footer-border-width
+    );
+
+    &--Count {
+      text-align: right;
+      font-size: 12px;
+      padding-top: 21px;
+    }
+  }
+}

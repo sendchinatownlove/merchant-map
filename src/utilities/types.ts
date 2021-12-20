@@ -10,6 +10,7 @@ export type Merchant = {
   websiteUrl: string;
   description?: string;
   position: LatLong;
+  insiderTips?: string;
 };
 
 export type LatLong = {

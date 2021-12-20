@@ -1,0 +1,18 @@
+@import "../../Theme.scss";
+
+.Map-Container {
+  position: fixed;
+  z-index: 3;
+  width: 50%;
+  height: 100%;
+  right: 0;
+  @media only screen and (max-width: $max-width-mobile-screen) {
+    position: fixed;
+    width: 100%;
+
+    // the bottom of the map should be at the screen's halfway point
+    // TODO: Change 60px variable, which is the height of the header
+    height: calc(50vh - 60px);
+    margin-top: 60px;
+  }
+}

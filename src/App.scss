@@ -1,0 +1,15 @@
+@import "./Theme.scss";
+
+#app-container {
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  @media only screen and (max-width: $max-width-mobile-screen) {
+    flex-direction: column;
+  }
+}
+
+#merchants-container {
+  display: flex;
+  flex-direction: column;
+}
