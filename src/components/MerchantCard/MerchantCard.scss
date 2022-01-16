@@ -1,11 +1,12 @@
 @import "../../Theme.scss";
 
 .Merchant {
-  width: 100%;
+  width: calc(100% - 36px - 36px);
   display: flex;
   flex-direction: column;
   background: transparent;
-  padding: 20px 0;
+  padding: 20px 36px;
+
   @media only screen and (min-width: $max-width-mobile-screen) {
     border-bottom: 1px solid $grey-3;
   }
