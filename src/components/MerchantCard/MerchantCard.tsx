@@ -41,17 +41,6 @@ function MerchantCard({ merchant }: MerchantCardProps) {
           <p className="Merchant--Insider-Tips--Text">{merchant.insiderTips}</p>
         </div>
       )}
-
-      {!state.isMobile && (
-        <div className="Merchant--Page-Container">
-          <a href="#">
-            <button className="Primary-Button--black">
-              Visit Merchant Page
-            </button>
-          </a>
-        </div>
-      )}
-      {/* <div className="Merchant--Images"></div> */}
     </div>
   );
 }
