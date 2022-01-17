@@ -14,6 +14,10 @@ interface MerchantCardExpandedProps {
 interface BackToResultsProps {
   onClick: () => void;
 }
+
+interface ExpandedMenuProps {
+  merchant: Merchant;
+}
 enum CurrentView {
   "STORY",
   "PAST_CAMPAIGNS",
@@ -34,7 +38,7 @@ function BackToResults({ onClick }: BackToResultsProps) {
     </div>
   );
 }
-function ExpandedMenu() {
+function ExpandedMenu({ merchant }: ExpandedMenuProps) {
   const [currentView, setCurrentView] = useState<CurrentView>(
     CurrentView.STORY
   );
@@ -60,7 +64,9 @@ function ExpandedMenu() {
         </span>
       </div>
       <div className="ExpandedMenu--Content">
-        {currentView == CurrentView.STORY && <div>{test_story}</div>}
+        {currentView == CurrentView.STORY && (
+          <div className="ExpandedMenu--Content--Story">{merchant.story}</div>
+        )}
         {currentView == CurrentView.PAST_CAMPAIGNS && (
           <div>{<PastCampaigns />}</div>
         )}
@@ -70,7 +76,6 @@ function ExpandedMenu() {
 }
 function MerchantCardExpanded({ merchant }: MerchantCardExpandedProps) {
   const { state, dispatch } = useEventHandler();
-  // TODO: update ref type
 
   const handleClick = () => {
     dispatch({
@@ -85,7 +90,7 @@ function MerchantCardExpanded({ merchant }: MerchantCardExpandedProps) {
     <div className="MerchantCardExpanded">
       <BackToResults onClick={handleClick} />
       <MerchantCard merchant={merchant} />
-      <ExpandedMenu />
+      <ExpandedMenu merchant={merchant} />
     </div>
   );
 }

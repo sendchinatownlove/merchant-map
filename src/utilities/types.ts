@@ -8,9 +8,9 @@ export type Merchant = {
   imageURLs?: { left: string; right: string };
   phoneNumber: string;
   websiteUrl: string;
-  description?: string;
   position: LatLong;
   insiderTips?: string;
+  story: string;
 };
 
 export type LatLong = {
