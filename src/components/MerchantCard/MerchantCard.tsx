@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from "react";
 
 import { Merchant } from "../../utilities/types";
 import { useEventHandler } from "../../utilities/EventHandlerContext";
-import { useHandleAutoScroll, useUpdateStateIfDivOnScreen } from "./hooks";
+import { updateScrollState, useHandleAutoScroll } from "./hooks";
 import { COLOR } from "../../utilities/colors";
 import { EventActionType } from "../../utilities/handleEventReducer";
 
@@ -20,9 +20,11 @@ function MerchantCard({ merchant }: MerchantCardProps) {
   // 211px = image width; 20px = padding between image + text; 36px = left padding
   const merchantTextStyle = { width: "calc(100% - 211px - 20px - 36px)" };
 
+  // Set the background color of the merchant marked on the map to grey
   useEffect(() => {
     if (
       !state.expandedView &&
+      // TODO: Use merchant ID to check whether 2 merchants are the same
       merchant.name == state.markedMerchant?.name &&
       merchant.address == state.markedMerchant?.address
     ) {
@@ -49,14 +51,13 @@ function MerchantCard({ merchant }: MerchantCardProps) {
     });
   };
 
-  // TODO: Replace user-scroll triggering map pan behavior so that mouseover triggers map pan
-  useUpdateStateIfDivOnScreen(merchant, ref);
   useHandleAutoScroll(merchant, ref);
 
   return (
     <div
       style={selectedStyle}
       onClick={handleClick}
+      onMouseOver={() => updateScrollState(merchant, state, dispatch)}
       className="Merchant"
       ref={ref}
     >

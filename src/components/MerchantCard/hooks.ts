@@ -52,7 +52,7 @@ function updateAutoScrollState(
   }
 }
 
-function updateScrollState(
+export function updateScrollState(
   merchantOnScreen: Merchant,
   state: AppState,
   dispatch: React.Dispatch<EventAction>
