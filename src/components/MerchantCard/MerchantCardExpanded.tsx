@@ -23,9 +23,6 @@ enum CurrentView {
   "PAST_CAMPAIGNS",
 }
 
-const test_story =
-  "Growing up in Darjeeling, a region in the foothills of the Himalayas, Karma was immersed in both Tibetan and Nepali culture, and food was always at the center of her life. Her parents were Tibetan refugees in India whose livelihood as small-scale farmers inspired her journey to the food industry. After she moved to the United States in 1998, she eventually opened her own restaurant, Cafe Himalaya, despite having no prior restaurant or business experience. Opening the restaurant with her savings required a huge leap of faith but she was confident in her vision to share a part of the Himalayas with everyday New Yorkers. Not only was this a way to pay homage to the diverse cultures and traditions she grew up with, but also a way to give back to the community by supporting her staff of immigrant employees and their families.";
-
 function PastCampaigns() {
   return <div>Past campaigns Past campaigns</div>;
 }
