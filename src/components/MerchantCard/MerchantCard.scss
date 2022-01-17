@@ -3,7 +3,9 @@
 .Merchant {
   width: calc(100% - 36px - 36px);
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
   background: transparent;
   padding: 20px 36px;
 
@@ -96,9 +98,10 @@
     margin-top: 24px;
   }
 
-  &--Images {
-    height: 400px;
-    width: 300px;
+  &--Image {
+    height: 151px;
+    width: 211px;
+    background-color: $grey-3;
   }
 }
 

@@ -5,7 +5,7 @@ export type Merchant = {
   addressLine2?: string;
   shortDescription: string;
   typeBusiness?: string[];
-  imageURLs?: { left: string; right: string };
+  imageUrl: string | null;
   phoneNumber: string;
   websiteUrl: string;
   position: LatLong;

@@ -17,6 +17,9 @@ function MerchantCard({ merchant }: MerchantCardProps) {
   const ref: any = useRef<Element>(null);
   const [selectedStyle, setSelectedStyle] = useState({});
 
+  // 211px = image width; 20px = padding between image + text; 36px = left padding
+  const merchantTextStyle = { width: "calc(100% - 211px - 20px - 36px)" };
+
   useEffect(() => {
     if (
       !state.expandedView &&
@@ -57,27 +60,39 @@ function MerchantCard({ merchant }: MerchantCardProps) {
       className="Merchant"
       ref={ref}
     >
-      <h2 className="Merchant--Name">{merchant.name}</h2>
-      <div className="Merchant--Details">
-        <div className="Merchant--Details--Row">
-          <p className="Merchant--Details--Item">{merchant.address}</p>
-          <p className="Merchant--Details--Item">{merchant.phoneNumber}</p>
+      <div
+        className="Merchant--Text"
+        style={merchant.imageUrl ? merchantTextStyle : {}}
+      >
+        <h2 className="Merchant--Name">{merchant.name}</h2>
+        <div className="Merchant--Details">
+          <div className="Merchant--Details--Row">
+            <p className="Merchant--Details--Item">{merchant.address}</p>
+            <p className="Merchant--Details--Item">{merchant.phoneNumber}</p>
+          </div>
+          <div className="Merchant--Details--Row">
+            {merchant.websiteUrl && (
+              <a className="Merchant--Details--Link" href={merchant.websiteUrl}>
+                Website
+              </a>
+            )}
+          </div>
         </div>
-        <div className="Merchant--Details--Row">
-          {merchant.websiteUrl && (
-            <a className="Merchant--Details--Link" href={merchant.websiteUrl}>
-              Website
-            </a>
-          )}
-        </div>
-      </div>
-      <p className="Merchant--Description">{merchant.shortDescription}</p>
+        <p className="Merchant--Description">{merchant.shortDescription}</p>
 
-      {merchant.insiderTips && (
-        <div className="Merchant--Insider-Tips">
-          <h3 className="Merchant--Insider-Tips--Label">Insider Tips:&nbsp;</h3>
-          <p className="Merchant--Insider-Tips--Text">{merchant.insiderTips}</p>
-        </div>
+        {merchant.insiderTips && (
+          <div className="Merchant--Insider-Tips">
+            <h3 className="Merchant--Insider-Tips--Label">
+              Insider Tips:&nbsp;
+            </h3>
+            <p className="Merchant--Insider-Tips--Text">
+              {merchant.insiderTips}
+            </p>
+          </div>
+        )}
+      </div>
+      {merchant.imageUrl && (
+        <img className="Merchant--Image" src={merchant.imageUrl} />
       )}
     </div>
   );
