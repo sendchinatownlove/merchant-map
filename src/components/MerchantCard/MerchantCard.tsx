@@ -5,19 +5,21 @@ import { Merchant } from "../../utilities/types";
 import { useEventHandler } from "../../utilities/EventHandlerContext";
 import { useHandleAutoScroll, useUpdateStateIfDivOnScreen } from "./hooks";
 import { COLOR } from "../../utilities/colors";
+import { EventActionType } from "../../utilities/handleEventReducer";
 
 interface MerchantCardProps {
   merchant: Merchant;
 }
 
 function MerchantCard({ merchant }: MerchantCardProps) {
-  const { state } = useEventHandler();
+  const { state, dispatch } = useEventHandler();
   // TODO: update ref type
   const ref: any = useRef<Element>(null);
   const [selectedStyle, setSelectedStyle] = useState({});
 
   useEffect(() => {
     if (
+      !state.expandedView &&
       merchant.name == state.markedMerchant?.name &&
       merchant.address == state.markedMerchant?.address
     ) {
@@ -27,11 +29,26 @@ function MerchantCard({ merchant }: MerchantCardProps) {
     }
   }, [state.markedMerchant]);
 
-  useUpdateStateIfDivOnScreen(merchant, ref);
+  const handleClick = () => {
+    dispatch({
+      type: EventActionType.SET_MERCHANT_CARD_EXPANDED_VIEW,
+      payload: {
+        expandedView: true,
+        merchant: merchant,
+      },
+    });
+  };
+
+  // useUpdateStateIfDivOnScreen(merchant, ref);
   useHandleAutoScroll(merchant, ref);
 
   return (
-    <div style={selectedStyle} className="Merchant" ref={ref}>
+    <div
+      style={selectedStyle}
+      onClick={handleClick}
+      className="Merchant"
+      ref={ref}
+    >
       <h2 className="Merchant--Name">{merchant.name}</h2>
       <div className="Merchant--Details">
         <div className="Merchant--Details--Row">

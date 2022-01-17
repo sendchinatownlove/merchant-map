@@ -101,3 +101,27 @@
     width: 300px;
   }
 }
+
+.MerchantCardExpanded {
+  height: 100%;
+  position: absolute;
+}
+
+.ExpandedMenu {
+  padding: 0 36px;
+  &--Select {
+    display: flex;
+    justify-content: space-around;
+
+    &--Tab {
+      font-size: 16px;
+      text-transform: uppercase;
+    }
+  }
+}
+
+.BackToResults {
+  display: flex;
+  width: 123px;
+  vertical-align: middle;
+}

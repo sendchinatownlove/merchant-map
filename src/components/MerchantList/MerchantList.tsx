@@ -3,6 +3,7 @@ import MerchantCard from "../MerchantCard/MerchantCard";
 import { Merchant } from "../../utilities/types";
 import MobileMerchantList from "./MobileMerchantList";
 import { useEventHandler } from "../../utilities/EventHandlerContext";
+import MerchantCardExpanded from "../MerchantCard/MerchantCardExpanded";
 
 interface MerchantListProps {
   merchants: Merchant[];
@@ -17,11 +18,14 @@ interface MobileCardsProps {
   markedMerchant: Merchant | null;
 }
 function DesktopCards({ merchants }: DesktopCardsProps) {
+  const { state } = useEventHandler();
   return (
     <div className="Merchant--List">
-      {merchants.map((merchant) => (
-        <MerchantCard merchant={merchant} />
-      ))}
+      {state.markedMerchant && state.expandedView ? (
+        <MerchantCardExpanded merchant={state.markedMerchant} />
+      ) : (
+        merchants.map((merchant) => <MerchantCard merchant={merchant} />)
+      )}
     </div>
   );
 }
