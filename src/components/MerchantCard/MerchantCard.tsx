@@ -46,7 +46,8 @@ function MerchantCard({ merchant }: MerchantCardProps) {
     });
   };
 
-  // useUpdateStateIfDivOnScreen(merchant, ref);
+  // TODO: Replace user-scroll triggering map pan behavior so that mouseover triggers map pan
+  useUpdateStateIfDivOnScreen(merchant, ref);
   useHandleAutoScroll(merchant, ref);
 
   return (
