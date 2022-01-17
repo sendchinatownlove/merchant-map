@@ -4,6 +4,7 @@ import { Merchant } from "../../utilities/types";
 import MobileMerchantList from "./MobileMerchantList";
 import { useEventHandler } from "../../utilities/EventHandlerContext";
 import MerchantCardExpanded from "../MerchantCard/MerchantCardExpanded";
+import { useEffect } from "react";
 
 interface MerchantListProps {
   merchants: Merchant[];
@@ -19,6 +20,15 @@ interface MobileCardsProps {
 }
 function DesktopCards({ merchants }: DesktopCardsProps) {
   const { state } = useEventHandler();
+
+  // When user clicks "Back To Results" on MerchantCardExpanded,
+  // this hook will take them back to their last scroll position
+  useEffect(() => {
+    if (!state.expandedView && state.lastYPosition !== null) {
+      window.scrollTo(0, state.lastYPosition);
+    }
+  }, [state.expandedView]);
+
   return (
     <div className="Merchant--List">
       {state.markedMerchant && state.expandedView ? (

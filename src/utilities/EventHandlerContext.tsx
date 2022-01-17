@@ -13,6 +13,7 @@ const initialReducerState: AppState = {
   isMobile: false,
   currentIndex: 0,
   expandedView: false,
+  lastYPosition: null,
 };
 
 const initialContextValue: EventHandlerContextValue = {

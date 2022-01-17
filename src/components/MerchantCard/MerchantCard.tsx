@@ -37,6 +37,13 @@ function MerchantCard({ merchant }: MerchantCardProps) {
         merchant: merchant,
       },
     });
+
+    dispatch({
+      type: EventActionType.UPDATE_LAST_Y_POSITION,
+      payload: {
+        lastYPosition: window.scrollY,
+      },
+    });
   };
 
   // useUpdateStateIfDivOnScreen(merchant, ref);

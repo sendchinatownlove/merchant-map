@@ -7,6 +7,7 @@ export type AppState = {
   isMobile: boolean;
   currentIndex: number;
   expandedView: boolean;
+  lastYPosition: number | null;
 };
 
 export enum EventActionType {
@@ -18,6 +19,7 @@ export enum EventActionType {
   "UPDATE_MERCHANT_INDEX",
   "STORE_MERCHANTS_DATA",
   "SET_MERCHANT_CARD_EXPANDED_VIEW",
+  "UPDATE_LAST_Y_POSITION",
 }
 
 export type EventAction = {
@@ -28,6 +30,7 @@ export type EventAction = {
     isMobile?: boolean;
     currentIndex?: number;
     expandedView?: boolean;
+    lastYPosition?: number;
   };
 };
 
@@ -83,6 +86,16 @@ export function reducer(state: AppState, action: EventAction): AppState {
       }
       return { ...state };
     }
+    case EventActionType.UPDATE_LAST_Y_POSITION:
+      {
+        if (action.payload.lastYPosition !== undefined) {
+          return {
+            ...state,
+            lastYPosition: action.payload.lastYPosition,
+          };
+        }
+      }
+      return { ...state };
     default:
       throw new Error();
   }
