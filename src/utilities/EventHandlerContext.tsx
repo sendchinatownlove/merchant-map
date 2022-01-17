@@ -12,6 +12,7 @@ const initialReducerState: AppState = {
   clickedMerchant: null,
   isMobile: false,
   currentIndex: 0,
+  expandedView: false,
 };
 
 const initialContextValue: EventHandlerContextValue = {
