@@ -24,6 +24,7 @@ function MerchantCard({ merchant }: MerchantCardProps) {
   useEffect(() => {
     if (
       !state.expandedView &&
+      !state.isMobile &&
       // TODO: Use merchant ID to check whether 2 merchants are the same
       merchant.name == state.markedMerchant?.name &&
       merchant.address == state.markedMerchant?.address
