@@ -24,8 +24,9 @@ enum CurrentView {
   "PAST_CAMPAIGNS",
 }
 
+// TODO: Finish past campaigns
 function PastCampaigns() {
-  return <div>Past campaigns Past campaigns</div>;
+  return <div>Nothing to see here...yet!</div>;
 }
 
 function BackToResults({ onClick, text }: BackToResultsProps) {
