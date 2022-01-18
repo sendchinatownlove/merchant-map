@@ -13,6 +13,7 @@ interface MerchantCardExpandedProps {
 
 interface BackToResultsProps {
   onClick: () => void;
+  text: string;
 }
 
 interface ExpandedMenuProps {
@@ -27,11 +28,11 @@ function PastCampaigns() {
   return <div>Past campaigns Past campaigns</div>;
 }
 
-function BackToResults({ onClick }: BackToResultsProps) {
+function BackToResults({ onClick, text }: BackToResultsProps) {
   return (
     <div className="BackToResults" onClick={onClick}>
       <PrevButton />
-      <span>Back to results</span>
+      <div className="BackToResults--Text">{text}</div>
     </div>
   );
 }
@@ -88,7 +89,9 @@ function MerchantCardExpanded({ merchant }: MerchantCardExpandedProps) {
   };
   return (
     <div className="MerchantCardExpanded">
-      <BackToResults onClick={handleClick} />
+      <div>
+        <BackToResults onClick={handleClick} text="Back to results" />
+      </div>
       <MerchantCard merchant={merchant} />
       <ExpandedMenu merchant={merchant} />
     </div>
