@@ -22,16 +22,16 @@ function MerchantCard({ merchant }: MerchantCardProps) {
 
   // Set the background color of the merchant marked on the map to grey
   useEffect(() => {
-    if (
-      !state.expandedView &&
-      !state.isMobile &&
+    if (state.expandedView || state.isMobile) {
+      setSelectedStyle({});
+    } else if (
       // TODO: Use merchant ID to check whether 2 merchants are the same
       merchant.name == state.markedMerchant?.name &&
       merchant.address == state.markedMerchant?.address
     ) {
-      setSelectedStyle({ backgroundColor: COLOR.GREY_6 });
+      setSelectedStyle({ backgroundColor: COLOR.GREY_6, cursor: "pointer" });
     } else {
-      setSelectedStyle({});
+      setSelectedStyle({ cursor: "pointer" });
     }
   }, [state.markedMerchant]);
 
