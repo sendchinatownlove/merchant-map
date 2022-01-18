@@ -89,13 +89,13 @@ function MerchantCardExpanded({ merchant }: MerchantCardExpandedProps) {
     });
   };
   return (
-    <div className="MerchantCardExpanded">
-      <div>
-        <BackToResults onClick={handleClick} text="Back to results" />
-      </div>
+    <>
+      <BackToResults onClick={handleClick} text="Back to results" />
+
       <MerchantCard merchant={merchant} />
+
       <ExpandedMenu merchant={merchant} />
-    </div>
+    </>
   );
 }
 
