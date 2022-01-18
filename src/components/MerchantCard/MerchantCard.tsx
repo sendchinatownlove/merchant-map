@@ -50,6 +50,9 @@ function MerchantCard({ merchant }: MerchantCardProps) {
         lastYPosition: window.scrollY,
       },
     });
+
+    // ensures that the top of the expanded view will be scrolled to
+    window.scrollTo(0, 0);
   };
 
   useHandleAutoScroll(merchant, ref);
