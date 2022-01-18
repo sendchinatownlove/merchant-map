@@ -5,6 +5,7 @@ import MobileMerchantList from "./MobileMerchantList";
 import { useEventHandler } from "../../utilities/EventHandlerContext";
 import MerchantCardExpanded from "../MerchantCard/MerchantCardExpanded";
 import { useEffect } from "react";
+import { COLOR } from "../../utilities/colors";
 
 interface MerchantListProps {
   merchants: Merchant[];
@@ -17,6 +18,17 @@ interface DesktopCardsProps {
 interface MobileCardsProps {
   merchants: Merchant[];
   markedMerchant: Merchant | null;
+}
+
+function HorizontalLine({ color }: { color: string }) {
+  return (
+    <div
+      style={{
+        width: "100%",
+        borderBottom: `1px solid ${color}`,
+      }}
+    />
+  );
 }
 function DesktopCards({ merchants }: DesktopCardsProps) {
   const { state } = useEventHandler();
@@ -34,7 +46,14 @@ function DesktopCards({ merchants }: DesktopCardsProps) {
       {state.markedMerchant && state.expandedView ? (
         <MerchantCardExpanded merchant={state.markedMerchant} />
       ) : (
-        merchants.map((merchant) => <MerchantCard merchant={merchant} />)
+        merchants.map((merchant, index) => (
+          <>
+            <MerchantCard merchant={merchant} />
+            {index !== merchants.length - 1 && (
+              <HorizontalLine color={COLOR.GREY_3} />
+            )}
+          </>
+        ))
       )}
     </div>
   );

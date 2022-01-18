@@ -7,7 +7,6 @@
   background: transparent;
 
   @media only screen and (min-width: $max-width-mobile-screen) {
-    border-bottom: 1px solid $grey-3;
     justify-content: space-between;
     align-items: center;
     padding: 20px 36px;
