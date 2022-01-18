@@ -29,7 +29,7 @@ export function useHandleAutoScroll(merchant: Merchant, ref: any) {
       state.clickedMerchant?.name === merchant.name;
 
     if (isClickedMerchant && !state.isMobile) {
-      ref.current.scrollIntoView({ behavior: "smooth" });
+      window.scrollTo({ top: ref.current.offsetTop, behavior: "smooth" });
     }
   }, [state.clickedMerchant]);
 }
