@@ -40,20 +40,23 @@ function ExpandedMenu({ merchant }: ExpandedMenuProps) {
     CurrentView.STORY
   );
 
-  const selectedStyle = { color: COLOR.PRIMARY_RED };
+  const selectedStyle = {
+    color: COLOR.PRIMARY_RED,
+    fontWeight: 700,
+  };
 
   return (
     <div className="ExpandedMenu">
-      <div className="ExpandedMenu--Select">
+      <div className="ExpandedMenu--SelectMenu">
         <span
-          className="ExpandedMenu--Select--Tab"
+          className="ExpandedMenu--SelectMenu--Tab"
           style={currentView == CurrentView.STORY ? selectedStyle : {}}
           onClick={() => setCurrentView(CurrentView.STORY)}
         >
           Story
         </span>
         <span
-          className="ExpandedMenu--Select--Tab"
+          className="ExpandedMenu--SelectMenu--Tab"
           style={currentView == CurrentView.PAST_CAMPAIGNS ? selectedStyle : {}}
           onClick={() => setCurrentView(CurrentView.PAST_CAMPAIGNS)}
         >

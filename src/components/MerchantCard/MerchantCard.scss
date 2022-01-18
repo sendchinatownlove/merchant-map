@@ -116,17 +116,21 @@
 
 .ExpandedMenu {
   padding: 0 36px;
-  &--Select {
+
+  &--SelectMenu {
     display: flex;
     justify-content: space-around;
-
+    padding: 24px 0 24px 0;
+    border-bottom: 1px solid $grey-3;
     &--Tab {
+      cursor: pointer;
       font-size: 16px;
       text-transform: uppercase;
     }
   }
 
   &--Content {
+    padding-top: 8px;
     &--Story {
       font-size: 18px;
       line-height: 25px;
