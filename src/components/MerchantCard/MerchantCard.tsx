@@ -64,7 +64,7 @@ function MerchantCard({ merchant }: MerchantCardProps) {
     >
       <div
         className="Merchant--Text"
-        style={merchant.imageUrl ? merchantTextStyle : {}}
+        style={merchant.heroURL ? merchantTextStyle : {}}
       >
         <h2 className="Merchant--Name">{merchant.name}</h2>
         <div className="Merchant--Details">
@@ -93,8 +93,8 @@ function MerchantCard({ merchant }: MerchantCardProps) {
           </div>
         )}
       </div>
-      {merchant.imageUrl && (
-        <img className="Merchant--Image" src={merchant.imageUrl} />
+      {merchant.heroURL && (
+        <img className="Merchant--Image" src={merchant.heroURL} />
       )}
     </div>
   );
