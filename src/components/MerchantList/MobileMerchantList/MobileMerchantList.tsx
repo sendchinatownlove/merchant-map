@@ -1,20 +1,33 @@
 import { Merchant } from "../../../utilities/types";
-import MerchantCard from "../../MerchantCard/MerchantCard";
 import NavButtons from "./NavButtons";
 import { useEventHandler } from "../../../utilities/EventHandlerContext";
-import { useEffect, useState } from "react";
+import { StatelessComponent, useEffect, useState } from "react";
 import { EventActionType } from "../../../utilities/handleEventReducer";
+import MerchantCardExpanded from "../../MerchantCard/MerchantCardExpanded";
 
 type MobileMerchantListProps = {
   merchants: Merchant[];
   index: number;
 };
 
+type MerchantCardPreview = {
+  merchant: Merchant;
+};
+
+function MerchantCardPreview({ merchant }: MerchantCardPreview) {
+  return (
+    <div>
+      <h2 className="Merchant--Name">{merchant.name}</h2>
+      {/* TODO: Add address link */}
+      <a className="Merchant--Details--Link">Address link</a>
+    </div>
+  );
+}
 export function MobileMerchantList({
   merchants,
   index,
 }: MobileMerchantListProps) {
-  const { dispatch } = useEventHandler();
+  const { state, dispatch } = useEventHandler();
   const [merchantIndex, setMerchantIndex] = useState<number>(index);
 
   // Update state whenever user clicks left or right button
@@ -25,6 +38,16 @@ export function MobileMerchantList({
       payload: { merchant: merchantOnScreen },
     });
   }, [merchantIndex]);
+
+  const handleExpandClick = () => {
+    dispatch({
+      type: EventActionType.SET_MERCHANT_CARD_EXPANDED_VIEW,
+      payload: {
+        expandedView: !state.expandedView,
+        merchant: null,
+      },
+    });
+  };
 
   const handleBackButtonClick = () => {
     if (merchants.length > 0 && merchantIndex === 0) {
@@ -53,10 +76,17 @@ export function MobileMerchantList({
   return (
     <>
       <div className="Merchant--Carousel">
+        <div onClick={() => handleExpandClick()}>Arrow</div>
         <div className="Merchant--Carousel--Count">{`${
           merchantIndex + 1
         } OUT OF ${merchants.length}`}</div>
-        <MerchantCard merchant={merchants[merchantIndex]} />
+        {state.expandedView ? (
+          <div style={{ height: "70vh" }}>
+            <MerchantCardExpanded merchant={merchants[merchantIndex]} />
+          </div>
+        ) : (
+          <MerchantCardPreview merchant={merchants[merchantIndex]} />
+        )}
       </div>
       <NavButtons
         onBackButtonClick={handleBackButtonClick}

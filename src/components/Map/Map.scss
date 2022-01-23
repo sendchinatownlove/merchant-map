@@ -12,7 +12,7 @@
 
     // the bottom of the map should be at the screen's halfway point
     // TODO: Change 60px variable, which is the height of the header
-    height: calc(50vh - 60px);
+    height: calc(100vh - 60px - 64px);
     margin-top: 60px;
   }
 }

@@ -67,7 +67,7 @@ function MerchantCard({ merchant }: MerchantCardProps) {
     >
       <div
         className="Merchant--Text"
-        style={merchant.heroURL ? merchantTextStyle : {}}
+        style={merchant.heroURL && !state.isMobile ? merchantTextStyle : {}}
       >
         <h2 className="Merchant--Name">{merchant.name}</h2>
         <div className="Merchant--Details">

@@ -13,7 +13,8 @@
   }
 
   @media only screen and (max-width: $max-width-mobile-screen) {
-    flex-direction: column;
+    flex-direction: column-reverse;
+    align-items: center;
     width: 100%;
     padding: 20px 0;
   }
@@ -111,11 +112,20 @@
 .ExpandedMenu {
   padding: 0 36px;
 
+  @media only screen and (max-width: $max-width-mobile-screen) {
+    padding: 0;
+  }
+
   &--SelectMenu {
     display: flex;
     justify-content: space-around;
     padding: 24px 0 24px 0;
     border-bottom: 1px solid $grey-3;
+
+    @media only screen and (max-width: $max-width-mobile-screen) {
+      padding: 0;
+    }
+
     &--Tab {
       cursor: pointer;
       font-size: 16px;
@@ -129,6 +139,10 @@
       font-size: 18px;
       line-height: 25px;
       padding-bottom: 24px;
+      @media only screen and (max-width: $max-width-mobile-screen) {
+        font-size: 14px;
+        line-height: 20px;
+      }
     }
   }
 }

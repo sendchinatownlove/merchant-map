@@ -90,7 +90,9 @@ function MerchantCardExpanded({ merchant }: MerchantCardExpandedProps) {
   };
   return (
     <>
-      <BackToResults onClick={handleClick} text="Back to results" />
+      {!state.isMobile && (
+        <BackToResults onClick={handleClick} text="Back to results" />
+      )}
 
       <MerchantCard merchant={merchant} />
 

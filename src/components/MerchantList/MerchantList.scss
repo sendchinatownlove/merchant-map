@@ -12,7 +12,6 @@
       width: 50%;
     }
     @media only screen and (max-width: $max-width-mobile-screen) {
-      height: $merchant-container-height;
       width: 100%;
       position: fixed;
       bottom: 0;
@@ -30,9 +29,6 @@
     border-radius: 20px 20px 0 0;
     background: $background-white;
     overflow-y: scroll;
-    min-height: calc(
-      $merchant-container-height - $nav-footer-height - $nav-footer-border-width
-    );
 
     &--Count {
       text-align: right;
