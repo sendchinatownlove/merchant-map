@@ -10,11 +10,11 @@ type MobileMerchantListProps = {
   index: number;
 };
 
-type MerchantCardPreview = {
+type MerchantCardPreviewProps = {
   merchant: Merchant;
 };
 
-function MerchantCardPreview({ merchant }: MerchantCardPreview) {
+function MerchantCardPreview({ merchant }: MerchantCardPreviewProps) {
   return (
     <div>
       <h2 className="Merchant--Name">{merchant.name}</h2>
