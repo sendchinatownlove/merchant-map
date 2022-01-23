@@ -6,6 +6,7 @@ import MerchantCard from ".";
 import { useState } from "react";
 import { COLOR } from "../../utilities/colors";
 import { PrevButton } from "../MerchantList/MobileMerchantList/icons";
+import { MerchantCardPreview } from "./MerchantCardPreview";
 
 interface MerchantCardExpandedProps {
   merchant: Merchant;
@@ -88,6 +89,11 @@ function MerchantCardExpanded({ merchant }: MerchantCardExpandedProps) {
       },
     });
   };
+
+  if (state.isMobile && !state.expandedView) {
+    return <MerchantCardPreview merchant={merchant} />;
+  }
+
   return (
     <>
       {!state.isMobile && (

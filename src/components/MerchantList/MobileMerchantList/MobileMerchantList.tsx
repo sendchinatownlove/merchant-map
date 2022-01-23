@@ -10,19 +10,6 @@ type MobileMerchantListProps = {
   index: number;
 };
 
-type MerchantCardPreviewProps = {
-  merchant: Merchant;
-};
-
-function MerchantCardPreview({ merchant }: MerchantCardPreviewProps) {
-  return (
-    <div>
-      <h2 className="Merchant--Name">{merchant.name}</h2>
-      {/* TODO: Add address link */}
-      <a className="Merchant--Details--Link">Address link</a>
-    </div>
-  );
-}
 export function MobileMerchantList({
   merchants,
   index,
@@ -44,7 +31,7 @@ export function MobileMerchantList({
       type: EventActionType.SET_MERCHANT_CARD_EXPANDED_VIEW,
       payload: {
         expandedView: !state.expandedView,
-        merchant: null,
+        merchant: state.markedMerchant,
       },
     });
   };
@@ -83,11 +70,7 @@ export function MobileMerchantList({
         <div className="Merchant--Carousel--Count">{`${
           merchantIndex + 1
         } OUT OF ${merchants.length}`}</div>
-        {state.expandedView ? (
-          <MerchantCardExpanded merchant={merchants[merchantIndex]} />
-        ) : (
-          <MerchantCardPreview merchant={merchants[merchantIndex]} />
-        )}
+        <MerchantCardExpanded merchant={merchants[merchantIndex]} />
       </div>
       <NavButtons
         onBackButtonClick={handleBackButtonClick}
