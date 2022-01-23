@@ -3,6 +3,9 @@ import MerchantCard from "../MerchantCard/MerchantCard";
 import { Merchant } from "../../utilities/types";
 import MobileMerchantList from "./MobileMerchantList";
 import { useEventHandler } from "../../utilities/EventHandlerContext";
+import MerchantCardExpanded from "../MerchantCard/MerchantCardExpanded";
+import { useEffect } from "react";
+import { COLOR } from "../../utilities/colors";
 
 interface MerchantListProps {
   merchants: Merchant[];
@@ -16,12 +19,42 @@ interface MobileCardsProps {
   merchants: Merchant[];
   markedMerchant: Merchant | null;
 }
+
+function HorizontalLine({ color }: { color: string }) {
+  return (
+    <div
+      style={{
+        width: "100%",
+        borderBottom: `1px solid ${color}`,
+      }}
+    />
+  );
+}
 function DesktopCards({ merchants }: DesktopCardsProps) {
+  const { state } = useEventHandler();
+
+  // When user clicks "Back To Results" on MerchantCardExpanded,
+  // this hook will take them back to their last scroll position
+  useEffect(() => {
+    if (!state.expandedView && state.lastYPosition !== null) {
+      window.scrollTo(0, state.lastYPosition);
+    }
+  }, [state.expandedView]);
+
   return (
     <div className="Merchant--List">
-      {merchants.map((merchant) => (
-        <MerchantCard merchant={merchant} />
-      ))}
+      {state.markedMerchant && state.expandedView ? (
+        <MerchantCardExpanded merchant={state.markedMerchant} />
+      ) : (
+        merchants.map((merchant, index) => (
+          <>
+            <MerchantCard merchant={merchant} />
+            {index !== merchants.length - 1 && (
+              <HorizontalLine color={COLOR.GREY_3} />
+            )}
+          </>
+        ))
+      )}
     </div>
   );
 }

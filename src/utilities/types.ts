@@ -5,12 +5,12 @@ export type Merchant = {
   addressLine2?: string;
   shortDescription: string;
   typeBusiness?: string[];
-  imageURLs?: { left: string; right: string };
+  heroURL?: string | null;
   phoneNumber: string;
   websiteUrl: string;
-  description?: string;
   position: LatLong;
   insiderTips?: string;
+  story: string;
 };
 
 export type LatLong = {

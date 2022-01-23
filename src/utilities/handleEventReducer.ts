@@ -6,6 +6,8 @@ export type AppState = {
   clickedMerchant: Merchant | null;
   isMobile: boolean;
   currentIndex: number;
+  expandedView: boolean;
+  lastYPosition: number | null;
 };
 
 export enum EventActionType {
@@ -16,15 +18,19 @@ export enum EventActionType {
   "UPDATE_IF_MOBILE",
   "UPDATE_MERCHANT_INDEX",
   "STORE_MERCHANTS_DATA",
+  "SET_MERCHANT_CARD_EXPANDED_VIEW",
+  "UPDATE_LAST_Y_POSITION",
 }
 
 export type EventAction = {
   type: EventActionType;
   payload: {
-    merchant?: Merchant;
+    merchant?: Merchant | null;
     map?: google.maps.Map;
     isMobile?: boolean;
     currentIndex?: number;
+    expandedView?: boolean;
+    lastYPosition?: number;
   };
 };
 
@@ -67,6 +73,29 @@ export function reducer(state: AppState, action: EventAction): AppState {
       }
       return { ...state };
     }
+    case EventActionType.SET_MERCHANT_CARD_EXPANDED_VIEW: {
+      if (
+        action.payload.expandedView !== undefined &&
+        action.payload.merchant !== undefined
+      ) {
+        return {
+          ...state,
+          markedMerchant: action.payload.merchant,
+          expandedView: action.payload.expandedView,
+        };
+      }
+      return { ...state };
+    }
+    case EventActionType.UPDATE_LAST_Y_POSITION:
+      {
+        if (action.payload.lastYPosition !== undefined) {
+          return {
+            ...state,
+            lastYPosition: action.payload.lastYPosition,
+          };
+        }
+      }
+      return { ...state };
     default:
       throw new Error();
   }

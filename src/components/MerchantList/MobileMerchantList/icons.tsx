@@ -1,6 +1,6 @@
 function PrevButton() {
   return (
-    <div style={{ width: "100%", display: "flex", justifyContent: "center" }}>
+    <div style={{ display: "flex", justifyContent: "center" }}>
       <svg
         width="10"
         height="18"
@@ -18,7 +18,7 @@ function PrevButton() {
 }
 function NextButton() {
   return (
-    <div style={{ width: "100%", display: "flex", justifyContent: "center" }}>
+    <div style={{ display: "flex", justifyContent: "center" }}>
       <svg
         width="10"
         height="18"

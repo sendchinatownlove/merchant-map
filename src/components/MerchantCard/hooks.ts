@@ -29,7 +29,7 @@ export function useHandleAutoScroll(merchant: Merchant, ref: any) {
       state.clickedMerchant?.name === merchant.name;
 
     if (isClickedMerchant && !state.isMobile) {
-      ref.current.scrollIntoView({ behavior: "smooth" });
+      window.scrollTo({ top: ref.current.offsetTop, behavior: "smooth" });
     }
   }, [state.clickedMerchant]);
 }
@@ -52,7 +52,7 @@ function updateAutoScrollState(
   }
 }
 
-function updateScrollState(
+export function updateScrollState(
   merchantOnScreen: Merchant,
   state: AppState,
   dispatch: React.Dispatch<EventAction>

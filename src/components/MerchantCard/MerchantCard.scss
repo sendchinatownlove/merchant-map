@@ -1,11 +1,22 @@
 @import "../../Theme.scss";
 
 .Merchant {
-  width: 100%;
+  width: calc(100% - 36px - 36px);
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   background: transparent;
-  padding: 20px 0;
+
+  @media only screen and (min-width: $max-width-mobile-screen) {
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 36px;
+  }
+
+  @media only screen and (max-width: $max-width-mobile-screen) {
+    flex-direction: column;
+    width: 100%;
+    padding: 20px 0;
+  }
 
   &--Name {
     font-weight: bold;
@@ -92,8 +103,46 @@
     margin-top: 24px;
   }
 
-  &--Images {
-    height: 400px;
-    width: 300px;
+  &--Image {
+    max-width: 211px;
+  }
+}
+
+.ExpandedMenu {
+  padding: 0 36px;
+
+  &--SelectMenu {
+    display: flex;
+    justify-content: space-around;
+    padding: 24px 0 24px 0;
+    border-bottom: 1px solid $grey-3;
+    &--Tab {
+      cursor: pointer;
+      font-size: 16px;
+      text-transform: uppercase;
+    }
+  }
+
+  &--Content {
+    padding-top: 8px;
+    &--Story {
+      font-size: 18px;
+      line-height: 25px;
+      padding-bottom: 24px;
+    }
+  }
+}
+
+.BackToResults {
+  display: flex;
+  padding: 29px 0 0 36px;
+  width: 155px;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  text-decoration: underline;
+
+  &--Text {
+    font-size: 18px;
   }
 }
