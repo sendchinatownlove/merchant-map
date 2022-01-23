@@ -1,7 +1,7 @@
 import { Merchant } from "../../../utilities/types";
 import NavButtons from "./NavButtons";
 import { useEventHandler } from "../../../utilities/EventHandlerContext";
-import { StatelessComponent, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { EventActionType } from "../../../utilities/handleEventReducer";
 import MerchantCardExpanded from "../../MerchantCard/MerchantCardExpanded";
 
@@ -75,15 +75,16 @@ export function MobileMerchantList({
 
   return (
     <>
-      <div className="Merchant--Carousel">
+      <div
+        className="Merchant--Carousel"
+        style={state.expandedView ? { height: "70vh" } : {}}
+      >
         <div onClick={() => handleExpandClick()}>Arrow</div>
         <div className="Merchant--Carousel--Count">{`${
           merchantIndex + 1
         } OUT OF ${merchants.length}`}</div>
         {state.expandedView ? (
-          <div style={{ height: "70vh" }}>
-            <MerchantCardExpanded merchant={merchants[merchantIndex]} />
-          </div>
+          <MerchantCardExpanded merchant={merchants[merchantIndex]} />
         ) : (
           <MerchantCardPreview merchant={merchants[merchantIndex]} />
         )}
