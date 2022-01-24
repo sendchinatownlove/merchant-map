@@ -11,7 +11,7 @@
     width: 100%;
 
     // the bottom of the map should be at the screen's halfway point
-    // TODO: Change 60px variable, which is the height of the header
+    // 60px = header height; 64px = bottom nav bar height
     height: calc(100vh - 60px - 64px);
     margin-top: 60px;
   }
