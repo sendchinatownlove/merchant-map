@@ -35,4 +35,44 @@ function NextButton() {
   );
 }
 
-export { PrevButton, NextButton };
+function UpButton() {
+  return (
+    <svg
+      width="18"
+      height="10"
+      viewBox="0 0 18 10"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M17 9L9 0.999999L1 9"
+        stroke="black"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      />
+    </svg>
+  );
+}
+
+function DownButton() {
+  return (
+    <svg
+      width="18"
+      height="10"
+      viewBox="0 0 18 10"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M1 1L9 9L17 1"
+        stroke="black"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      />
+    </svg>
+  );
+}
+
+export { PrevButton, NextButton, UpButton, DownButton };

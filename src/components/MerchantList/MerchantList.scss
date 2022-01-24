@@ -33,7 +33,12 @@
     &--Count {
       text-align: right;
       font-size: 12px;
-      padding-top: 21px;
+    }
+
+    &--ShowHideIcon {
+      display: flex;
+      justify-content: center;
+      padding-top: 10px;
     }
   }
 }

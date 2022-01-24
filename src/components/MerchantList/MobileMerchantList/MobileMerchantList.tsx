@@ -4,6 +4,7 @@ import { useEventHandler } from "../../../utilities/EventHandlerContext";
 import { useEffect, useState } from "react";
 import { EventActionType } from "../../../utilities/handleEventReducer";
 import MerchantCardExpanded from "../../MerchantCard/MerchantCardExpanded";
+import { DownButton, UpButton } from "./icons";
 
 type MobileMerchantListProps = {
   merchants: Merchant[];
@@ -66,12 +67,20 @@ export function MobileMerchantList({
         className="Merchant--Carousel"
         style={state.expandedView ? { height: "70vh" } : {}}
       >
-        <div onClick={() => handleExpandClick()}>Arrow</div>
-        <div className="Merchant--Carousel--Count">{`${
-          merchantIndex + 1
-        } OUT OF ${merchants.length}`}</div>
+        <div>
+          <div
+            className="Merchant--Carousel--ShowHideIcon"
+            onClick={() => handleExpandClick()}
+          >
+            {state.expandedView ? <DownButton /> : <UpButton />}
+          </div>
+          <div className="Merchant--Carousel--Count">{`${
+            merchantIndex + 1
+          } OUT OF ${merchants.length}`}</div>
+        </div>
         <MerchantCardExpanded merchant={merchants[merchantIndex]} />
       </div>
+
       <NavButtons
         onBackButtonClick={handleBackButtonClick}
         onForwardButtonClick={handleForwardButtonClick}
