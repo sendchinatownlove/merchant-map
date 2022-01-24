@@ -17,9 +17,6 @@ function MerchantCard({ merchant }: MerchantCardProps) {
   const ref: any = useRef<Element>(null);
   const [selectedStyle, setSelectedStyle] = useState({});
 
-  // 211px = image width; 20px = padding between image + text; 36px = left padding
-  const merchantTextStyle = { width: "calc(100% - 211px - 20px - 36px)" };
-
   // Set the background color of the merchant marked on the map to grey
   useEffect(() => {
     if (state.expandedView || state.isMobile) {
@@ -65,10 +62,7 @@ function MerchantCard({ merchant }: MerchantCardProps) {
       className="Merchant"
       ref={ref}
     >
-      <div
-        className="Merchant--Text"
-        style={merchant.heroURL && !state.isMobile ? merchantTextStyle : {}}
-      >
+      <div className="Merchant--Text">
         <h2 className="Merchant--Name">{merchant.name}</h2>
         <div className="Merchant--Details">
           <div className="Merchant--Details--Row">
