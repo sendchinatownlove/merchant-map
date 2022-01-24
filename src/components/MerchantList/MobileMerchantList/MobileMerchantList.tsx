@@ -67,7 +67,7 @@ export function MobileMerchantList({
         className="Merchant--Carousel"
         style={state.expandedView ? { height: "70vh" } : {}}
       >
-        <div>
+        <div className="Merchant--Carousel--Upper-Tab">
           <div
             className="Merchant--Carousel--ShowHideIcon"
             onClick={() => handleExpandClick()}
@@ -80,10 +80,11 @@ export function MobileMerchantList({
         </div>
         <MerchantCardExpanded merchant={merchants[merchantIndex]} />
       </div>
-
+      {/* TODO: Add donate button URL */}
       <NavButtons
         onBackButtonClick={handleBackButtonClick}
         onForwardButtonClick={handleForwardButtonClick}
+        href="/"
       />
     </>
   );

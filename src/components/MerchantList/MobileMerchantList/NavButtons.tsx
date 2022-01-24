@@ -4,11 +4,13 @@ import "./NavButtons.scss";
 type NavButtonsProps = {
   onBackButtonClick: () => void;
   onForwardButtonClick: () => void;
+  href?: string;
 };
 
 export default ({
   onBackButtonClick,
   onForwardButtonClick,
+  href = "/",
 }: NavButtonsProps) => {
   return (
     <div className="NavBar--Container">
@@ -17,7 +19,7 @@ export default ({
         <span className="NavBar--Button-Text">Prev</span>
       </div>
       <button className="Primary-Button--black">
-        <a href="/">Visit Merchant Page</a>
+        <a href={href}>Donate</a>
       </button>
       <div className="NavBar--Button" onClick={onForwardButtonClick}>
         <NextButton />
