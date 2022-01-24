@@ -10,7 +10,7 @@
     position: fixed;
     width: 100%;
 
-    // the bottom of the map should be at the screen's halfway point
+    // the map will take up the whole screen between the header + bottom nav bar
     // 60px = header height; 64px = bottom nav bar height
     height: calc(100vh - 60px - 64px);
     margin-top: 60px;
