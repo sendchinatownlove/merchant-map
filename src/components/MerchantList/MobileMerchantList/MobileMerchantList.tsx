@@ -4,15 +4,19 @@ import NavButtons from "./NavButtons";
 import { useEventHandler } from "../../../utilities/EventHandlerContext";
 import { useEffect, useState } from "react";
 import { EventActionType } from "../../../utilities/handleEventReducer";
+import { UpArrow } from "./icons";
+import { Dispatch, SetStateAction } from "react";
 
 type MobileMerchantListProps = {
   merchants: Merchant[];
   index: number;
+  setExpandedMobileView: Dispatch<SetStateAction<boolean>>;
 };
 
 export function MobileMerchantList({
   merchants,
   index,
+  setExpandedMobileView
 }: MobileMerchantListProps) {
   const { dispatch } = useEventHandler();
   const [merchantIndex, setMerchantIndex] = useState<number>(index);
@@ -56,7 +60,11 @@ export function MobileMerchantList({
         <div className="Merchant--Carousel--Count">{`${
           merchantIndex + 1
         } OUT OF ${merchants.length}`}</div>
+        <div className="Merchant--Carousel--Expander--Button" onClick={() => setExpandedMobileView(true)}>
+          <UpArrow  />
+        </div>
         <MerchantCard merchant={merchants[merchantIndex]} />
+
       </div>
       <NavButtons
         onBackButtonClick={handleBackButtonClick}
