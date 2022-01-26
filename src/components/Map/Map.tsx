@@ -13,6 +13,7 @@ import ZoomButtons from "./ZoomButtons";
 
 // Create an .env file and store your Google Maps API key as VITE_GOOGLE_MAPS_API_KEY
 const apiKey = import.meta.env.VITE_GOOGLE_MAPS_API_KEY;
+const mapId = import.meta.env.VITE_MAP_ID;
 const mapContainerStyle = {
   width: "100%",
   height: "100%",
@@ -20,6 +21,7 @@ const mapContainerStyle = {
 
 const googleMapsOptions: google.maps.MapOptions = {
   disableDefaultUI: true,
+  mapId: mapId,
 };
 
 const defaultMapCenter: LatLong = {
@@ -38,7 +40,7 @@ export function Map({ merchants }: MapProps) {
 
   return (
     <div className="Map-Container">
-      <LoadScript googleMapsApiKey={apiKey as string}>
+      <LoadScript googleMapsApiKey={apiKey as string} mapIds={[mapId]}>
         <GoogleMap
           options={googleMapsOptions}
           mapContainerStyle={mapContainerStyle}
