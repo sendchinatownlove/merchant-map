@@ -12,9 +12,12 @@ If you're new to Vite, it has a lot of common [defaults](https://vitejs.dev/guid
 4. Visit `http://localhost:3000` to see your app.
 5. Make changes to the code to see it update live.
 
-You will also need a Google Maps API key. Once you have it, make an `.env` file in the root directory and store your key as shown in the `.env.example` file. 
+Make an `.env` file in the root directory and store your key as shown in the `.env.example` file. You will need the following keys and IDs in your `.env` file
+
+- Google Maps API key: You can get an API key by following the instructions from Google [here](https://developers.google.com/maps/documentation/javascript/get-api-key).
+- Map ID: Ask Jacob for this.
 
 # Creating a production build
 
-* `yarn build`
-* See vitejs.dev for other plugins and tooling, such as using [Env variables](https://vitejs.dev/guide/env-and-mode.html)
+- `yarn build`
+- See vitejs.dev for other plugins and tooling, such as using [Env variables](https://vitejs.dev/guide/env-and-mode.html)
