@@ -1,11 +1,12 @@
 import "./MerchantCard.scss";
+import ReactMarkdown from 'react-markdown';
+import { useState } from "react";
 import { useEventHandler } from "../../utilities/EventHandlerContext";
 import { EventActionType } from "../../utilities/handleEventReducer";
 import { Merchant } from "../../utilities/types";
-import MerchantCard from ".";
-import { useState } from "react";
 import { COLOR } from "../../utilities/colors";
 import { PrevButton } from "../MerchantList/MobileMerchantList/icons";
+import MerchantCard from ".";
 
 interface MerchantCardExpandedProps {
   merchant: Merchant;
@@ -67,7 +68,9 @@ function ExpandedMenu({ merchant }: ExpandedMenuProps) {
       </div>
       <div className="ExpandedMenu--Content">
         {currentView == CurrentView.STORY && (
-          <div className="ExpandedMenu--Content--Story">{merchant.story}</div>
+          <div className="ExpandedMenu--Content--Story">
+            <ReactMarkdown>{merchant.story}</ReactMarkdown>
+          </div>
         )}
         {currentView == CurrentView.PAST_CAMPAIGNS && (
           <div>{<PastCampaigns />}</div>

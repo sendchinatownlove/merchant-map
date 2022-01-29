@@ -1,6 +1,6 @@
 import "./MerchantCard.scss";
 import { useEffect, useRef, useState } from "react";
-import ReactMarkdown from 'react-markdown'
+import ReactMarkdown from 'react-markdown';
 
 import { Merchant } from "../../utilities/types";
 import { useEventHandler } from "../../utilities/EventHandlerContext";
