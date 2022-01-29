@@ -6,6 +6,7 @@
     display: flex;
     position: relative;
     flex-direction: column;
+    overflow-y: scroll;
 
     @media (min-width: $max-width-mobile-screen) {
       margin-top: 102px; // height of the header
