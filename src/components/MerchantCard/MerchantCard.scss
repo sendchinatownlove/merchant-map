@@ -8,12 +8,12 @@
 
   @media only screen and (min-width: $max-width-mobile-screen) {
     justify-content: space-between;
-    align-items: center;
+    align-items: flex-start;
     padding: 20px 36px;
   }
 
   @media only screen and (max-width: $max-width-mobile-screen) {
-    flex-direction: column;
+    flex-direction: row;
     width: 100%;
     padding: 20px 0;
   }
@@ -53,6 +53,12 @@
     }
   }
 
+  &--Text {
+    @media only screen and (max-width: $max-width-mobile-screen) {
+      width: 100% !important;
+    }
+  }
+
   &--Description {
     font-size: 18px;
     line-height: 25px;
@@ -62,6 +68,10 @@
       line-height: 20px;
       width: 100%;
       margin: 8px auto;
+    }
+
+    a {
+      color: $primary-red;
     }
   }
 
@@ -105,6 +115,14 @@
 
   &--Image {
     max-width: 211px;
+    margin-top: 70px;
+    align-self: self-start;
+    border-radius: 15px;
+    border: 1px solid rgb(229, 229, 229);
+
+    @media only screen and (max-width: $max-width-mobile-screen) {
+      margin: 30px 0 0 20px;
+    }
   }
 }
 
@@ -129,6 +147,10 @@
       font-size: 18px;
       line-height: 25px;
       padding-bottom: 24px;
+
+      a {
+        color: $primary-red;
+      }
     }
   }
 }
