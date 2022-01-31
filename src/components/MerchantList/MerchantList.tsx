@@ -4,7 +4,7 @@ import { Merchant } from "../../utilities/types";
 import MobileMerchantList from "./MobileMerchantList";
 import { useEventHandler } from "../../utilities/EventHandlerContext";
 import MerchantCardExpanded from "../MerchantCard/MerchantCardExpanded";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { COLOR } from "../../utilities/colors";
 
 interface MerchantListProps {
@@ -77,16 +77,14 @@ function MobileCards({ merchants, markedMerchant }: MobileCardsProps) {
 }
 
 function MerchantList({ merchants }: MerchantListProps) {
-  const [expandedMobileView, setExpandedMobileView] = useState<boolean>(false)
   const { state } = useEventHandler();
 
   return (
-    <div className={`Merchant--Container${expandedMobileView ? '--Expanded' : ''}`}>
+    <div className={`Merchant--Container${state.expandedMobileView ? '--Expanded' : ''}`}>
       {state.isMobile ? (
         <MobileCards
           merchants={merchants}
           markedMerchant={state.markedMerchant}
-          setExpandedMobileView={setExpandedMobileView}
         />
       ) : (
         <DesktopCards merchants={merchants} />

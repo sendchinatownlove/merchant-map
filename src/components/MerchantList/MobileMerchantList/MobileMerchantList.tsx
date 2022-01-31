@@ -4,22 +4,20 @@ import NavButtons from "./NavButtons";
 import { useEventHandler } from "../../../utilities/EventHandlerContext";
 import { useEffect, useState } from "react";
 import { EventActionType } from "../../../utilities/handleEventReducer";
-import { UpArrow } from "./icons";
-import { Dispatch, SetStateAction } from "react";
+import { UpArrow, DownArrow } from "./icons";
 
 type MobileMerchantListProps = {
   merchants: Merchant[];
   index: number;
-  setExpandedMobileView: Dispatch<SetStateAction<boolean>>;
 };
 
 export function MobileMerchantList({
   merchants,
   index,
-  setExpandedMobileView
 }: MobileMerchantListProps) {
-  const { dispatch } = useEventHandler();
+  const { state, dispatch } = useEventHandler();
   const [merchantIndex, setMerchantIndex] = useState<number>(index);
+  const [isExpanded, setIsExpanded] = useState<boolean>(false);
 
   // Update state whenever user clicks left or right button
   useEffect(() => {
@@ -28,7 +26,15 @@ export function MobileMerchantList({
       type: EventActionType.HANDLE_USER_SCROLL_AND_CAROUSEL_CLICK,
       payload: { merchant: merchantOnScreen },
     });
-  }, [merchantIndex]);
+    dispatch({
+      type: EventActionType.SET_MERCHANT_CARD_EXPANDED_MOBILE_VIEW,
+      payload: { expandedMobileView: isExpanded },
+    });
+  }, [merchantIndex, isExpanded]);
+
+  const handleArrowClick = () => {
+    setIsExpanded(!isExpanded)
+  };
 
   const handleBackButtonClick = () => {
     if (merchants.length > 0 && merchantIndex === 0) {
@@ -60,8 +66,8 @@ export function MobileMerchantList({
         <div className="Merchant--Carousel--Count">{`${
           merchantIndex + 1
         } OUT OF ${merchants.length}`}</div>
-        <div className="Merchant--Carousel--Expander--Button" onClick={() => setExpandedMobileView(true)}>
-          <UpArrow  />
+        <div className="Merchant--Carousel--Expander--Button" onClick={handleArrowClick}>
+          {isExpanded ? <DownArrow  /> : <UpArrow />}
         </div>
         <MerchantCard merchant={merchants[merchantIndex]} />
 

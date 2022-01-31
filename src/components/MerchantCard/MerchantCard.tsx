@@ -61,13 +61,13 @@ function MerchantCard({ merchant }: MerchantCardProps) {
     <div
       style={selectedStyle}
       onClick={handleClick}
-      onMouseOver={() => updateScrollState(merchant, state, dispatch)}
+      onMouseOver={() => !state.isMobile && updateScrollState(merchant, state, dispatch)}
       className="Merchant"
       ref={ref}
     >
       <div
         className="Merchant--Text"
-        style={merchant.heroURL ? merchantTextStyle : {}}
+        style={merchant.heroURL && !state.isMobile? merchantTextStyle : {}}
       >
         <h2 className="Merchant--Name">{merchant.name}</h2>
         <div className="Merchant--Details">

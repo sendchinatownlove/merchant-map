@@ -12,10 +12,35 @@
       width: 50%;
     }
     @media only screen and (max-width: $max-width-mobile-screen) {
-      height: $merchant-container-height;
+      height: calc(
+        $merchant-container-mobile-height + $nav-footer-height + $nav-footer-border-width
+      );
       width: 100%;
       position: fixed;
       bottom: 0;
+    }
+
+    &--Expanded {
+        // Merchant card styles for expadned mobile view
+        .Merchant {
+          @media only screen and (max-width: $max-width-mobile-screen) {
+            flex-direction: column-reverse;
+          }
+
+          .Merchant--Image {
+            @media only screen and (max-width: $max-width-mobile-screen) {
+              margin: 0 auto;
+              max-width: none;
+              height: 150px;
+            }
+          }
+        }
+
+      @media only screen and (max-width: $max-width-mobile-screen) {
+        z-index: 3;
+        position: fixed;
+        bottom: 0;
+      }
     }
   }
 
@@ -27,6 +52,7 @@
 
   &--Carousel {
     padding: 0 20px;
+    width: calc(100vw - 40px);
     border-radius: 20px 20px 0 0;
     background: $background-cream;
     overflow-y: scroll;
@@ -42,10 +68,10 @@
 
     &--Expander--Button {
       display: flex;
+      height: 10px;
+      width: 20px;
       justify-content: center;
       margin: 0 auto;
-      height: 50px;
-      width: 50px;
       cursor: pointer;
     }
 
