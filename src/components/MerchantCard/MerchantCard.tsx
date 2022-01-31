@@ -1,5 +1,6 @@
 import "./MerchantCard.scss";
 import { useEffect, useRef, useState } from "react";
+import ReactMarkdown from 'react-markdown';
 
 import { Merchant } from "../../utilities/types";
 import { useEventHandler } from "../../utilities/EventHandlerContext";
@@ -83,7 +84,11 @@ function MerchantCard({ merchant }: MerchantCardProps) {
             )}
           </div>
         </div>
-        <p className="Merchant--Description">{merchant.shortDescription}</p>
+        <p className="Merchant--Description">
+          <ReactMarkdown>
+            {merchant.shortDescription}
+          </ReactMarkdown>
+        </p>
 
         {merchant.insiderTips && (
           <div className="Merchant--Insider-Tips">
