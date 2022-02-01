@@ -80,7 +80,7 @@ function MerchantList({ merchants }: MerchantListProps) {
   const { state } = useEventHandler();
 
   return (
-    <div className={`Merchant--Container${state.expandedMobileView ? '--Expanded' : ''}`}>
+    <div className={`Merchant--Container${state.expandedView ? '--Expanded' : ''}`}>
       {state.isMobile ? (
         <MobileCards
           merchants={merchants}

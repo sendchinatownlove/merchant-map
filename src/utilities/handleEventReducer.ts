@@ -7,7 +7,6 @@ export type AppState = {
   isMobile: boolean;
   currentIndex: number;
   expandedView: boolean;
-  expandedMobileView: boolean;
   lastYPosition: number | null;
 };
 
@@ -32,7 +31,6 @@ export type EventAction = {
     isMobile?: boolean;
     currentIndex?: number;
     expandedView?: boolean;
-    expandedMobileView?: boolean;
     lastYPosition?: number;
   };
 };
@@ -85,14 +83,6 @@ export function reducer(state: AppState, action: EventAction): AppState {
           ...state,
           markedMerchant: action.payload.merchant,
           expandedView: action.payload.expandedView,
-        };
-      }
-      return { ...state };
-    }
-    case EventActionType.SET_MERCHANT_CARD_EXPANDED_MOBILE_VIEW: {
-      if (action.payload.expandedMobileView !== undefined) {
-        return {
-          ...state, expandedMobileView: action.payload.expandedMobileView,
         };
       }
       return { ...state };

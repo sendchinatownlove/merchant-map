@@ -27,8 +27,11 @@ export function MobileMerchantList({
       payload: { merchant: merchantOnScreen },
     });
     dispatch({
-      type: EventActionType.SET_MERCHANT_CARD_EXPANDED_MOBILE_VIEW,
-      payload: { expandedMobileView: isExpanded },
+      type: EventActionType.SET_MERCHANT_CARD_EXPANDED_VIEW,
+      payload: {
+        merchant: merchantOnScreen,
+        expandedView: isExpanded
+      }
     });
   }, [merchantIndex, isExpanded]);
 
