@@ -73,7 +73,7 @@ export function MobileMerchantList({
           className="Merchant--Carousel--Expander--Button"
           onClick={handleArrowClick}
         >
-          {isExpanded ? <DownArrow /> : <UpArrow />}
+          {state.expandedView ? <DownArrow /> : <UpArrow />}
         </div>
         <MerchantCard merchant={merchants[merchantIndex]} />
       </div>
