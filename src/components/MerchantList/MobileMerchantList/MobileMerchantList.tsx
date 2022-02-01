@@ -30,13 +30,13 @@ export function MobileMerchantList({
       type: EventActionType.SET_MERCHANT_CARD_EXPANDED_VIEW,
       payload: {
         merchant: merchantOnScreen,
-        expandedView: isExpanded
-      }
+        expandedView: isExpanded,
+      },
     });
   }, [merchantIndex, isExpanded]);
 
   const handleArrowClick = () => {
-    setIsExpanded(!isExpanded)
+    setIsExpanded(!isExpanded);
   };
 
   const handleBackButtonClick = () => {
@@ -69,11 +69,13 @@ export function MobileMerchantList({
         <div className="Merchant--Carousel--Count">{`${
           merchantIndex + 1
         } OUT OF ${merchants.length}`}</div>
-        <div className="Merchant--Carousel--Expander--Button" onClick={handleArrowClick}>
-          {isExpanded ? <DownArrow  /> : <UpArrow />}
+        <div
+          className="Merchant--Carousel--Expander--Button"
+          onClick={handleArrowClick}
+        >
+          {isExpanded ? <DownArrow /> : <UpArrow />}
         </div>
         <MerchantCard merchant={merchants[merchantIndex]} />
-
       </div>
       <NavButtons
         onBackButtonClick={handleBackButtonClick}

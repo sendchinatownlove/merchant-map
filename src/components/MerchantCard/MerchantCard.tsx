@@ -1,6 +1,6 @@
 import "./MerchantCard.scss";
 import { useEffect, useRef, useState } from "react";
-import ReactMarkdown from 'react-markdown';
+import ReactMarkdown from "react-markdown";
 
 import { Merchant } from "../../utilities/types";
 import { useEventHandler } from "../../utilities/EventHandlerContext";
@@ -58,17 +58,23 @@ function MerchantCard({ merchant }: MerchantCardProps) {
 
   useHandleAutoScroll(merchant, ref);
 
+  // !isMobileNonExpandedView would be desktop and mobile expanded view.
+  const isMobileNonExpandedView: boolean =
+    state.isMobile && !state.expandedView;
+
   return (
     <div
       style={selectedStyle}
       onClick={handleClick}
-      onMouseOver={() => !state.isMobile && updateScrollState(merchant, state, dispatch)}
+      onMouseOver={() =>
+        !state.isMobile && updateScrollState(merchant, state, dispatch)
+      }
       className="Merchant"
       ref={ref}
     >
       <div
         className="Merchant--Text"
-        style={merchant.heroURL && !state.isMobile? merchantTextStyle : {}}
+        style={merchant.heroURL && !state.isMobile ? merchantTextStyle : {}}
       >
         <h2 className="Merchant--Name">{merchant.name}</h2>
         <div className="Merchant--Details">
@@ -84,11 +90,11 @@ function MerchantCard({ merchant }: MerchantCardProps) {
             )}
           </div>
         </div>
-        <p className="Merchant--Description">
-          <ReactMarkdown>
-            {merchant.shortDescription}
-          </ReactMarkdown>
-        </p>
+        {!isMobileNonExpandedView && (
+          <p className="Merchant--Description">
+            <ReactMarkdown>{merchant.shortDescription}</ReactMarkdown>
+          </p>
+        )}
 
         {merchant.insiderTips && (
           <div className="Merchant--Insider-Tips">
@@ -101,7 +107,7 @@ function MerchantCard({ merchant }: MerchantCardProps) {
           </div>
         )}
       </div>
-      {merchant.heroURL && (
+      {!isMobileNonExpandedView && merchant.heroURL && (
         <img className="Merchant--Image" src={merchant.heroURL} />
       )}
     </div>
