@@ -63,6 +63,7 @@
 
     @media only screen and (max-width: $max-width-mobile-screen) {
       min-height: calc(100px + $nav-footer-height + $nav-footer-border-width);
+      max-height: calc(100vh - 60px - $nav-footer-height - $nav-footer-border-width);
     }
 
     &--Expander--Button {
