@@ -64,7 +64,7 @@ function MerchantCard({ merchant }: MerchantCardProps) {
 
   // build merchant url
   const pattern = new RegExp('^(https?|ftp)://');
-  const websiteUrl;
+  let websiteUrl: string = "";
   websiteUrl = merchant.websiteUrl && !pattern.test(merchant.websiteUrl) ? "http://" + merchant.websiteUrl : merchant.websiteUrl;
 
   return (
@@ -89,7 +89,7 @@ function MerchantCard({ merchant }: MerchantCardProps) {
           </div>
           <div className="Merchant--Details--Row">
             {merchant.websiteUrl && (
-              <a className="Merchant--Details--Link" href={websiteUrl} >
+              <a className="Merchant--Details--Link" href={websiteUrl}>
                 Website
               </a>
             )}
