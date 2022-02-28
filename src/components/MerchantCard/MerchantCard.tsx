@@ -62,6 +62,11 @@ function MerchantCard({ merchant }: MerchantCardProps) {
   const isMobileNonExpandedView: boolean =
     state.isMobile && !state.expandedView;
 
+  // build merchant url
+  const pattern = new RegExp('^(https?|ftp)://');
+  const websiteUrl;
+  websiteUrl = merchant.websiteUrl && !pattern.test(merchant.websiteUrl) ? "http://" + merchant.websiteUrl : merchant.websiteUrl;
+
   return (
     <div
       style={selectedStyle}
@@ -84,7 +89,7 @@ function MerchantCard({ merchant }: MerchantCardProps) {
           </div>
           <div className="Merchant--Details--Row">
             {merchant.websiteUrl && (
-              <a className="Merchant--Details--Link" href={merchant.websiteUrl}>
+              <a className="Merchant--Details--Link" href={websiteUrl} >
                 Website
               </a>
             )}
