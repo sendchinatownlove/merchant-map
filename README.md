@@ -21,3 +21,9 @@ Make an `.env` file in the root directory and store your key as shown in the `.e
 
 - `yarn build`
 - See vitejs.dev for other plugins and tooling, such as using [Env variables](https://vitejs.dev/guide/env-and-mode.html)
+
+
+# deploy 
+- `npm install -g firebase`
+- `firebase login`
+- `firebase deploy` ** should need google cloud console access to sendchinatownlove project
