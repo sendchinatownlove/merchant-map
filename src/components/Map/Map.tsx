@@ -46,7 +46,7 @@ export function Map({ merchants }: MapProps) {
           mapContainerStyle={mapContainerStyle}
           center={merchants ? merchants[0].position : defaultMapCenter}
           zoom={17}
-          onLoad={(map) =>
+          onLoad={async (map) =>
             dispatch({ type: EventActionType.SET_MAP, payload: { map } })
           }
         >
