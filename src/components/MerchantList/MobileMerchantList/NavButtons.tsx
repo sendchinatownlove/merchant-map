@@ -16,9 +16,9 @@ export default ({
         <PrevButton />
         <span className="NavBar--Button-Text">Prev</span>
       </div>
-      <button className="Primary-Button--black">
+      {/* <button className="Primary-Button--black">
         <a href="https://square.link/u/G7n2wte2" target="_blank">Donate</a>
-      </button>
+      </button> */}
       <div className="NavBar--Button" onClick={onForwardButtonClick}>
         <NextButton />
         <span className="NavBar--Button-Text">Next</span>

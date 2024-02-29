@@ -58,13 +58,13 @@ function ExpandedMenu({ merchant }: ExpandedMenuProps) {
         >
           Story
         </span>
-        <span
+        {/* <span
           className="ExpandedMenu--SelectMenu--Tab"
           style={currentView == CurrentView.PAST_CAMPAIGNS ? selectedStyle : {}}
           onClick={() => setCurrentView(CurrentView.PAST_CAMPAIGNS)}
         >
           Past Campaigns
-        </span>
+        </span> */}
       </div>
       <div className="ExpandedMenu--Content">
         {currentView == CurrentView.STORY && (

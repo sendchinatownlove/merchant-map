@@ -22,7 +22,8 @@ function decodeGeocache(base64Geocache: any) {
     }
 }
 export function getAddressFromGeocache(base64Geocache: any) {
-    const base64GeocacheJSON = decodeGeocache(base64Geocache);
+    // const base64GeocacheJSON = decodeGeocache(base64Geocache);
+    const base64GeocacheJSON = JSON.parse(atob(base64Geocache));
 
     if (base64GeocacheJSON && base64GeocacheJSON.o) {
         // formattedAddress from the Geocache ends with ", USA" so we want to remove that.
