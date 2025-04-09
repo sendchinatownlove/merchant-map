@@ -15,7 +15,7 @@ $sidebar-min-width: 550px;
 
 // Mobile
 $merchant-container-height: 20vh; // the container includes both the merchant card + footer
-$merchant-container-mobile-height: 60px; 
+$merchant-container-mobile-height: 60px;
 $nav-footer-height: 64px;
 $nav-footer-border-width: 2px;
 
@@ -46,5 +46,46 @@ $nav-footer-border-width: 2px;
     height: 42px;
     font-size: 10px;
     padding: 0;
+  }
+}
+
+.bounce {
+  animation: bounce 2s infinite;
+}
+
+@-moz-keyframes bounce {
+  0%, 20%, 50%, 80%, 100% {
+    -moz-transform: translateY(0);
+    transform: translateY(0);
+  }
+  40%, 60% {
+    -moz-transform: translateY(-15px);
+    transform: translateY(-15px);
+  }
+}
+
+@-webkit-keyframes bounce {
+  0%, 20%, 50%, 80%, 100% {
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+  }
+  40%, 60% {
+    -webkit-transform: translateY(-15px);
+    transform: translateY(-15px);
+  }
+}
+
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% {
+    -moz-transform: translateY(0);
+    -ms-transform: translateY(0);
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+  }
+  40%, 60% {
+    -moz-transform: translateY(-15px);
+    -ms-transform: translateY(-15px);
+    -webkit-transform: translateY(-15px);
+    transform: translateY(-15px);
   }
 }
